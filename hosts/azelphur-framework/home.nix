@@ -5,6 +5,28 @@
     ../../modules/home-manager/default/default.nix
     inputs.nixvim.homeManagerModules.nixvim
   ];
+  wayland.windowManager.hyprland.settings = {
+    exec-once = [
+      "nm-applet"
+    ];
+    bindd = [] ++ (
+      # workspaces
+      # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
+      builtins.concatLists (builtins.genList (
+          x: let
+            ws = let
+              c = (x + 1) / 10;
+            in
+              builtins.toString (x + 1 - (c * 10));
+          in [
+            "$mainMod, ${ws}, Switch to workspace ${ws}, workspace, ${toString (x + 1)}"
+            "$shiftMod, ${ws}, Move active window to workspace ${ws}, movetoworkspacesilent, ${toString (x + 1)}"
+          ]
+        )
+        10)
+    );
+    monitor = ", preferred, auto, 1";
+  };
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "azelphur";

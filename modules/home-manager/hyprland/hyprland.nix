@@ -7,7 +7,6 @@
     "$shiftMod" = "SUPER_SHIFT";
     exec-once = [
       "waybar"
-      "nm-applet"
     ];
     bindd = [
       "$mainMod, Return, Launch terminal emulator, exec, kitty"
@@ -22,23 +21,7 @@
       ", XF86AudioPlay, Media Play, exec, playerctl play-pause"
       ", XF86AudioNext, Media Next, exec, playerctl next"
       ", XF86AudioPrev, Media Previous, exec, playerctl previous"
-    ] ++ (
-      # workspaces
-      # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
-      builtins.concatLists (builtins.genList (
-          x: let
-            ws = let
-              c = (x + 1) / 10;
-            in
-              builtins.toString (x + 1 - (c * 10));
-          in [
-            "$mainMod, ${ws}, Switch to workspace ${ws}, workspace, ${toString (x + 1)}"
-            "$shiftMod, ${ws}, Move active window to workspace ${ws}, movetoworkspacesilent, ${toString (x + 1)}"
-          ]
-        )
-        10)
-    );
-    monitor = ", preferred, auto, 1";
+    ];
     general = {
       #"col.active_border" = "0000FF 0000FF 0000FF 45deg";
       #"col.inactive_border" = "333333 333333";
