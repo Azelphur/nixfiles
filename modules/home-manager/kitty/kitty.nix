@@ -1,0 +1,14 @@
+{ config, pkgs, ... }:
+
+{
+  home.packages = with pkgs; [
+    kitty
+  ];
+  programs.kitty = {
+    enable = true;
+    settings = {
+      scrollback_lines = 99999;
+      enable_audio_bell = false;
+    };
+  };
+}
