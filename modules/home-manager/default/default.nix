@@ -34,6 +34,8 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+    wl-clipboard
+    inkscape
     jellyfin-media-player
     google-chrome
     playerctl

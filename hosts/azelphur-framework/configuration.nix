@@ -20,7 +20,13 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
   stylix.image = ./wallpaper.png;
-
+  home-manager = {
+    # also pass inputs to home-manager modules
+    extraSpecialArgs = { inherit inputs; };
+    users = {
+      "azelphur" = import ./home.nix;
+    };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
