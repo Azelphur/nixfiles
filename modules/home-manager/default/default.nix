@@ -11,6 +11,7 @@
     ../zsh/zsh.nix
     ../nixvim/nixvim.nix
     ../dunst/dunst.nix
+    ../fastfetch/fastfetch.nix
   ];
   qt.enable = true;
   nixpkgs.config.allowUnfree = true;
@@ -34,6 +35,7 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+    grimblast
     hyprland
     hyprlandPlugins.hy3
     wl-clipboard

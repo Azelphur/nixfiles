@@ -66,6 +66,9 @@ with config.lib.stylix.colors.withHashtag;
         spacing = 5;
 	icon-size = 21;
       };
+      "hyprland/workspaces" = {
+        all-outputs = true;
+      };
       #"custom/media" = {
       #  format = "{icon} {}";
       #  return-type = "json";

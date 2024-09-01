@@ -82,7 +82,7 @@
     wget
     killall
     libsForQt5.breeze-qt5
-    (python3.withPackages(ps: with ps; [ python312Packages.pygobject3 ]))
+    (python3.withPackages(ps: with ps; [ python312Packages.virtualenv ]))
   ];
 
   # Enable the OpenSSH daemon.

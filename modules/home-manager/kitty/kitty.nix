@@ -9,6 +9,8 @@
     settings = {
       scrollback_lines = 99999;
       enable_audio_bell = false;
+      close_on_child_death = false;
+      font_size = 20;
     };
   };
 }

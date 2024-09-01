@@ -5,6 +5,10 @@
     ../../modules/home-manager/default/default.nix
     inputs.nixvim.homeManagerModules.nixvim
   ];
+  home.packages = with pkgs; [
+    obs-studio
+    v4l-utils
+ ];
   wayland.windowManager.hyprland.settings = {
     monitor = [
       #"DP-4, 5120x1440@120, 1619x1440, 1, transform, 0, bitdepth, 10" # Bottom
@@ -21,6 +25,10 @@
       "sleep 1;hyprctl keyword monitor DP-5, 5120x1440@120, 1619x0, 1, transform, 2, bitdepth, 10" # Top
       "sleep 1;hyprctl keyword monitor DP-6, 3840x2160@60, 6739x0, 1.333333, transform, 3" # Right
       "sleep 1;hyprctl keyword monitor HDMI-A-2, 3840x2160x, 0x0, 1.333333, transform, 1" # Left
+      # Webcam autofocus is terrible, force focus.
+      "v4l2-ctl -d /dev/video3 --set-ctrl=focus_automatic_continuous=0"
+      "v4l2-ctl -d /dev/video3 --set-ctrl=focus_absolute=0"
+      "streamcontroller -b"
     ];
 #    workspace = [] ++ (
 #      builtins.concatLists (builtins.genList udo 
