@@ -13,6 +13,7 @@
       "$mainMod, Space, Launch Rofi, exec, rofi -show drun"
       "$shiftMod, Q, Close, killactive"
       "$mainMod, F, Fullscreen, fullscreen"
+      "$shiftMod, Space, Toggle Floating, togglefloating"
       ", XF86AudioRaiseVolume, Raise Volume, exec, pactl set-sink-volume @DEFAULT_SINK@ +5%"
       ", XF86AudioLowerVolume, Lower Volume, exec, pactl set-sink-volume @DEFAULT_SINK@ -5%"
       ", XF86AudioMute, Mute Volume, exec, pactl set-sink-mute @DEFAULT_SINK@ toggle"
@@ -21,6 +22,10 @@
       ", XF86AudioPlay, Media Play, exec, playerctl play-pause"
       ", XF86AudioNext, Media Next, exec, playerctl next"
       ", XF86AudioPrev, Media Previous, exec, playerctl previous"
+    ];
+    bindm = [
+      "$mainMod, mouse:272, movewindow"
+      "$mainMod, mouse:273, resizewindow"
     ];
     general = {
       #"col.active_border" = "0000FF 0000FF 0000FF 45deg";
@@ -32,7 +37,11 @@
 
       layout = "hy3";
     };
-
+    misc = {
+      disable_hyprland_logo = true;
+      disable_splash_rendering = true;
+      force_default_wallpaper = 0;
+    };
     input = {
       kb_layout = "gb";
       kb_variant = "colemak";
