@@ -1,8 +1,12 @@
 { config, pkgs, ... }:
 
 {
+  home.packages = with pkgs; [
+    hyprlandPlugins.hy3
+  ];
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.settings = {
+    plugin = "${pkgs.hyprlandPlugins.hy3}/lib/libhy3.so";
     "$mainMod" = "SUPER";
     "$shiftMod" = "SUPER_SHIFT";
     exec-once = [
@@ -13,7 +17,9 @@
       "$mainMod, Space, Launch Rofi, exec, rofi -show drun"
       "$shiftMod, Q, Close, killactive"
       "$mainMod, F, Fullscreen, fullscreen"
+      "$shiftMod, F, Fake fullscreen,fakefullscreen"
       "$shiftMod, Space, Toggle Floating, togglefloating"
+      "$mainMod, J, Toggle split, togglesplit"
       ", XF86AudioRaiseVolume, Raise Volume, exec, pactl set-sink-volume @DEFAULT_SINK@ +5%"
       ", XF86AudioLowerVolume, Lower Volume, exec, pactl set-sink-volume @DEFAULT_SINK@ -5%"
       ", XF86AudioMute, Mute Volume, exec, pactl set-sink-mute @DEFAULT_SINK@ toggle"
@@ -22,6 +28,18 @@
       ", XF86AudioPlay, Media Play, exec, playerctl play-pause"
       ", XF86AudioNext, Media Next, exec, playerctl next"
       ", XF86AudioPrev, Media Previous, exec, playerctl previous"
+      "$mainMod, mouse_up, Zoom Out, exec, python /home/azelphur/.bin/cursor_zoom_factor.py out"
+      "$mainMod, mouse_down, Zoom In, exec, python /home/azelphur/.bin/cursor_zoom_factor.py in"
+      "$mainMod, minus, Zoom Out, exec, python /home/azelphur/.bin/cursor_zoom_factor.py out"
+      "$mainMod, equal, Zoom In, exec, python /home/azelphur/.bin/cursor_zoom_factor.py in"
+      "$shiftMod, left, Move window left, hy3:movewindow, l"
+      "$shiftMod, right, Move window right, hy3:movewindow, r"
+      "$shiftMod, up, Move window up, hy3:movewindow, u"
+      "$shiftMod, down, Move window down, hy3:movewindow, d"
+      "$mainMod, H, Horizontal split, hy3:makegroup, h"
+      "$mainMod, V, Vertical split, hy3:makegroup, v"
+      "$shiftMod, H, Change to horizontal split, hy3:changegroup, h"
+      "$shiftMod, V, Change to vertical split, hy3:changegroup, v"
     ];
     bindm = [
       "$mainMod, mouse:272, movewindow"
@@ -66,5 +84,11 @@
       shadow_range = 4;
       shadow_render_power = 3;
     };
+  };
+  home.file = {
+    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
+    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
+    # # symlink to the Nix store copy.
+    ".bin/cursor_zoom_factor.py".source = scripts/cursor_zoom_factor.py;
   };
 }

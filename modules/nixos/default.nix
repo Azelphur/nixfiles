@@ -33,6 +33,7 @@
 
   environment.sessionVariables = {
     QT_STYLE_OVERRIDE = "Breeze";
+    NIXOS_OZONE_WL = "1";
   };
 
   #stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/ayu-dark.yaml";

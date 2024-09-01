@@ -34,6 +34,8 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+    hyprland
+    hyprlandPlugins.hy3
     wl-clipboard
     inkscape
     jellyfin-media-player
@@ -53,5 +55,8 @@
     spotify
     btop
     pulseaudio # Even though we use pipewire, we use pactl for waybar volume control
+  ];
+  home.sessionPath = [
+    "$HOME/.bin"
   ];
 }
