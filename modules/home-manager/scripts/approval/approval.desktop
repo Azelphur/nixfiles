@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Approval
+Comment=Copy an approval gif from shipit.gifs with github formatting
+Exec=/home/azelphur/.bin/approval
+Type=Application
+Icon=security-high

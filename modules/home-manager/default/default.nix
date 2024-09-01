@@ -12,6 +12,7 @@
     ../nixvim/nixvim.nix
     ../dunst/dunst.nix
     ../fastfetch/fastfetch.nix
+    ../scripts/scripts.nix
   ];
   qt.enable = true;
   nixpkgs.config.allowUnfree = true;
