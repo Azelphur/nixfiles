@@ -17,7 +17,7 @@
       "$mainMod, Space, Launch Rofi, exec, rofi -show drun"
       "$shiftMod, Q, Close, killactive"
       "$mainMod, F, Fullscreen, fullscreen"
-      "$shiftMod, F, Fake fullscreen,fakefullscreen"
+      #"$shiftMod, F, Fake fullscreen,fakefullscreen"
       "$shiftMod, Space, Toggle Floating, togglefloating"
       "$mainMod, J, Toggle split, togglesplit"
       ", XF86AudioRaiseVolume, Raise Volume, exec, pactl set-sink-volume @DEFAULT_SINK@ +5%"
@@ -83,6 +83,9 @@
       drop_shadow = true;
       shadow_range = 4;
       shadow_render_power = 3;
+    };
+    xwayland = {
+      force_zero_scaling = true;
     };
   };
   home.file = {
