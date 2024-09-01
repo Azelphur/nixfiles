@@ -32,6 +32,14 @@
   };
 
   outputs = { self, nixpkgs, nixvim, ... }@inputs: {
+    nixosConfigurations.azelphur-pc = nixpkgs.lib.nixosSystem {
+      specialArgs = {inherit inputs;};
+      modules = [
+        ./hosts/azelphur-pc/configuration.nix
+        inputs.home-manager.nixosModules.default
+        inputs.stylix.nixosModules.stylix
+      ];
+    };
     nixosConfigurations.azelphur-framework = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
