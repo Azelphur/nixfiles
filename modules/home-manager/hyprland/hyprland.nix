@@ -14,7 +14,7 @@
     ];
     bindd = [
       "$mainMod, Return, Launch terminal emulator, exec, kitty"
-      "$mainMod, Space, Launch Rofi, exec, rofi -show drun"
+      "$mainMod, Space, Launch Rofi, exec, fuzzel"
       "$shiftMod, Q, Close, killactive"
       "$mainMod, F, Fullscreen, fullscreen"
       #"$shiftMod, F, Fake fullscreen,fakefullscreen"

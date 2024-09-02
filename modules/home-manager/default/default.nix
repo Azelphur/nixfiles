@@ -4,7 +4,6 @@
   imports = [
     ../hyprland/hyprland.nix
     ../hyprlock/hyprlock.nix
-    ../rofi/rofi.nix
     ../waybar/waybar.nix
     ../stylix/stylix.nix
     ../kitty/kitty.nix
@@ -13,6 +12,7 @@
     ../dunst/dunst.nix
     ../fastfetch/fastfetch.nix
     ../scripts/scripts.nix
+    ../fuzzel/fuzzel.nix
   ];
   qt.enable = true;
   nixpkgs.config.allowUnfree = true;
@@ -36,6 +36,7 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+    libreoffice
     grimblast
     hyprland
     hyprlandPlugins.hy3
