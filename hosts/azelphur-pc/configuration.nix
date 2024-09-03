@@ -30,6 +30,9 @@
     };
   };
   virtualisation.docker.enable = true;
+  environment.systemPackages = with pkgs; [
+    tpm2-tss
+  ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

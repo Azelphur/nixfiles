@@ -22,6 +22,7 @@
       "DP-5, 1920x1080@60, 1619x0, 1, transform, 2, bitdepth, 10" # Top
     ];
     exec-once = [
+      "hyprlock"
       "sleep 1;hyprctl keyword monitor DP-4, 5120x1440@120, 1619x1440, 1, transform, 0, bitdepth, 10" # Bottom
       "sleep 1;hyprctl keyword monitor DP-5, 5120x1440@120, 1619x0, 1, transform, 2, bitdepth, 10" # Top
       "sleep 1;hyprctl keyword monitor DP-6, 3840x2160@60, 6739x0, 1.333333, transform, 3" # Right
