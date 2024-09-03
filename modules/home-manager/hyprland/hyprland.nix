@@ -90,6 +90,9 @@
     xwayland = {
       force_zero_scaling = true;
     };
+    binds = {
+      scroll_event_delay = 0;
+    };
   };
   home.file = {
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in

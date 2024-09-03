@@ -36,6 +36,7 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+    jq
     heroku
     libnotify
     libreoffice
