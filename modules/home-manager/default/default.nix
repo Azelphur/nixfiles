@@ -36,6 +36,8 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+    pre-commit
+    yazi
     jq
     heroku
     libnotify
@@ -51,10 +53,8 @@
     grimblast
     gimp
     networkmanagerapplet
-    nautilus
     brightnessctl
     slack
-    dolphin
     vesktop
     firefox
     pavucontrol
