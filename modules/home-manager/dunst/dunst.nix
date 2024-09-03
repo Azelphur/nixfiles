@@ -8,7 +8,6 @@
     enable = true;
     settings = {
       global = {
-        monitor = "eDP-1";
         follow = "none";
         gap_size = 10;
 	width = 600;

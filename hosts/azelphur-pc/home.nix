@@ -8,7 +8,8 @@
   home.packages = with pkgs; [
     obs-studio
     v4l-utils
- ];
+  ];
+  services.dunst.settings.global.monitor = "DP-5";
   wayland.windowManager.hyprland.settings = {
     monitor = [
       #"DP-4, 5120x1440@120, 1619x1440, 1, transform, 0, bitdepth, 10" # Bottom
