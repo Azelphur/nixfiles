@@ -87,14 +87,12 @@ if stdout == "Set Temperature\n":
         headers=HEADERS,
         json=data
     )
-    print(r.content)
 
 else:
     data = {
         "entity_id": ENTITY_ID,
         "hvac_mode": stdout.lower().strip()
     }
-    print(data)
     r = requests.post(
         API_URL + "/api/services/climate/set_hvac_mode",
         headers=HEADERS,
