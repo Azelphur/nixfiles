@@ -36,6 +36,10 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+    android-tools
+    ffmpeg-full
+    mpv
+    vlc
     pre-commit
     yazi
     jq
