@@ -11,6 +11,11 @@
       ../../modules/nixos/default.nix
       inputs.home-manager.nixosModules.default
     ];
+  boot.loader.systemd-boot.enable = lib.mkForce false;
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/etc/secureboot";
+  };
   networking.hostName = "azelphur-pc"; # Define your hostname.
   boot.kernelModules = [ "v4l2loopback" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [

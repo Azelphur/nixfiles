@@ -18,6 +18,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.4.1";
+
+      # Optional but recommended to limit the size of your system closure.
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     stylix.url = "github:danth/stylix";
   };
 
@@ -25,7 +32,8 @@
     nixosConfigurations.azelphur-pc = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
-        ./hosts/azelphur-pc/configuration.nix
+        inputs.lanzaboote.nixosModules.lanzaboote
+	./hosts/azelphur-pc/configuration.nix
         inputs.home-manager.nixosModules.default
         inputs.stylix.nixosModules.stylix
       ];
