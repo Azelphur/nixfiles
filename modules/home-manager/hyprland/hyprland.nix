@@ -91,6 +91,11 @@
     binds = {
       scroll_event_delay = 0;
     };
+    windowrulev2 = [
+      "opacity 1.0 0.8,class:(.*)"
+      "opacity 1.0 1.0,title:(.*)(- YouTube)(.*)"
+      "opacity 1.0 1.0,class:^(com\.github\.iwalton3\.jellyfin-media-player)$"
+    ];
   };
   home.file = {
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
