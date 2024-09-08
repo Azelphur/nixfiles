@@ -5,6 +5,10 @@
     inputs.home-manager.nixosModules.default
   ];
   nix.settings.experimental-features = ["nix-command" "flakes" ];
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/etc/secureboot";
+  };
   boot.supportedFilesystems = [ "ntfs" ];
   nixpkgs.config.allowUnfree = true;
   programs.hyprland.enable = true;
@@ -44,7 +48,7 @@
   stylix.autoEnable = true;
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.enable = false;
   boot.loader.efi.canTouchEfiVariables = true;
 
   time.timeZone = "Europe/London";

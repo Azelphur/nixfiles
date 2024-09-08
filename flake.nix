@@ -41,6 +41,7 @@
     nixosConfigurations.azelphur-framework = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
+        inputs.lanzaboote.nixosModules.lanzaboote
         ./hosts/azelphur-framework/configuration.nix
         inputs.home-manager.nixosModules.default
         inputs.stylix.nixosModules.stylix

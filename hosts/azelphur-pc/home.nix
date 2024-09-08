@@ -6,7 +6,6 @@
     inputs.nixvim.homeManagerModules.nixvim
   ];
   home.packages = with pkgs; [
-    sbctl
     obs-studio
     v4l-utils
   ];
