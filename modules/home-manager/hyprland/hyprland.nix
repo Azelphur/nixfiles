@@ -74,8 +74,6 @@
       };
     };
     
-    windowrulev2 = "float,class:(Rofi)";
-
     decoration = {
       rounding = 10;
       blur = {
