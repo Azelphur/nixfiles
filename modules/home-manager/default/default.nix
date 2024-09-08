@@ -42,6 +42,7 @@
     ffmpeg-full
     mpv
     vlc
+    file
     pre-commit
     yazi
     jq
