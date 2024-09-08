@@ -38,8 +38,8 @@
     NIXOS_OZONE_WL = "1";
   };
 
-  #stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/ayu-dark.yaml";
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/irblack.yaml";
+  #stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
   stylix.enable = true;
   stylix.autoEnable = true;
 
