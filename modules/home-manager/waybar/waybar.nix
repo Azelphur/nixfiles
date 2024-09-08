@@ -40,6 +40,8 @@ with config.lib.stylix.colors.withHashtag;
       };
       mpris = {
         format = "{dynamic}";
+	title-len = 60;
+	ellipsis = "...";
 	dynamic-order = ["artist" "title"];
       };
       wireplumber = {
