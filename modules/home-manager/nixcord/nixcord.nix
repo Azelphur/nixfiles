@@ -42,7 +42,4 @@
       # ...
     };
   };
-  home.file = {
-    ".config/Vencord/themes/stylix.theme.css".source = config.lib.file.mkOutOfStoreSymlink "/home/azelphur/.config/vesktop/themes/stylix.theme.css";
-  };
 }
