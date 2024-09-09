@@ -14,6 +14,7 @@
     ../scripts/scripts.nix
     ../fuzzel/fuzzel.nix
     ../cliphist/cliphist.nix
+    ../nixcord/nixcord.nix
   ];
   qt.enable = true;
   nixpkgs.config.allowUnfree = true;
@@ -63,7 +64,6 @@
     networkmanagerapplet
     brightnessctl
     slack
-    vesktop
     firefox
     pavucontrol
     kate
