@@ -13,6 +13,7 @@
     ../fastfetch/fastfetch.nix
     ../scripts/scripts.nix
     ../fuzzel/fuzzel.nix
+    ../cliphist/cliphist.nix
   ];
   qt.enable = true;
   nixpkgs.config.allowUnfree = true;
