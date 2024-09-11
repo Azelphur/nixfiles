@@ -9,7 +9,9 @@
     ./hardware-configuration.nix
     ../../modules/nixos/default.nix
     inputs.home-manager.nixosModules.default
+    ./vfio.nix
   ];
+  vfio.enable = true;
   hardware.graphics.enable32Bit = true;
   hardware.nvidia-container-toolkit.enable = true;
   hardware.nvidia = {
