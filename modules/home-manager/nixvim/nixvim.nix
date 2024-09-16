@@ -8,6 +8,7 @@
       lualine.enable = true;
       luasnip.enable = true;
       nvim-tree.enable = true;
+      treesitter.enable = true;
       lsp = {
         enable = true;
 	servers = {
@@ -15,6 +16,16 @@
           lua-ls.enable = true;
           #rust-analyzer.enable = true;
           pyright.enable = true;
+	};
+      };
+      neogen = {
+        enable = true;
+	languages = {
+	  python = {
+	    template = {
+	      annotation_convention = "reST";
+	    };
+          };
 	};
       };
       cmp = {
@@ -29,6 +40,21 @@
           ];
           mapping = {
             "<CR>" = "cmp.mapping.confirm({ select = true })";
+            "<Tab>" = ''
+                function(fallback)
+                  if cmp.visible() then
+                    cmp.select_next_item()
+                  elseif luasnip.expandable() then
+                    luasnip.expand()
+                  elseif luasnip.expand_or_jumpable() then
+                    luasnip.expand_or_jump()
+                  elseif check_backspace() then
+                    fallback()
+                  else
+                    fallback()
+                  end
+                end
+              '';
           };
 	};
       };
