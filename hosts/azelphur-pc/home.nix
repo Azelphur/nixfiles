@@ -419,10 +419,10 @@ submap = reset
       "~/.wallpaper/bottom.png"
     ];
     wallpaper = [
-      "DP-4,~/.wallpaper/bottom.png"
-      "DP-5,~/.wallpaper/top.png"
-      "DP-6,~/.wallpaper/right.png"
-      "HDMI-A-2,~/.wallpaper/left.png"
+      "DP-1,~/.wallpaper/bottom.png"
+      "DP-2,~/.wallpaper/top.png"
+      "DP-3,~/.wallpaper/right.png"
+      "HDMI-A-1,~/.wallpaper/left.png"
     ];
   };
 
