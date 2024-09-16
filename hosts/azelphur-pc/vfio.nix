@@ -30,7 +30,22 @@ in { pkgs, lib, config, ... }: {
         # isolate the GPU
         ("vfio-pci.ids=" + lib.concatStringsSep "," gpuIDs);
     };
-
+    environment.systemPackages = [
+      pkgs.evsieve
+      (pkgs.writeShellScriptBin "toggle-source" ''
+        HOST="azelphur@192.168.1.56"
+        DDCUTIL="ssh $HOST ddcutil"
+        MONITORCONTROL="ssh $HOST monitorcontrol"
+        OUTPUT="$($DDCUTIL -t -d 1 getvcp 60)"
+        if [[ "$OUTPUT" == "VCP 60 SNC x04" ]]; then
+          $MONITORCONTROL --set-input-source DP1
+          echo "DP1"
+        else
+          $MONITORCONTROL --set-input-source DP2
+          echo "DP2"
+        fi
+      '')
+    ];
     #hardware.opengl.enable = true;
     hardware.graphics.enable = true;
     virtualisation.spiceUSBRedirection.enable = true;
