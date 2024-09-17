@@ -50,7 +50,7 @@ with config.lib.stylix.colors.withHashtag;
       wireplumber = {
         format = "{icon} {volume}%";
         format-muted = "";
-        on-click = "helvum";
+        on-click = "pwvucontrol";
         format-icons = ["" "" ""];
       };
       backlight = {
@@ -58,12 +58,13 @@ with config.lib.stylix.colors.withHashtag;
         format-icons = ["" ""];
       };
       battery = {
-        interval = 60;
+        interval = 2;
         states = {
-          warning = 30;
-          critical = 15;
+          warning = 20;
+          critical = 10;
         };
         format = "{icon} {capacity}%";
+        format-charging = " {capacity}%";
         format-icons = ["" "" "" "" ""];
         max-length = 25;
       };
@@ -179,6 +180,14 @@ window#waybar {
   padding-left: 10px;
   padding-right: 10px;
   margin-right: 10px;
+}
+
+#battery.warning {
+  color: #eed202;
+}
+
+#battery.critical {
+  color: #ff0000;
 }
   '';
 }
