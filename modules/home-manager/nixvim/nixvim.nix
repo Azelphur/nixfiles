@@ -9,13 +9,19 @@
       luasnip.enable = true;
       nvim-tree.enable = true;
       treesitter.enable = true;
+      precognition = {
+        enable = true;
+        settings = {
+          startVisible = true;
+        };
+      };
       lsp = {
         enable = true;
         servers = {
-          tsserver.enable = true;
+          ts-ls.enable = true;
           lua-ls.enable = true;
-          #rust-analyzer.enable = true;
           pyright.enable = true;
+          nil-ls.enable = true;
       	};
       };
       neogen = {
