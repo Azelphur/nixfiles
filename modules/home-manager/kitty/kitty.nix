@@ -4,6 +4,17 @@
   home.packages = with pkgs; [
     kitty
   ];
+  home.sessionVariables = {
+    TERMINAL = "kitty";
+  };
+  xdg = {
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        x-terminal-emulator = "kitty.desktop";
+      };
+    };
+  };
   programs.kitty = {
     enable = true;
     settings = {
