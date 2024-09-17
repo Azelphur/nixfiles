@@ -15,6 +15,7 @@
     };
     shellAliases = {
       dc = "docker compose";
+      dcu = "docker compose up -d --remove-orphans";
       d = "docker";
       dl = "docker logs --tail 1000 --follow";
       de = "docker exec -it";
