@@ -32,17 +32,20 @@ with config.lib.stylix.colors.withHashtag;
         waves = false;
         noise_reduction = 0.77;
         input_delay = 2;
-	format-icons = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█" ];
-	#format-icons =  ["A" "-" "A" "-" "a" "*" ";" "." ];
+        format-icons = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█" ];
+        #format-icons =  ["A" "-" "A" "-" "a" "*" ";" "." ];
         actions = {
           on-click-right = "mode";
         };
       };
+      clock = {
+        format = "{:%d %b %Y - %H:%M}";
+      };
       mpris = {
         format = "{dynamic}";
-	title-len = 60;
-	ellipsis = "...";
-	dynamic-order = ["artist" "title"];
+	      title-len = 60;
+	      ellipsis = "...";
+      	dynamic-order = ["artist" "title"];
       };
       wireplumber = {
         format = "{icon} {volume}%";
@@ -66,7 +69,7 @@ with config.lib.stylix.colors.withHashtag;
       };
       tray = {
         spacing = 5;
-	icon-size = 21;
+      	icon-size = 21;
       };
       "hyprland/workspaces" = {
         all-outputs = true;

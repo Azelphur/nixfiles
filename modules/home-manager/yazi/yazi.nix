@@ -1,7 +1,10 @@
 { config, pkgs, ... }:
 
 {
-  programs.yazi.enable = true;
+  programs.yazi = {
+    enable = true;
+    enableZshIntegration = true;
+  };
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
