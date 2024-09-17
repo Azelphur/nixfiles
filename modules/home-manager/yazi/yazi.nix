@@ -1,10 +1,12 @@
 { config, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    yazi
-  ];
-  xdg.mimeApps.defaultApplications = {
-    "application/zip" = ["yazi.desktop"];
+  programs.yazi.enable = true;
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "inode/directory" = ["yazi.desktop"];
+      "application/zip" = ["yazi.desktop"];
+    };
   };
 }

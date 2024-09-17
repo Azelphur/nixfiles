@@ -4,6 +4,14 @@
   imports = [
     inputs.home-manager.nixosModules.default
   ];
+  xdg = {
+    terminal-exec = {
+      enable = true;
+      settings = {
+        default = [ "kitty.desktop" ];
+      };
+    };
+  };
   programs.steam.enable = true;
   nix.settings.experimental-features = ["nix-command" "flakes" ];
   boot.lanzaboote = {

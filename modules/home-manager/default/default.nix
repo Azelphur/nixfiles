@@ -15,6 +15,7 @@
     ../fuzzel/fuzzel.nix
     ../cliphist/cliphist.nix
     ../nixcord/nixcord.nix
+    ../yazi/yazi.nix
   ];
   qt.enable = true;
   nixpkgs.config.allowUnfree = true;
@@ -47,7 +48,6 @@
     vlc
     file
     pre-commit
-    yazi
     jq
     heroku
     libnotify
