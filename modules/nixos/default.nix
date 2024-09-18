@@ -4,6 +4,12 @@
   imports = [
     inputs.home-manager.nixosModules.default
   ];
+  services.printing.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
   xdg = {
     terminal-exec = {
       enable = true;
