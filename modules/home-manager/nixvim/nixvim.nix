@@ -3,12 +3,25 @@
 {
   programs.nixvim = {
     enable = true;
+    keymaps = [
+      {
+        mode = "n";
+        key = "<C-n>";
+        options = {
+          silent = true;
+          noremap = true;
+        };
+        action = ":lua require('fzf-lua').files()<CR>";
+      }
+    ];
     plugins = {
       telescope.enable = true;
       lualine.enable = true;
       luasnip.enable = true;
       nvim-tree.enable = true;
       treesitter.enable = true;
+      yazi.enable = true;
+      fzf-lua.enable = true;
       precognition = {
         enable = true;
         settings = {
