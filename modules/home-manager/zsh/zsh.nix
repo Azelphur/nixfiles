@@ -23,6 +23,8 @@
       hr = "heroku run -a";
       random = "openssl rand -hex 12";
       b = "sudo nixos-rebuild switch && sudo nix-env --delete-generations 7d";
+      grimblast = "grimblast-wrapper";
+      ut = "./.ut";
     };
     enableCompletion = true;
     autosuggestion = {

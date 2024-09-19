@@ -3,6 +3,11 @@
 {
   home.packages = with pkgs; [
     hyprlandPlugins.hy3
+    (pkgs.writeShellScriptBin "grimblast-wrapper" ''
+      hyprctl clients -j | jq -r ".[].address" | xargs -I {} hyprctl setprop address:{} opaque on > /dev/null
+      grimblast "$@"
+      hyprctl clients -j | jq -r ".[].address" | xargs -I {} hyprctl setprop address:{} opaque ofi > /dev/null
+    '')
   ];
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.settings = {
