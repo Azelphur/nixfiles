@@ -30,6 +30,9 @@
       "v4l2-ctl -d /dev/video3 --set-ctrl=focus_absolute=0"
       "streamcontroller -b"
     ];
+    bindd = [
+      "$shiftMod, d, Toggle display source, exec, toggle-source"
+    ];
 #    workspace = [] ++ (
 #      builtins.concatLists (builtins.genList udo 
 #          i: let
