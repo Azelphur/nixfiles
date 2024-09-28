@@ -13,6 +13,15 @@
         };
         action = ":lua require('fzf-lua').files()<CR>";
       }
+      {
+        mode = "n";
+        key = "gd";
+        options = {
+          silent = true;
+          noremap = true;
+        };
+        action = ":lua vim.lsp.buf.definition()<CR>";
+      }
     ];
     plugins = {
       telescope.enable = true;
