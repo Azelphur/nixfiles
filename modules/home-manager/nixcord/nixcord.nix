@@ -22,19 +22,19 @@
       frameless = true; # set some Vencord options
       plugins = {
         alwaysTrust.enable = true;
-	copyFileContents.enable = true;
-	customRPC.enable = true;
-	forceOwnerCrown.enable = true;
-	imageZoom.enable = true;
-	memberCount.enable = true;
-	messageLinkEmbeds.enable = true;
-	messageLogger.enable = true;
-	permissionsViewer.enable = true;
-	pinDMs.enable = true;
-	previewMessage.enable = true;
-	viewRaw.enable = true;
-	voiceDownload.enable = true;
-	whoReacted.enable = true;
+        copyFileContents.enable = true;
+        customRPC.enable = true;
+        forceOwnerCrown.enable = true;
+        imageZoom.enable = true;
+        memberCount.enable = true;
+        messageLinkEmbeds.enable = true;
+        messageLogger.enable = true;
+        permissionsViewer.enable = true;
+        pinDMs.enable = true;
+        previewMessage.enable = true;
+        viewRaw.enable = true;
+        voiceDownload.enable = true;
+        whoReacted.enable = true;
       };
     };
     extraConfig = {
