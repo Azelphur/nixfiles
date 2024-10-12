@@ -42,7 +42,6 @@
     };
   };
   programs.zsh.enable = true;
-  programs.plymouth.enable = true;
   services.getty.autologinUser = "azelphur";
   boot.initrd.systemd.enable = true;
   services.greetd = {
