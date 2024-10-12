@@ -31,6 +31,7 @@
       treesitter.enable = true;
       yazi.enable = true;
       fzf-lua.enable = true;
+      web-devicons.enable = true;
       precognition = {
         enable = true;
         settings = {
@@ -40,10 +41,10 @@
       lsp = {
         enable = true;
         servers = {
-          ts-ls.enable = true;
-          lua-ls.enable = true;
+          ts_ls.enable = true;
+          lua_ls.enable = true;
           pyright.enable = true;
-          nil-ls.enable = true;
+          nil_ls.enable = true;
       	};
       };
       neogen = {
