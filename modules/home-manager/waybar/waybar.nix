@@ -96,6 +96,8 @@ with config.lib.stylix.colors.withHashtag;
 @define-color base08 ${base08}; @define-color base09 ${base09}; @define-color base0A ${base0A}; @define-color base0B ${base0B};
 @define-color base0C ${base0C}; @define-color base0D ${base0D}; @define-color base0E ${base0E}; @define-color base0F ${base0F};
 
+@define-color text ${base0D};
+
 * {
   border: none;
   font-family: 'JetBrains Mono', 'Symbols Nerd Font Mono';
@@ -117,7 +119,7 @@ window#waybar {
   border-top-right-radius: 12px;
   border-bottom-right-radius: 12px;
   background-color: @base00;
-  color: @base05;
+  color: @text;
   margin-top: 5px;
   margin-right: 0px;
   margin-left: 10px;
@@ -131,7 +133,7 @@ window#waybar {
   border-top-right-radius: 12px;
   border-bottom-right-radius: 12px;
   background-color: @base00;
-  color: @base05;
+  color: @text;
   margin-top: 5px;
   margin-right: 0px;
   margin-left: -8px;
@@ -143,7 +145,7 @@ window#waybar {
 #custom-arch, #workspaces {
   border-radius: 12px;
   background-color: @base00;
-  color: @base05;
+  color: @text;
   margin-top: 5px;
   margin-right: 15px;
   padding-top: 1px;
@@ -154,18 +156,18 @@ window#waybar {
 #custom-arch {
   font-size: 20px;
   margin-left: 15px;
-  color: @base05;
+  color: @text;
 }
 
 #workspaces button {
   background: @base00;
-  color: @base05;
+  color: @text;
 }
 
 #custom-spotify {
   border-radius: 10px;
   background-color: @base00;
-  color: @base05;
+  color: @text;
   margin-top: 5px;
   padding-left: 10px;
   padding-right: 10px;
@@ -175,7 +177,7 @@ window#waybar {
 #window, #tray, #memory, #backlight, #pulseaudio, #bluetooth, #network, #battery, #wireplumber, #clock {
   border-radius: 8px;
   background-color: @base00;
-  color: @base05;
+  color: @text;
   margin-top: 5px;
   padding-left: 10px;
   padding-right: 10px;
