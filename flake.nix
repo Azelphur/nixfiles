@@ -5,6 +5,17 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     #nixpkgs.url = "path:///home/azelphur/Downloads/nixpkgs";
 
+    #hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1&ref=v0.44.1";
+    hyprland.url = "github:hyprwm/Hyprland?ref=v0.44.0";
+    # where {version} is the hyprland release version
+    # or "github:hyprwm/Hyprland?submodules=1" to follow the development branch
+
+    hy3 = {
+      url = "github:outfoxxed/hy3?ref=hl0.44.0"; # where {version} is the hyprland release version
+      # or "github:outfoxxed/hy3" to follow the development branch.
+      # (you may encounter issues if you dont do the same for hyprland)
+      inputs.hyprland.follows = "hyprland";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -32,12 +43,12 @@
     stylix.url = "github:danth/stylix";
   };
 
-  outputs = { self, nixpkgs, nixvim, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, nixvim, hyprland, hy3, home-manager, ... }@inputs: {
     nixosConfigurations.azelphur-pc = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
         inputs.lanzaboote.nixosModules.lanzaboote
-	./hosts/azelphur-pc/configuration.nix
+        ./hosts/azelphur-pc/configuration.nix
         inputs.home-manager.nixosModules.default
         inputs.stylix.nixosModules.stylix
       ];
@@ -49,6 +60,12 @@
         ./hosts/azelphur-framework/configuration.nix
         inputs.home-manager.nixosModules.default
         inputs.stylix.nixosModules.stylix
+      ];
+    };
+    homeConfigurations."azelphur@azelphur-framework" = home-manager.lib.homeManagerConfiguration {
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      modules = [
+        hyprland.homeManagerModules.default
       ];
     };
   };

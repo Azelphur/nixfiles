@@ -60,8 +60,6 @@
     libnotify
     libreoffice
     grimblast
-    hyprland
-    hyprlandPlugins.hy3
     wl-clipboard
     inkscape
     jellyfin-media-player

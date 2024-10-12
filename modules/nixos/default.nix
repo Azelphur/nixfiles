@@ -26,7 +26,12 @@
   };
   boot.supportedFilesystems = [ "ntfs" ];
   nixpkgs.config.allowUnfree = true;
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    # make sure to also set the portal package, so that they are in sync
+    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+  };
   programs.git = {
     enable = true;
     config = {
@@ -37,14 +42,14 @@
     };
   };
   programs.zsh.enable = true;
-  boot.plymouth.enable = true;
+  programs.plymouth.enable = true;
   services.getty.autologinUser = "azelphur";
   boot.initrd.systemd.enable = true;
   services.greetd = {
     enable = true;
     settings = rec {
       initial_session = {
-        command = "dbus-run-session ${pkgs.hyprland}/bin/hyprland 2>&1 > /tmp/hyprland.log";
+        command = "dbus-run-session ${inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland}/bin/Hyprland 2>&1 > /tmp/hyprland.log";
         user = "azelphur";
       };
       default_session = initial_session;
