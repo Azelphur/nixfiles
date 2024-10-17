@@ -41,6 +41,7 @@
     # '')
     # Must be ran with WEBKIT_DISABLE_DMABUF_RENDERER=1 until graphics driver update
     orca-slicer
+    element-desktop
     nextcloud-client
     lcov
     dig
