@@ -5,19 +5,20 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     #nixpkgs.url = "path:///home/azelphur/Downloads/nixpkgs";
 
-    #hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1&ref=v0.44.1";
-    hyprland.url = "github:hyprwm/Hyprland?ref=v0.44.0";
-    # where {version} is the hyprland release version
+    #hyprland.url = "github:hyprwm/Hyprland?ref=v0.44.1";
+    hyprland.url = "github:hyprwm/Hyprland?submodules=1"; # Development branch
     # or "github:hyprwm/Hyprland?submodules=1" to follow the development branch
 
     hy3 = {
-      url = "github:outfoxxed/hy3?ref=hl0.44.0"; # where {version} is the hyprland release version
+      #url = "github:outfoxxed/hy3?ref=hl0.44.0"; # where {version} is the hyprland release version
+      url = "github:outfoxxed/hy3";
       # or "github:outfoxxed/hy3" to follow the development branch.
       # (you may encounter issues if you dont do the same for hyprland)
       inputs.hyprland.follows = "hyprland";
     };
 
     hypr-dynamic-cursors = {
+        #url = "github:VirtCode/hypr-dynamic-cursors?ref=3ff4c2a053f7673b3b8cd45ada0886cbda13ebcc";
         url = "github:VirtCode/hypr-dynamic-cursors";
         inputs.hyprland.follows = "hyprland"; # to make sure that the plugin is built for the correct version of hyprland
     };
