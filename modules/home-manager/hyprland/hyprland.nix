@@ -120,6 +120,8 @@
       "$shiftMod" = "SUPER_SHIFT";
       exec-once = [
         "waybar"
+        "nextcloud"
+        "gnome-keyring-daemon"
       ];
       bindd = [
         "$mainMod, Return, Launch terminal emulator, exec, kitty"

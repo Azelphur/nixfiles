@@ -23,15 +23,23 @@
       "DP-2, 1920x1080@60, 1619x0, 1, transform, 2, bitdepth, 10" # Top
     ];
     exec-once = [
+      "systemctl --user stop hyprpaper"
       "hyprlock"
       "sleep 2;${pkgs.writeScriptBin "fix-monitors.sh" (builtins.readFile ./fix-monitors.sh)}/bin/fix-monitors.sh"
       # Webcam autofocus is terrible, force focus.
       "v4l2-ctl -d /dev/video3 --set-ctrl=focus_automatic_continuous=0"
       "v4l2-ctl -d /dev/video3 --set-ctrl=focus_absolute=0"
       "streamcontroller -b"
+      "[workspace 11 silent] vesktop"
+      "[workspace 11 silent] element-desktop"
+      "[workspace 12 silent] spotify"
+      "[workspace 12 silent] thunderbird"
     ];
     bindd = [
       "$shiftMod, d, Toggle display source, exec, toggle-source"
+    ];
+    windowrulev2 = [
+      "workspace 11 silent,class:vesktop"
     ];
 #    workspace = [] ++ (
 #      builtins.concatLists (builtins.genList udo 
@@ -48,6 +56,61 @@
 #        )
 #        40)
 #    );
+  };
+  programs.hyprlock.settings = {
+    general = {
+      disable_loading_bar = true;
+      grace = 0;
+      hide_cursor = true;
+      no_fade_in = false;
+    };
+    background = [
+      {
+        monitor = "DP-1"; # Bottom
+        path = "/home/azelphur/.wallpaper/bottom.png";
+      }
+      {
+        monitor = "DP-2"; # Top
+        path = "/home/azelphur/.wallpaper/top.png";
+      }
+      {
+        monitor = "DP-3"; # Right
+        path = "/home/azelphur/.wallpaper/right.png";
+      }
+      {
+        monitor = "HDMI-A-1"; # Left
+        path = "/home/azelphur/.wallpaper/left.png";
+      }
+    ];
+    input-field = {
+        monitor = "DP-1";
+        size = "320, 50";
+        outline_thickness = 3;
+        dots_size = 0.33; # Scale of input-field height, 0.2 - 0.8
+        dots_spacing = 0.15; # Scale of dots' absolute size, 0.0 - 1.0
+        dots_center = false;
+        dots_rounding = -1; # -1 default circle, -2 follow input-field rounding
+        outer_color = "rgb(151515)";
+        inner_color = "rgb(200, 200, 200)";
+        font_color = "rgb(10, 10, 10)";
+        #fade_on_empty = true
+        fade_timeout = 1000; # Milliseconds before fade_on_empty is triggered.
+        placeholder_text = "<i>Input Password...</i>"; # Text rendered in the input box when it's empty.
+        hide_input = false;
+        rounding = -1; # -1 means complete rounding (circle/oval)
+        check_color = "rgb(204, 136, 34)";
+        fail_color = "rgb(204, 34, 34)"; # if authentication failed, changes outer_color and fail message color
+        fail_text = "<i>$FAIL <b>($ATTEMPTS)</b></i>"; # can be set to empty
+        fail_transition = 300; # transition time in ms between normal outer_color and fail_color
+        capslock_color = -1;
+        numlock_color = -1;
+        bothlock_color = -1; # when both locks are active. -1 means don't change outer color (same for above)
+        invert_numlock = false; # change color if numlock is off
+        swap_font_color = false; # see below
+        position = "0, -20";
+        halign = "center";
+        valign = "center";
+    };
   };
   wayland.windowManager.hyprland.extraConfig = ''
  # Begin monitor HDMI-A-1

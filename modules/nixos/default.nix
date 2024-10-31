@@ -54,7 +54,8 @@
       default_session = initial_session;
     };
   };
-
+  security.pam.services.greetd.enableGnomeKeyring = true;
+  services.gnome.gnome-keyring.enable = true;
   environment.sessionVariables = {
     EDITOR = "nvim";
     QT_STYLE_OVERRIDE = "Breeze";

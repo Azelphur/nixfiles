@@ -19,6 +19,12 @@
   ];
   qt.enable = true;
   nixpkgs.config.allowUnfree = true;
+  programs.thunderbird = {
+    enable = true;
+    profiles.default = {
+      isDefault = true;
+    };
+  };
   #services.network-manager-applet.enable = true;
   # The home.packages option allows you to install Nix packages into your
   # environment.
