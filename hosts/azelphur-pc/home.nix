@@ -24,7 +24,7 @@
     ];
     exec-once = [
       "hyprlock"
-      "sleep 1;${pkgs.writeScriptBin "fix-monitors.sh" (builtins.readFile ./fix-monitors.sh)}/bin/fix-monitors.sh"
+      "sleep 2;${pkgs.writeScriptBin "fix-monitors.sh" (builtins.readFile ./fix-monitors.sh)}/bin/fix-monitors.sh"
       # Webcam autofocus is terrible, force focus.
       "v4l2-ctl -d /dev/video3 --set-ctrl=focus_automatic_continuous=0"
       "v4l2-ctl -d /dev/video3 --set-ctrl=focus_absolute=0"
