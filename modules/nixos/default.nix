@@ -38,7 +38,7 @@
       user.name = "azelphur";
       user.email = "azelphur@azelphur.com";
       init.defaultBranch = "main";
-      safe.directory = "etc/nixos";
+      safe.directory = "/etc/nixos";
     };
   };
   programs.zsh.enable = true;
@@ -68,6 +68,7 @@
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = false;
+  boot.loader.systemd-boot.configurationLimit = 10;
   boot.loader.efi.canTouchEfiVariables = true;
 
   time.timeZone = "Europe/London";
