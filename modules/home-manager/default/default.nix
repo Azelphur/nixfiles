@@ -76,6 +76,7 @@
     kate
     spotify
     btop
+    electrum
     pulseaudio # Even though we use pipewire, we use pactl for waybar volume control
   ];
   home.sessionPath = [
