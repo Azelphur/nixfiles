@@ -9,7 +9,6 @@
 
     hyprland = {
       url = "github:hyprwm/Hyprland?ref=v0.45.2";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     #hyprland.url = "github:hyprwm/Hyprland?submodules=1"; # Development branch
     # or "github:hyprwm/Hyprland?submodules=1" to follow the development branch
@@ -60,7 +59,7 @@
     
   };
 
-  outputs = { self, nixpkgs, nixpkgsstaging, nixvim, hyprland, hy3, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixvim, hyprland, hy3, home-manager, ... }@inputs: {
     nixosConfigurations.azelphur-pc = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [

@@ -2,9 +2,11 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, inputs, ... }:
+#{ config, lib, pkgs, inputs, ... }:
 
-{
+{ config, lib, pkgs, inputs, ...}: let
+  pkgs-unstable = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../modules/nixos/default.nix
@@ -12,6 +14,13 @@
     ./vfio.nix
   ];
   vfio.enable = true;
+  hardware.opengl = {
+    package = pkgs-unstable.mesa.drivers;
+
+    # if you also want 32-bit support (e.g for Steam)
+    driSupport32Bit = true;
+    package32 = pkgs-unstable.pkgsi686Linux.mesa.drivers;
+  };
   hardware.nvidia = {
     # Modesetting is required.
     modesetting.enable = true;
