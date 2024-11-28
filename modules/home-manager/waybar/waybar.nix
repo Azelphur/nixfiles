@@ -1,9 +1,8 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, nixpkgs-staging, ... }:
 
 with config.lib.stylix.colors.withHashtag;
 {
   home.packages = with pkgs; [
-    cava
     playerctl
   ];
   programs.waybar.enable = true;

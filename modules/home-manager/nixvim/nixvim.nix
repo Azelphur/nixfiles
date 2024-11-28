@@ -29,19 +29,17 @@
       luasnip.enable = true;
       nvim-tree.enable = true;
       treesitter.enable = true;
-      yazi.enable = true;
       fzf-lua.enable = true;
-      web-devicons.enable = true;
-      precognition = {
-        enable = true;
-        settings = {
-          startVisible = true;
-        };
-      };
+      #web-devicons.enable = true;
+      #precognition = {
+      #  enable = true;
+      #  settings = {
+      #    startVisible = true;
+      #  };
+      # };
       lsp = {
         enable = true;
         servers = {
-          ts_ls.enable = true;
           lua_ls.enable = true;
           pyright.enable = true;
           nil_ls.enable = true;

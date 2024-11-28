@@ -36,8 +36,8 @@ in { pkgs, lib, config, ... }: {
         ssh azelphur@192.168.1.56 ./toggle-source.sh
       '')
     ];
-    #hardware.opengl.enable = true;
-    hardware.graphics.enable = true;
+    hardware.opengl.enable = true;
+    #hardware.graphics.enable = true;
     virtualisation.spiceUSBRedirection.enable = true;
     virtualisation.libvirtd.enable = true;
     programs.virt-manager.enable = true;

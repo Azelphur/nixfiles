@@ -57,7 +57,7 @@
 #        40)
 #    );
   };
-  programs.hyprlock.settings = {
+  programs.hyprlock.settings = lib.mkForce {
     general = {
       disable_loading_bar = true;
       grace = 0;

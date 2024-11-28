@@ -12,8 +12,6 @@
     ./vfio.nix
   ];
   vfio.enable = true;
-  hardware.graphics.enable32Bit = true;
-  hardware.nvidia-container-toolkit.enable = true;
   hardware.nvidia = {
     # Modesetting is required.
     modesetting.enable = true;

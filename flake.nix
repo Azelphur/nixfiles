@@ -2,16 +2,21 @@
   description = "Nixos config flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgsstaging.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     #nixpkgs.url = "path:///home/azelphur/Downloads/nixpkgs";
 
-    #hyprland.url = "github:hyprwm/Hyprland?ref=v0.44.1";
-    hyprland.url = "github:hyprwm/Hyprland?submodules=1"; # Development branch
+    hyprland = {
+      url = "github:hyprwm/Hyprland?ref=v0.45.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    #hyprland.url = "github:hyprwm/Hyprland?submodules=1"; # Development branch
     # or "github:hyprwm/Hyprland?submodules=1" to follow the development branch
 
     hy3 = {
-      #url = "github:outfoxxed/hy3?ref=hl0.44.0"; # where {version} is the hyprland release version
-      url = "github:outfoxxed/hy3";
+      url = "github:outfoxxed/hy3?ref=hl0.45.0"; # where {version} is the hyprland release version
+      #url = "github:outfoxxed/hy3";
       # or "github:outfoxxed/hy3" to follow the development branch.
       # (you may encounter issues if you dont do the same for hyprland)
       inputs.hyprland.follows = "hyprland";
@@ -24,16 +29,16 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixvim = {
-      url = "github:nix-community/nixvim";
+      url = "github:nix-community/nixvim/nixos-24.05";
       # If you are not running an unstable channel of nixpkgs, select the corresponding branch of nixvim.
       # url = "github:nix-community/nixvim/nixos-24.05";
 
-      inputs.nixpkgs.follows = "nixpkgs";
+      #inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     lanzaboote = {
@@ -47,10 +52,15 @@
       url = "github:kaylorben/nixcord";
     };
 
-    stylix.url = "github:danth/stylix";
+    stylix = {
+      #url = "github:danth/stylix";
+      url = "github:danth/stylix/cf8b6e2d4e8aca8ef14b839a906ab5eb98b08561";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    
   };
 
-  outputs = { self, nixpkgs, nixvim, hyprland, hy3, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, nixpkgsstaging, nixvim, hyprland, hy3, home-manager, ... }@inputs: {
     nixosConfigurations.azelphur-pc = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [

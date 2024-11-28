@@ -9,6 +9,7 @@
   programs.nixcord = {
     enable = true;  # enable Nixcord. Also installs discord package
     discord.enable = false;
+    discord.vencord.package = pkgs.vencord;
     vesktop.enable = true;
     #quickCss = "some CSS";  # quickCSS file
     config = {
