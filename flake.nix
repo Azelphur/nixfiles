@@ -2,10 +2,10 @@
   description = "Nixos config flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
-    nixpkgsstaging.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    #nixpkgs.url = "path:///home/azelphur/Downloads/nixpkgs";
+    #nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    #nixpkgs.url = "github:nixos/nixpkgs/staging";
+    #nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "path:///home/azelphur/Downloads/nixpkgs";
 
     hyprland = {
       url = "github:hyprwm/Hyprland?ref=v0.45.2";
@@ -28,7 +28,8 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+      #url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -37,7 +38,7 @@
       # If you are not running an unstable channel of nixpkgs, select the corresponding branch of nixvim.
       # url = "github:nix-community/nixvim/nixos-24.05";
 
-      #inputs.nixpkgs.follows = "nixpkgs-unstable";
+      #inputs.nixpkgs.follows = "nixpkgs";
     };
 
     lanzaboote = {
@@ -52,14 +53,14 @@
     };
 
     stylix = {
-      #url = "github:danth/stylix";
-      url = "github:danth/stylix/cf8b6e2d4e8aca8ef14b839a906ab5eb98b08561";
+      url = "github:danth/stylix";
+      #url = "github:danth/stylix/cf8b6e2d4e8aca8ef14b839a906ab5eb98b08561";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nixvim, hyprland, hy3, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, nixvim, hyprland, hy3, home-manager, ... }@inputs: {
     nixosConfigurations.azelphur-pc = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [

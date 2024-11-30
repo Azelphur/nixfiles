@@ -16,7 +16,6 @@ in { pkgs, lib, config, ... }: {
         "vfio"
         "vfio_iommu_type1"
         #"vfio_virqfd"
-
         "nvidia"
         "nvidia_modeset"
         "nvidia_uvm"
@@ -26,7 +25,7 @@ in { pkgs, lib, config, ... }: {
       kernelParams = [
         # enable IOMMU
         "amd_iommu=on"
-      ] ++ lib.optional cfg.enable
+      ] ++ lib.optional cfg.enable # Remove the semicolon here when uncommenting
         # isolate the GPU
         ("vfio-pci.ids=" + lib.concatStringsSep "," gpuIDs);
     };
@@ -36,10 +35,47 @@ in { pkgs, lib, config, ... }: {
         ssh azelphur@192.168.1.56 ./toggle-source.sh
       '')
     ];
-    hardware.opengl.enable = true;
-    #hardware.graphics.enable = true;
-    virtualisation.spiceUSBRedirection.enable = true;
-    virtualisation.libvirtd.enable = true;
+    #hardware.opengl.enable = true;
+    hardware.graphics.enable = true;
+    virtualisation = {
+      spiceUSBRedirection.enable = true;
+      libvirtd = {
+        enable = true;
+        #hooks.qemu = {
+        #  gpu_binding = pkgs.writeShellScript "hook" ''
+        #    command=$2
+        #    gpu="0000:0d:00.0"
+        #    aud="0000:0d:00.1"
+        #    gpu_vd="$(cat /sys/bus/pci/devices/$gpu/vendor) $(cat /sys/bus/pci/devices/$gpu/device)"
+        #    aud_vd="$(cat /sys/bus/pci/devices/$aud/vendor) $(cat /sys/bus/pci/devices/$aud/device)"
+       # 
+       #     function bind_vfio {
+       #       modprobe -r nvidia-drm
+       #       echo "$gpu" > "/sys/bus/pci/devices/$gpu/driver/unbind"
+       #       echo "$aud" > "/sys/bus/pci/devices/$aud/driver/unbind"
+       #       echo "$gpu_vd" > /sys/bus/pci/drivers/vfio-pci/new_id || true
+       #       echo "$aud_vd" > /sys/bus/pci/drivers/vfio-pci/new_id || true
+       #     }
+       #     
+       #     function unbind_vfio {
+       #       echo "$gpu_vd" > "/sys/bus/pci/drivers/vfio-pci/remove_id"
+       #       echo "$aud_vd" > "/sys/bus/pci/drivers/vfio-pci/remove_id"
+       #       echo 1 > "/sys/bus/pci/devices/$gpu/remove"
+       #       echo 1 > "/sys/bus/pci/devices/$aud/remove"
+       #       echo 1 > "/sys/bus/pci/rescan"
+       #     }
+       # 
+       #     if [ "$command" = "started" ]; then
+      #        echo "Trying to take" > /tmp/status
+      #        bind_vfio
+      #      elif [ "$command" = "release" ]; then
+      #        echo "Trying to unbind" > /tmp/status
+      #        unbind_vfio
+      #      fi
+      #    '';
+      #  };
+      };
+    };
     programs.virt-manager.enable = true;
     users.users.azelphur.extraGroups = [ "libvirtd" ];
   };
