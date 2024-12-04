@@ -22,8 +22,8 @@
     };
 
     hypr-dynamic-cursors = {
-        #url = "github:VirtCode/hypr-dynamic-cursors?ref=3ff4c2a053f7673b3b8cd45ada0886cbda13ebcc";
-        url = "github:VirtCode/hypr-dynamic-cursors";
+        url = "github:VirtCode/hypr-dynamic-cursors?ref=81f4b964f997a3174596ef22c7a1dee8a5f616c7";
+        #url = "github:VirtCode/hypr-dynamic-cursors";
         inputs.hyprland.follows = "hyprland"; # to make sure that the plugin is built for the correct version of hyprland
     };
 
