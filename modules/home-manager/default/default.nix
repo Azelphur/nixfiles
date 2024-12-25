@@ -46,7 +46,7 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
     # Must be ran with WEBKIT_DISABLE_DMABUF_RENDERER=1 until graphics driver update
-    orca-slicer
+    #orca-slicer
     element-desktop
     nextcloud-client
     lcov
@@ -84,6 +84,8 @@
     btop
     electrum
     pulseaudio # Even though we use pipewire, we use pactl for waybar volume control
+    unzip
+    openscad-unstable
   ];
   home.sessionPath = [
     "$HOME/.bin"

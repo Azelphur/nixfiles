@@ -30,13 +30,13 @@
       nvim-tree.enable = true;
       treesitter.enable = true;
       fzf-lua.enable = true;
-      #web-devicons.enable = true;
-      #precognition = {
-      #  enable = true;
-      #  settings = {
-      #    startVisible = true;
-      #  };
-      # };
+      web-devicons.enable = true;
+      precognition = {
+        enable = true;
+        settings = {
+          startVisible = true;
+        };
+      };
       lsp = {
         enable = true;
         servers = {
