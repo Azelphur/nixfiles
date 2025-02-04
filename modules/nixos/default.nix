@@ -4,6 +4,7 @@ in {
   imports = [
     inputs.home-manager.nixosModules.default
   ];
+  services.fwupd.enable = true;
   hardware.opengl = {
     package = pkgs-unstable.mesa.drivers;
 
@@ -26,6 +27,7 @@ in {
     };
   };
   programs.steam.enable = true;
+  programs.kdeconnect.enable = true;
   nix.settings.experimental-features = ["nix-command" "flakes" ];
   boot.lanzaboote = {
     enable = true;
