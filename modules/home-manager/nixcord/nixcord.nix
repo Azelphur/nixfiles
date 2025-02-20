@@ -8,15 +8,11 @@
   stylix.targets.vesktop.enable = true;
   programs.nixcord = {
     enable = true;  # enable Nixcord. Also installs discord package
-    discord.enable = false;
-    discord.vencord.package = pkgs.vencord;
-    vesktop.enable = true;
+    #discord.enable = false;
+    #discord.vencord.package = pkgs.vencord;
+    #vesktop.enable = true;
     #quickCss = "some CSS";  # quickCSS file
     config = {
-      #useQuickCss = true;   # use out quickCSS
-      #themeLinks = [        # or use an online theme
-      #  "https://raw.githubusercontent.com/link/to/some/theme.css"
-      #];
       enabledThemes = [
         "stylix.theme.css"
       ];
