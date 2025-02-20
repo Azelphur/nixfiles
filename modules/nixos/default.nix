@@ -111,7 +111,7 @@ in {
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.azelphur = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" "adbusers" "networkmanager"]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "docker" "adbusers" "networkmanager" "dialout"]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
     ];
     shell = pkgs.zsh;
