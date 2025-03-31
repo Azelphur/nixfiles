@@ -1,16 +1,16 @@
-{ config, lib, pkgs, inputs, ...}: let
-  pkgs-unstable = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-in {
+{ config, lib, pkgs, inputs, ...}:
+
+{
   imports = [
     inputs.home-manager.nixosModules.default
   ];
   services.fwupd.enable = true;
   hardware.graphics = {
     enable32Bit = true;
-    package = pkgs-unstable.mesa.drivers;
+    #package = pkgs-unstable.mesa.drivers;
     # if you also want 32-bit support (e.g for Steam)
     #driSupport32Bit = true;
-    package32 = pkgs-unstable.pkgsi686Linux.mesa.drivers;
+    #package32 = pkgs-unstable.pkgsi686Linux.mesa.drivers;
   };
   services.printing.enable = true;
   services.avahi = {
@@ -37,9 +37,9 @@ in {
   nixpkgs.config.allowUnfree = true;
   programs.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    #package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     # make sure to also set the portal package, so that they are in sync
-    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    #portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
   nix.settings = {
     substituters = ["https://hyprland.cachix.org"];
@@ -61,7 +61,8 @@ in {
     enable = true;
     settings = rec {
       initial_session = {
-        command = "dbus-run-session ${inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland}/bin/Hyprland 2>&1 > /tmp/hyprland.log";
+        #command = "dbus-run-session ${inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland}/bin/Hyprland 2>&1 > /tmp/hyprland.log";
+        command = "Hyprland 2>&1 /tmp/hyprland.log";
         user = "azelphur";
       };
       default_session = initial_session;

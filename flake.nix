@@ -4,28 +4,28 @@
   inputs = {
     #nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     #nixpkgs.url = "github:nixos/nixpkgs/staging";
-    #nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs.url = "path:///home/azelphur/Downloads/nixpkgs";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    #nixpkgs.url = "path:///home/azelphur/Downloads/nixpkgs";
 
-    hyprland = {
-      #url = "github:hyprwm/Hyprland?ref=v0.48.1";
-      url = "github:hyprwm/Hyprland?submodules=1"; # Development branch
-    };
+    #hyprland = {
+    #  url = "github:hyprwm/Hyprland?ref=v0.48.1";
+      #url = "github:hyprwm/Hyprland?submodules=1"; # Development branch
+    #};
     # or "github:hyprwm/Hyprland?submodules=1" to follow the development branch
 
-    hy3 = {
+    #hy3 = {
       #url = "github:outfoxxed/hy3?ref=hl0.46.0"; # where {version} is the hyprland release version
-      url = "github:outfoxxed/hy3";
+    #  url = "github:outfoxxed/hy3";
       # or "github:outfoxxed/hy3" to follow the development branch.
       # (you may encounter issues if you dont do the same for hyprland)
-      inputs.hyprland.follows = "hyprland";
-    };
+    #  inputs.hyprland.follows = "hyprland";
+    #};
 
-    hypr-dynamic-cursors = {
+    #hypr-dynamic-cursors = {
         #url = "github:VirtCode/hypr-dynamic-cursors?ref=81f4b964f997a3174596ef22c7a1dee8a5f616c7";
-        url = "github:VirtCode/hypr-dynamic-cursors";
-        inputs.hyprland.follows = "hyprland"; # to make sure that the plugin is built for the correct version of hyprland
-    };
+    #    url = "github:VirtCode/hypr-dynamic-cursors";
+    #    inputs.hyprland.follows = "hyprland"; # to make sure that the plugin is built for the correct version of hyprland
+    #};
 
     home-manager = {
       #url = "github:nix-community/home-manager/release-24.05";
@@ -60,7 +60,7 @@
     
   };
 
-  outputs = { self, nixpkgs, nixvim, hyprland, hy3, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, nixvim, home-manager, ... }@inputs: {
     nixosConfigurations.azelphur-pc = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
