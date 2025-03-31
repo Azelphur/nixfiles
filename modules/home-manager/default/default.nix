@@ -79,13 +79,15 @@
     slack
     firefox
     pavucontrol
-    kate
+    libsForQt5.kate
     spotify
     btop
     electrum
     pulseaudio # Even though we use pipewire, we use pactl for waybar volume control
     unzip
     openscad-unstable
+    flutterPackages-source.stable
+    android-studio
   ];
   home.sessionPath = [
     "$HOME/.bin"

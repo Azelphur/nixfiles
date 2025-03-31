@@ -12,20 +12,24 @@
   services.dunst.settings.global.monitor = "DP-2";
   wayland.windowManager.hyprland.settings = {
     env = "AQ_DRM_DEVICES,/dev/dri/card1";
+    cursor.no_hardware_cursors = 1;
     monitor = [
       #"DP-4, 5120x1440@120, 1619x1440, 1, transform, 0, bitdepth, 10" # Bottom
-      "DP-1, 1920x1080@60, 1619x1440, 1, transform, 0, bitdepth, 10" # Bottom
+      "DP-1, 1920x1080@60, 0x0, 1" # Bottom
       #"HDMI-A-2, 3840x2160@60, 0x0, 1.333333, transform, 1" # Left
-      "HDMI-A-1, 1920x1080@60, 0x0, 1.333333, transform, 1" # Left
+      #"HDMI-A-1, 1920x1080@60, 0x0, 1.333333, transform, 1" # Left
+      "HDMI-A-1, disable"
       #"DP-6, 3840x2160@60, 6739x0, 1.333333, transform, 3" # Right
-      "DP-3, 1920x1080@60, 6739x0, 1.333333, transform, 3" # Right
+      #"DP-3, 1920x1080@60, 6739x0, 1.333333, transform, 3" # Right
+      "DP-3, disable"
       #"DP-5, 5120x1440@120, 1619x0, 1, transform, 2, bitdepth, 10" # Top
-      "DP-2, 1920x1080@60, 1619x0, 1, transform, 2, bitdepth, 10" # Top
+      #"DP-2, 1920x1080@60, 1619x0, 1, transform, 2, bitdepth, 10" # Top
+      "DP-2, disable"
     ];
     exec-once = [
       "systemctl --user stop hyprpaper"
       "hyprlock"
-      "sleep 2;${pkgs.writeScriptBin "fix-monitors.sh" (builtins.readFile ./fix-monitors.sh)}/bin/fix-monitors.sh"
+      "${pkgs.writeScriptBin "fix-monitors.sh" (builtins.readFile ./fix-monitors.sh)}/bin/fix-monitors.sh"
       # Webcam autofocus is terrible, force focus.
       "v4l2-ctl -d /dev/video3 --set-ctrl=focus_automatic_continuous=0"
       "v4l2-ctl -d /dev/video3 --set-ctrl=focus_absolute=0"

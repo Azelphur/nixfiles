@@ -8,7 +8,7 @@
     nixpkgs.url = "path:///home/azelphur/Downloads/nixpkgs";
 
     hyprland = {
-      #url = "github:hyprwm/Hyprland?ref=v0.46.2";
+      #url = "github:hyprwm/Hyprland?ref=v0.48.1";
       url = "github:hyprwm/Hyprland?submodules=1"; # Development branch
     };
     # or "github:hyprwm/Hyprland?submodules=1" to follow the development branch

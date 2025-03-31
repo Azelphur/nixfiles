@@ -32,7 +32,7 @@ in { pkgs, lib, config, ... }: {
     environment.systemPackages = [
       pkgs.evsieve
       (pkgs.writeShellScriptBin "toggle-source" ''
-        ssh azelphur@192.168.1.56 ./toggle-source.sh
+        ssh azelphur@10.0.1.17 ./toggle-source.sh
       '')
     ];
     #hardware.opengl.enable = true;
