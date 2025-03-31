@@ -62,7 +62,7 @@
     settings = rec {
       initial_session = {
         #command = "dbus-run-session ${inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland}/bin/Hyprland 2>&1 > /tmp/hyprland.log";
-        command = "Hyprland 2>&1 /tmp/hyprland.log";
+        command = "Hyprland 2>&1 > /tmp/hyprland.log";
         user = "azelphur";
       };
       default_session = initial_session;

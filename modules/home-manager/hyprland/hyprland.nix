@@ -1,6 +1,15 @@
-{ configs, pkgs, inputs, ... }:
+{ configs, pkgs, inputs, ... }: let
+  hy3 = (pkgs.hyprlandPlugins.hy3.overrideAttrs (o: rec {
+    version = "0.48.0";
 
-{
+    src = pkgs.fetchFromGitHub {
+      owner = "outfoxxed";
+      repo = "hy3";
+      rev = "refs/tags/hl${version}";
+      hash = "sha256-CUlxc2u1Y8gpeAl7NKrZxxpeZjyU2DBxOYb8b0haM2M=";
+    };
+  }));
+in {
   home.packages = with pkgs; [
     (pkgs.writeShellScriptBin "grimblast-wrapper" ''
       hyprctl clients -j | jq -r ".[].address" | xargs -I {} hyprctl setprop address:{} opaque on > /dev/null
@@ -12,7 +21,7 @@
     enable = true;
     #package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     plugins = with pkgs; [
-      hyprlandPlugins.hy3
+      hy3
       #inputs.hy3.packages.x86_64-linux.hy3
       #inputs.hypr-dynamic-cursors.packages.${pkgs.system}.hypr-dynamic-cursors
     ];
