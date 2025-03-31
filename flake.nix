@@ -27,6 +27,12 @@
     #    inputs.hyprland.follows = "hyprland"; # to make sure that the plugin is built for the correct version of hyprland
     #};
 
+    rose-pine-hyprcursor = {
+      url = "github:ndom91/rose-pine-hyprcursor";
+      #inputs.nixpkgs.follows = "nixpkgs";
+      #inputs.hyprlang.follows = "hyprland/hyprlang";
+    };
+
     home-manager = {
       #url = "github:nix-community/home-manager/release-24.05";
       url = "github:nix-community/home-manager/";
