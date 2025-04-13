@@ -11,7 +11,9 @@
   ];
   services.dunst.settings.global.monitor = "DP-2";
   wayland.windowManager.hyprland.settings = {
-    env = "AQ_DRM_DEVICES,/dev/dri/card1";
+    env = [
+      "AQ_DRM_DEVICES,/dev/dri/card1"
+    ];
     cursor.no_hardware_cursors = 1;
     monitor = [
       #"DP-4, 5120x1440@120, 1619x1440, 1, transform, 0, bitdepth, 10" # Bottom
