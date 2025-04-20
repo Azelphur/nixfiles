@@ -11,6 +11,11 @@
       ../../modules/nixos/default.nix
       inputs.home-manager.nixosModules.default
     ];
+  hardware.graphics = {
+    enable32Bit = true;
+    enable = true;
+    extraPackages = with pkgs; [ intel-media-driver intel-ocl intel-vaapi-driver ];
+  };
   hardware.bluetooth = {
     enable = true;
     settings = {

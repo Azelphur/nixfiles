@@ -5,13 +5,6 @@
     inputs.home-manager.nixosModules.default
   ];
   services.fwupd.enable = true;
-  hardware.graphics = {
-    enable32Bit = true;
-    #package = pkgs-unstable.mesa.drivers;
-    # if you also want 32-bit support (e.g for Steam)
-    #driSupport32Bit = true;
-    #package32 = pkgs-unstable.pkgsi686Linux.mesa.drivers;
-  };
   services.printing.enable = true;
   services.avahi = {
     enable = true;
