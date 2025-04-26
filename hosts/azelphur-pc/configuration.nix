@@ -11,7 +11,12 @@
     inputs.home-manager.nixosModules.default
     ./vfio.nix
   ];
-  vfio.enable = true;
+  vfio.enable = false;
+  hardware.nvidia-container-toolkit.enable = true;
+  hardware.graphics = {
+    enable32Bit = true;
+    enable = true;
+  };
   hardware.nvidia = {
     # Modesetting is required.
     modesetting.enable = true;
