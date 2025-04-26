@@ -2,7 +2,7 @@
 
 {
   imports = [
-    inputs.nixcord.homeManagerModules.nixcord
+    inputs.nixcord.homeModules.nixcord
   ];
 
   stylix.targets.vesktop.enable = true;
