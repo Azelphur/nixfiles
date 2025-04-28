@@ -89,6 +89,7 @@
     flutterPackages-source.stable
     android-studio
     yt-dlp
+    whois
   ];
   home.sessionPath = [
     "$HOME/.bin"
