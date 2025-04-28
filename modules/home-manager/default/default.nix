@@ -88,6 +88,7 @@
     openscad-unstable
     flutterPackages-source.stable
     android-studio
+    yt-dlp
   ];
   home.sessionPath = [
     "$HOME/.bin"
