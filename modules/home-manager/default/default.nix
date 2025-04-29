@@ -90,6 +90,7 @@
     android-studio
     yt-dlp
     whois
+    telegram-desktop
   ];
   home.sessionPath = [
     "$HOME/.bin"
