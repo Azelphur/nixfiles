@@ -65,7 +65,6 @@
   services.gnome.gnome-keyring.enable = true;
   environment.sessionVariables = {
     EDITOR = "nvim";
-    QT_STYLE_OVERRIDE = "Breeze";
     NIXOS_OZONE_WL = "1";
   };
 
@@ -118,7 +117,6 @@
     git
     wget
     killall
-    libsForQt5.breeze-qt5
     (python3.withPackages(ps: with ps; [ 
       requests
       virtualenv
