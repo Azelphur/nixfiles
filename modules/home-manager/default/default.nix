@@ -25,6 +25,13 @@
       isDefault = true;
     };
   };
+  programs.vscode = {
+    enable = true;
+    extensions = with pkgs.vscode-extensions; [
+      dracula-theme.theme-dracula
+    ];
+  };
+
   #services.network-manager-applet.enable = true;
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -79,7 +86,6 @@
     slack
     firefox
     pavucontrol
-    libsForQt5.kate
     spotify
     btop
     electrum
@@ -91,6 +97,10 @@
     yt-dlp
     whois
     telegram-desktop
+    kdePackages.dolphin
+    kdePackages.kate
+    kdePackages.gwenview
+    kdePackages.plasma-workspace
   ];
   home.sessionPath = [
     "$HOME/.bin"
