@@ -1,12 +1,12 @@
 { configs, pkgs, inputs, ... }: let
   hy3 = (pkgs.hyprlandPlugins.hy3.overrideAttrs (o: rec {
-    version = "0.48.0";
+    version = "0.49.0";
 
     src = pkgs.fetchFromGitHub {
       owner = "outfoxxed";
       repo = "hy3";
       rev = "refs/tags/hl${version}";
-      hash = "sha256-CUlxc2u1Y8gpeAl7NKrZxxpeZjyU2DBxOYb8b0haM2M=";
+      hash = "sha256-dYxkdbg6yj8HhuBkCmklMQVR17N7P32R8ir7b7oNxm4=";
     };
   }));
 in {
