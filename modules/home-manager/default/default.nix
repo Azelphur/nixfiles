@@ -96,6 +96,7 @@
     android-studio
     yt-dlp
     whois
+    obs-studio
     telegram-desktop
     kdePackages.dolphin
     kdePackages.kate
