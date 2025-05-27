@@ -2,9 +2,9 @@
   description = "Nixos config flake";
 
   inputs = {
-    #nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     #nixpkgs.url = "github:nixos/nixpkgs/staging";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    #nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     #nixpkgs.url = "path:///home/azelphur/Downloads/nixpkgs";
 
     #hyprland = {
