@@ -3,6 +3,12 @@
 {
   programs.nixvim = {
     enable = true;
+    clipboard = {
+      providers = {
+        wl-copy.enable = true;
+      };
+      register = "unnamedplus";
+    };
     keymaps = [
       {
         mode = "n";
