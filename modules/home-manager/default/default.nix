@@ -102,6 +102,7 @@
     kdePackages.kate
     kdePackages.gwenview
     kdePackages.plasma-workspace
+    p7zip
   ];
   home.sessionPath = [
     "$HOME/.bin"
