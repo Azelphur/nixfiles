@@ -5,15 +5,6 @@ import subprocess
 import os
 import json
 
-with open(os.path.expanduser("~/.ha_credentials.json"), "r") as f:
-    config = json.load(f)
-
-API_URL = config["url"].strip()
-HEADERS = {
-    "Authorization": f"Bearer {config['token']}",
-}
-ENTITY_ID = config["entity_id"]
-
 
 class MenuItem:
     def __init__(self, name, icon=None):
@@ -26,75 +17,111 @@ class MenuItem:
     def render(self):
         return f"{self.name}\0icon\x1f{self.get_icon()}"
 
-modes = [
-    MenuItem("Off", "power.svg"),
-    MenuItem("Set Temperature", "thermostat.svg"),
-    MenuItem("Heat", "fire.svg"),
-    MenuItem("Dry", "humidity-percentage.svg"),
-    MenuItem("Cool", "snowflake.svg"),
-    MenuItem("Fan", "mode-fan.svg"),
-    MenuItem("Heat/Cool", "mode-heat-cool.svg"),
-]
+def main(entity_id=None):
+    with open(os.path.expanduser("~/.ha_credentials.json"), "r") as f:
+        config = json.load(f)
 
-def get_current_state():
-    r = requests.get(API_URL + f"/api/states/{ENTITY_ID}", headers=HEADERS)
-    return r.json()
+    if entity_id is None:
+        entity_id = config["default_entity_id"]
+    aircon_name = config["entity_ids"][entity_id]
 
-state = get_current_state()
-if state['state'] == "off":
-    prompt = "Off"
-else:
-    prompt = f"{state['state'].capitalize()}ing {state['attributes']['temperature']}°C"
+    api_url = config["url"].strip()
+    headers = {
+        "Authorization": f"Bearer {config['token']}",
+    }
+    modes = [
+        MenuItem("Off", "power.svg"),
+        MenuItem("Set Temperature", "thermostat.svg"),
+        MenuItem("Heat", "fire.svg"),
+        MenuItem("Dry", "humidity-percentage.svg"),
+        MenuItem("Cool", "snowflake.svg"),
+        MenuItem("Fan", "mode-fan.svg"),
+        MenuItem("Heat/Cool", "mode-heat-cool.svg"),
+        MenuItem("Switch Unit", "heat-pump.svg"),
+    ]
 
-p = subprocess.Popen(
-    [
-        "fuzzel",
-        "-d",
-        "--prompt",
-        f"Aircon {prompt} > "
-    ],
-    stdout=subprocess.PIPE,
-    stdin=subprocess.PIPE,
-    stderr=subprocess.PIPE,
-    text=True
-)
+    def get_current_state():
+        r = requests.get(api_url + f"/api/states/{entity_id}", headers=headers)
+        return r.json()
 
-s = ""
-for mode in modes:
-    s += mode.render() + "\n"
+    state = get_current_state()
+    if state['state'] == "off":
+        prompt = "Off"
+    else:
+        prompt = f"{state['state'].capitalize()}ing {state['attributes']['temperature']}°C"
 
-stdout, stderr = p.communicate(input=s)
-if stdout == "Set Temperature\n":
     p = subprocess.Popen(
         [
             "fuzzel",
             "-d",
             "--prompt",
-            "Set Temperature > ",
+            f"{aircon_name} {prompt} > "
         ],
         stdout=subprocess.PIPE,
         stdin=subprocess.PIPE,
         stderr=subprocess.PIPE,
         text=True
     )
-    stdout, stderr = p.communicate()
-    data = {
-        "entity_id": ENTITY_ID,
-        "temperature": stdout.strip(),
-    }
-    r = requests.post(
-        API_URL + "/api/services/climate/set_temperature",
-        headers=HEADERS,
-        json=data
-    )
 
-else:
-    data = {
-        "entity_id": ENTITY_ID,
-        "hvac_mode": stdout.lower().strip()
-    }
-    r = requests.post(
-        API_URL + "/api/services/climate/set_hvac_mode",
-        headers=HEADERS,
-        json=data
-    )
+    s = ""
+    for mode in modes:
+        s += mode.render() + "\n"
+
+    stdout, stderr = p.communicate(input=s)
+    print("STDOUT IS", stdout)
+    if stdout == "Set Temperature\n":
+        p = subprocess.Popen(
+            [
+                "fuzzel",
+                "-d",
+                "--prompt",
+                "Set Temperature > ",
+            ],
+            stdout=subprocess.PIPE,
+            stdin=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        stdout, stderr = p.communicate()
+        data = {
+            "entity_id": entity_id,
+            "temperature": stdout.strip(),
+        }
+        r = requests.post(
+            api_url + "/api/services/climate/set_temperature",
+            headers=headers,
+            json=data
+        )
+    elif stdout == "Switch Unit\n":
+        p = subprocess.Popen(
+            [
+                "fuzzel",
+                "-d",
+                "--prompt",
+                "Select Unit > ",
+            ],
+            stdout=subprocess.PIPE,
+            stdin=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        menu = [MenuItem(v, "heat-pump.svg") for v in config["entity_ids"].values()]
+        s = ""
+        for item in menu:
+            s += item.render() + "\n"
+        stdout, stderr = p.communicate(input=s)
+        reverse_dict = {v: k for k, v in config["entity_ids"].items()}
+        main(reverse_dict[stdout.strip()])
+    else:
+        data = {
+            "entity_id": entity_id,
+            "hvac_mode": stdout.lower().strip()
+        }
+        r = requests.post(
+            api_url + "/api/services/climate/set_hvac_mode",
+            headers=headers,
+            json=data
+        )
+
+if __name__ == "__main__":
+    main()
