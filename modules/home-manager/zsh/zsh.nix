@@ -4,7 +4,6 @@
   home.packages = with pkgs; [
     python312Packages.pygments
     fzf
-    thefuck
   ];
   programs.zsh = {
     enable = true;
@@ -36,7 +35,7 @@
     oh-my-zsh = {
       enable = true;
       theme = "fox";
-      plugins = ["colorize" "thefuck" "colored-man-pages" "copypath" "cp" "docker" "extract" "fzf" "heroku" "sudo" "git" "zsh-interactive-cd"];
+      plugins = ["colorize" "colored-man-pages" "copypath" "cp" "docker" "extract" "fzf" "heroku" "sudo" "git" "zsh-interactive-cd"];
     };
     initContent = "fastfetch --logo .assets/nixos.png --logo-type kitty-direct --logo-width 40 --logo-height 20";
   };
