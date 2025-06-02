@@ -91,7 +91,7 @@
     electrum
     pulseaudio # Even though we use pipewire, we use pactl for waybar volume control
     unzip
-    openscad-unstable
+    openscad
     flutterPackages-source.stable
     android-studio
     yt-dlp
@@ -103,6 +103,7 @@
     kdePackages.gwenview
     kdePackages.plasma-workspace
     p7zip
+    rpi-imager
   ];
   home.sessionPath = [
     "$HOME/.bin"
