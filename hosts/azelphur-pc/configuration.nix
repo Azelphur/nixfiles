@@ -66,9 +66,6 @@
       "azelphur" = import ./home.nix;
     };
   };
-  virtualisation.docker = {
-    enable = true;
-  };
   environment.systemPackages = with pkgs; [
     tpm2-tss
   ];

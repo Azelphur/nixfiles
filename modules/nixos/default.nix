@@ -58,6 +58,9 @@ in
       };
     };
   };
+  virtualisation.docker = {
+    enable = true;
+  };
   programs.steam.enable = true;
   programs.kdeconnect.enable = true;
   nix.settings.experimental-features = ["nix-command" "flakes" ];
