@@ -4,6 +4,7 @@
   imports = [
     ../hyprland/hyprland.nix
     ../hyprlock/hyprlock.nix
+    ../hypridle/hypridle.nix
     ../waybar/waybar.nix
     ../stylix/stylix.nix
     ../kitty/kitty.nix
