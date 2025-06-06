@@ -135,6 +135,7 @@ in {
         "waybar"
         "nextcloud"
         "gnome-keyring-daemon"
+        "go-hass-agent run"
       ];
       bindd = [
         "$mainMod, Return, Launch terminal emulator, exec, kitty"
