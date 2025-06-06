@@ -5,7 +5,7 @@
     enable = true;
     settings = {
       general = {
-        lock_cmd = "pidof hyprlock && hyprlock";
+        lock_cmd = "pidof hyprlock || hyprlock";
       };
       listener = {
         timeout = 10;
