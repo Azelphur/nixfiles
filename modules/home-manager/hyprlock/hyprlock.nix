@@ -7,7 +7,7 @@
   programs.hyprlock.enable = true;
   wayland.windowManager.hyprland.settings = {
     bindd = [
-      "$shiftMod, x, Launch Rofi, exec, hyprlock"
+      "$shiftMod, x, Launch Rofi, exec, loginctl lock-session"
     ];
   };
 }
