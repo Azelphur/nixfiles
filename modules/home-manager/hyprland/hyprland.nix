@@ -132,10 +132,11 @@ in {
       "$mainMod" = "SUPER";
       "$shiftMod" = "SUPER_SHIFT";
       exec-once = [
+        "discord"
         "waybar"
         "nextcloud"
         "gnome-keyring-daemon"
-        "go-hass-agent run"
+        "XDG_CURRENT_DESKTOP=KDE go-hass-agent run"
       ];
       bindd = [
         "$mainMod, Return, Launch terminal emulator, exec, kitty"
