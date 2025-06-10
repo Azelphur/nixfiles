@@ -45,7 +45,7 @@
       "$shiftMod, d, Toggle display source, exec, toggle-source"
     ];
     windowrulev2 = [
-      "workspace 11 silent,class:vesktop"
+      "workspace 11 silent,class:discord"
     ];
 #    workspace = [] ++ (
 #      builtins.concatLists (builtins.genList udo 
