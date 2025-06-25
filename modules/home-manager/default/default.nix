@@ -32,6 +32,19 @@
       dracula-theme.theme-dracula
     ];
   };
+  programs.ssh = {
+    enable = true;
+    extraConfig = ''
+      Host svr
+      HostName azelphur-server.internal
+
+      Host pc
+      HostName azelphur-pc.internal
+
+      Host fw
+      HostName azelphur-framework.internal
+    '';
+  };
 
   #services.network-manager-applet.enable = true;
   # The home.packages option allows you to install Nix packages into your
