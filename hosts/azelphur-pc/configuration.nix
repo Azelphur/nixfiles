@@ -11,8 +11,8 @@
     inputs.home-manager.nixosModules.default
     ./vfio.nix
   ];
-  vfio.enable = false;
-  hardware.nvidia-container-toolkit.enable = true;
+  vfio.enable = true;
+  #hardware.nvidia-container-toolkit.enable = true;
   hardware.graphics = {
     enable32Bit = true;
     enable = true;
