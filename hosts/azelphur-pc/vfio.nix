@@ -16,10 +16,10 @@ in { pkgs, lib, config, ... }: {
         "vfio"
         "vfio_iommu_type1"
         #"vfio_virqfd"
-        "nvidia"
-        "nvidia_modeset"
-        "nvidia_uvm"
-        "nvidia_drm"
+        #"nvidia"
+        #"nvidia_modeset"
+        #"nvidia_uvm"
+        #"nvidia_drm"
       ];
 
       kernelParams = [
