@@ -17,6 +17,7 @@ in {
       hyprctl clients -j | jq -r ".[].address" | xargs -I {} hyprctl setprop address:{} opaque ofi > /dev/null
     '')
   ];
+  wayland.windowManager.hyprland.systemd.enable = false;
   wayland.windowManager.hyprland = {
     enable = true;
     #package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
@@ -141,6 +142,7 @@ in {
       bindd = [
         "$mainMod, Return, Launch terminal emulator, exec, kitty"
         "$mainMod, Space, Launch Rofi, exec, fuzzel"
+        "$mainMod, D, Launch Dolphin, exec, dolphin"
         "$shiftMod, Q, Close, killactive"
         "$mainMod, F, Fullscreen, fullscreen"
         #"$shiftMod, F, Fake fullscreen,fakefullscreen"

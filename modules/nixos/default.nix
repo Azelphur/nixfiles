@@ -34,6 +34,7 @@
   nixpkgs.config.allowUnfree = true;
   programs.hyprland = {
     enable = true;
+    withUWSM  = true;
     #package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     # make sure to also set the portal package, so that they are in sync
     #portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
@@ -59,25 +60,15 @@
   programs.zsh.enable = true;
   services.getty.autologinUser = "azelphur";
   boot.initrd.systemd.enable = true;
-  services.greetd = {
-    enable = true;
-    settings = rec {
-      initial_session = {
-        #command = "dbus-run-session ${inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland}/bin/Hyprland 2>&1 > /tmp/hyprland.log";
-        command = "Hyprland 2>&1 > /tmp/hyprland.log";
-        user = "azelphur";
-      };
-      default_session = initial_session;
-    };
-  };
-  security.pam.services.greetd.enableGnomeKeyring = true;
+  services.xserver.enable = true;
+  services.xserver.displayManager.lightdm.enable = false;
   services.gnome.gnome-keyring.enable = true;
   environment.sessionVariables = {
     EDITOR = "nvim";
     NIXOS_OZONE_WL = "1";
   };
 
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/irblack.yaml";
+  stylix.base16Scheme = ./mytheme.yaml;
   #stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
   stylix.enable = true;
   stylix.autoEnable = true;
@@ -126,6 +117,9 @@
     git
     wget
     killall
+    borgbackup
+    screen
+    pciutils
     (python3.withPackages(ps: with ps; [ 
       requests
       virtualenv

@@ -37,6 +37,11 @@
       theme = "fox";
       plugins = ["colorize" "colored-man-pages" "copypath" "cp" "docker" "extract" "fzf" "heroku" "sudo" "git" "zsh-interactive-cd"];
     };
-    initContent = "fastfetch --logo .assets/nixos.png --logo-type kitty-direct --logo-width 40 --logo-height 20";
+    initContent = ''
+      fastfetch --logo-width 40 --logo-height 20
+      if [ -z "''${WAYLAND_DISPLAY}" ] && [ "''${XDG_VTNR}" -eq 1 ] && uwsm check may-start; then
+          exec uwsm start hyprland-uwsm.desktop
+      fi
+    '';
   };
 }

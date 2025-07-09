@@ -1,0 +1,22 @@
+system: "base16"
+name: "Outer Wilds"
+author: "Azelphur"
+variant: "dark"
+palette:
+  base00: "1e1b18" # Space black-brown (dark background)
+  base01: "2b2622" # Dark brown shadows
+  base02: "4a3f36" # Timber Hearth soil
+  base03: "63564c" # Rock surface
+  base04: "908170" # Sandstone cliffs
+  base05: "c0b8a4" # Neutral Nomai walls
+  base06: "e0d6bd" # Pale parchment (highlight background)
+  base07: "fdf6e3" # Starlight / Nomai text
+  base08: "e35b00" # Ember Twin orange (red)
+  base09: "ffa724" # Campfire flame (orange)
+  base0A: "ffe16b" # Sun station yellow (yellow)
+  base0B: "5ba76f" # Brittle Hollow trees (green)
+  base0C: "4ec2c1" # Ghost matter teal (cyan)
+  base0D: "5f81c3" # Starry blue sky (blue)
+  base0E: "a97ec7" # Quantum purple (magenta)
+  base0F: "b46b40" # Rusty Nomai ruin (brown)
+
