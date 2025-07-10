@@ -18,7 +18,7 @@
         "kernel"
         "uptime"
         "shell"
-	{
+        {
           type = "display";
           format = "{1}x{2} @ {3}Hz";
         }
@@ -31,7 +31,10 @@
         "swap"
         "disk"
         "localip"
-        "battery"
+        {
+          type = "battery";
+          key = "Battery";
+        }
         "poweradapter"
         "break"
         "colors"
