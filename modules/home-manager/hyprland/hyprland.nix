@@ -27,9 +27,6 @@ in {
       #inputs.hypr-dynamic-cursors.packages.${pkgs.system}.hypr-dynamic-cursors
     ];
     settings = {
-      env = [
-        "HYPRCURSOR_THEME,rose-pine-hyprcursor"
-      ];
       "plugin:dynamic-cursors" = {
         # enables the plugin
         enabled = true;

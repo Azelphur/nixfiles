@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../gwenview/gwenview.nix
     ../hyprland/hyprland.nix
     ../hyprlock/hyprlock.nix
     ../hypridle/hypridle.nix
@@ -13,9 +14,11 @@
     ../dunst/dunst.nix
     ../fastfetch/fastfetch.nix
     ../scripts/scripts.nix
+    ../spicetify/spicetify.nix
     ../fuzzel/fuzzel.nix
     ../cliphist/cliphist.nix
     ../nixcord/nixcord.nix
+    ../uwsm/uwsm.nix
     ../yazi/yazi.nix
   ];
   qt.enable = true;
@@ -100,7 +103,6 @@
     slack
     firefox
     pavucontrol
-    spotify
     btop
     electrum
     pulseaudio # Even though we use pipewire, we use pactl for waybar volume control
@@ -114,7 +116,6 @@
     telegram-desktop
     kdePackages.dolphin
     kdePackages.kate
-    kdePackages.gwenview
     kdePackages.plasma-workspace
     p7zip
     rpi-imager

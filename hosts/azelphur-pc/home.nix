@@ -30,7 +30,6 @@
     ];
     exec-once = [
       "systemctl --user stop hyprpaper"
-      "hyprlock"
       "${pkgs.writeScriptBin "fix-monitors.sh" (builtins.readFile ./fix-monitors.sh)}/bin/fix-monitors.sh"
       # Webcam autofocus is terrible, force focus.
       "v4l2-ctl -d /dev/video3 --set-ctrl=focus_automatic_continuous=0"
@@ -40,6 +39,7 @@
       "[workspace 11 silent] element-desktop"
       "[workspace 12 silent] spotify"
       "[workspace 12 silent] thunderbird"
+      "loginctl lock-session"
     ];
     bindd = [
       "$shiftMod, d, Toggle display source, exec, toggle-source"
