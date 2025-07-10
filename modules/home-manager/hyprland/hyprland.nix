@@ -134,7 +134,6 @@ in {
       "$shiftMod" = "SUPER_SHIFT";
       exec-once = [
         "discord"
-        "waybar"
         "nextcloud"
         "gnome-keyring-daemon"
         "XDG_CURRENT_DESKTOP=KDE go-hass-agent run"

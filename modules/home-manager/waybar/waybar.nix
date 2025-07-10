@@ -6,7 +6,7 @@ with config.lib.stylix.colors.withHashtag;
     playerctl
   ];
   programs.waybar.enable = true;
-  #programs.waybar.systemd.enable = true;
+  programs.waybar.systemd.enable = true;
   #programs.waybar.systemd.target = "hyprland-session.target";
   programs.waybar.settings = {
     mainBar = {
