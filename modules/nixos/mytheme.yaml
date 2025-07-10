@@ -15,8 +15,8 @@ palette:
   base09: "ffa724" # Campfire flame (orange)
   base0A: "ffe16b" # Sun station yellow (yellow)
   base0B: "5ba76f" # Brittle Hollow trees (green)
-  base0C: "4ec2c1" # Ghost matter teal (cyan)
-  base0D: "5f81c3" # Starry blue sky (blue)
+  base0C: "174e7d" # Blue
+  base0D: "ff7d25" # Main orange
   base0E: "a97ec7" # Quantum purple (magenta)
   base0F: "b46b40" # Rusty Nomai ruin (brown)
 
