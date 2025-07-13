@@ -19,6 +19,7 @@
       frameless = true; # set some Vencord options
       plugins = {
         alwaysTrust.enable = true;
+        clearURLs.enable = true;  
         copyFileContents.enable = true;
         customRPC.enable = true;
         forceOwnerCrown.enable = true;
@@ -26,11 +27,15 @@
         memberCount.enable = true;
         messageLinkEmbeds.enable = true;
         messageLogger.enable = true;
+        noF1.enable = true;
         permissionsViewer.enable = true;
         pinDMs.enable = true;
         previewMessage.enable = true;
+        serverInfo.enable = true;
+        unlockedAvatarZoom.enable = true;
         viewRaw.enable = true;
         voiceDownload.enable = true;
+        webScreenShareFixes.enable = true;
         whoReacted.enable = true;
       };
     };
