@@ -97,7 +97,7 @@
     google-chrome
     playerctl
     grimblast
-    gimp
+    #gimp
     networkmanagerapplet
     brightnessctl
     slack

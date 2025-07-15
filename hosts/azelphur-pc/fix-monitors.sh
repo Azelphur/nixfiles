@@ -20,3 +20,7 @@ hyprctl keyword monitor HDMI-A-1, 3840x2160@60, 0x0, 1.333333, transform, 1 # Le
 
 # This whole procedure freaks hyprpaper out, restart it.
 systemctl --user restart hyprpaper
+
+if [ "$1" = "lock" ]; then
+  loginctl lock-session
+fi

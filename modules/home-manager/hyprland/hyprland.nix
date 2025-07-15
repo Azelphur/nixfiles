@@ -130,15 +130,15 @@ in {
       "$mainMod" = "SUPER";
       "$shiftMod" = "SUPER_SHIFT";
       exec-once = [
-        "discord"
-        "nextcloud"
-        "gnome-keyring-daemon"
-        "XDG_CURRENT_DESKTOP=KDE go-hass-agent run"
+        "uwsm app -- discord"
+        "uwsm app -- nextcloud"
+        "uwsm app -- gnome-keyring-daemon"
+        "XDG_CURRENT_DESKTOP=KDE uwsm app -- go-hass-agent run"
       ];
       bindd = [
-        "$mainMod, Return, Launch terminal emulator, exec, kitty"
-        "$mainMod, Space, Launch Rofi, exec, fuzzel"
-        "$mainMod, D, Launch Dolphin, exec, dolphin"
+        "$mainMod, Return, Launch terminal emulator, exec, uwsm app -- kitty"
+        "$mainMod, Space, Launch Rofi, exec, uwsm app -- fuzzel"
+        "$mainMod, D, Launch Dolphin, exec, uwsm app -- dolphin"
         "$shiftMod, Q, Close, killactive"
         "$mainMod, F, Fullscreen, fullscreen"
         #"$shiftMod, F, Fake fullscreen,fakefullscreen"

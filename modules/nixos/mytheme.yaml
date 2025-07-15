@@ -3,20 +3,19 @@ name: "Outer Wilds"
 author: "Azelphur"
 variant: "dark"
 palette:
-  base00: "1e1b18" # Space black-brown (dark background)
-  base01: "2b2622" # Dark brown shadows
-  base02: "4a3f36" # Timber Hearth soil
-  base03: "63564c" # Rock surface
-  base04: "908170" # Sandstone cliffs
-  base05: "c0b8a4" # Neutral Nomai walls
-  base06: "e0d6bd" # Pale parchment (highlight background)
-  base07: "fdf6e3" # Starlight / Nomai text
-  base08: "e35b00" # Ember Twin orange (red)
-  base09: "ffa724" # Campfire flame (orange)
-  base0A: "ffe16b" # Sun station yellow (yellow)
-  base0B: "5ba76f" # Brittle Hollow trees (green)
-  base0C: "174e7d" # Blue
-  base0D: "ff7d25" # Main orange
-  base0E: "a97ec7" # Quantum purple (magenta)
-  base0F: "b46b40" # Rusty Nomai ruin (brown)
-
+  base00: "#000000"
+  base01: "#242422"
+  base02: "#484844"
+  base03: "#6c6c66"
+  base04: "#918f88"
+  base05: "#b5b3aa"
+  base06: "#d9d7cc"
+  base07: "#fdfbee"
+  base08: "#ff6c60"
+  base09: "#147e7d" # OW Blue
+  base0A: "#ffffb6"
+  base0B: "#0fc391" # Wanted OW green, but too dark.
+  base0C: "#c6c5fe"
+  base0D: "#ff7d25" # OW Orange
+  base0E: "#ff73fd"
+  base0F: "#6a4d75" # OW Purple

@@ -11,9 +11,6 @@
   ];
   services.dunst.settings.global.monitor = "DP-2";
   wayland.windowManager.hyprland.settings = {
-    env = [
-      "AQ_DRM_DEVICES,/dev/dri/card1"
-    ];
     cursor.no_hardware_cursors = 1;
     monitor = [
       #"DP-4, 5120x1440@120, 1619x1440, 1, transform, 0, bitdepth, 10" # Bottom
@@ -29,20 +26,18 @@
       "DP-2, disable"
     ];
     exec-once = [
-      "systemctl --user stop hyprpaper"
-      "${pkgs.writeScriptBin "fix-monitors.sh" (builtins.readFile ./fix-monitors.sh)}/bin/fix-monitors.sh"
+      "uwsm app -- systemctl --user stop hyprpaper"
+      "uwsm app -- ${pkgs.writeScriptBin "fix-monitors.sh" (builtins.readFile ./fix-monitors.sh)}/bin/fix-monitors.sh lock"
       # Webcam autofocus is terrible, force focus.
-      "v4l2-ctl -d /dev/video3 --set-ctrl=focus_automatic_continuous=0"
-      "v4l2-ctl -d /dev/video3 --set-ctrl=focus_absolute=0"
-      "streamcontroller -b"
-      "[workspace 11 silent] vesktop"
-      "[workspace 11 silent] element-desktop"
-      "[workspace 12 silent] spotify"
-      "[workspace 12 silent] thunderbird"
-      "loginctl lock-session"
+      "uwsm app -- v4l2-ctl -d /dev/video3 --set-ctrl=focus_automatic_continuous=0"
+      "uwsm app -- v4l2-ctl -d /dev/video3 --set-ctrl=focus_absolute=0"
+      "uwsm app -- streamcontroller -b"
+      "[workspace 11 silent] uwsm app -- element-desktop"
+      "[workspace 12 silent] uwsm app -- spotify"
+      "[workspace 12 silent] uwsm app -- thunderbird"
     ];
     bindd = [
-      "$shiftMod, d, Toggle display source, exec, toggle-source"
+      "$shiftMod, d, Toggle display source, exec, uwsm app -- toggle-source"
     ];
     windowrulev2 = [
       "workspace 11 silent,class:discord"
