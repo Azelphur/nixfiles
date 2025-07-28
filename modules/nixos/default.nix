@@ -5,6 +5,7 @@
     inputs.home-manager.nixosModules.default
     ./go-hass-agent.nix
   ];
+  services.envfs.enable = true;
   services.fwupd.enable = true;
   services.printing.enable = true;
   services.avahi = {
@@ -20,6 +21,9 @@
       };
     };
   };
+  nixpkgs.config.permittedInsecurePackages = [
+    "libsoup-2.74.3"
+  ];
   xdg.portal = {
     enable = true;
     config = {
@@ -135,6 +139,8 @@
     borgbackup
     screen
     pciutils
+    usbutils
+    gamescope
     (python3.withPackages(ps: with ps; [ 
       requests
       virtualenv

@@ -1,32 +1,49 @@
 { config, pkgs, inputs, lib, ... }:
 
+let
+  left_monitor = "HDMI-A-2";
+  top_monitor = "DP-4";
+  bottom_monitor = "DP-1";
+  right_monitor = "DP-5";
+in
 {
   imports = [
     ../../modules/home-manager/default/default.nix
     inputs.nixvim.homeManagerModules.nixvim
   ];
+#  xdg.configFile."openvr/openvrpaths.vrpath".text = ''
+#    {
+#      "config" :
+#      [
+#        "~/.local/share/Steam/config"
+#      ],
+#      "external_drivers" : null,
+#      "jsonid" : "vrpathreg",
+#      "log" :
+#      [
+#        "~/.local/share/Steam/logs"
+#      ],
+#      "runtime" :
+#      [
+#        "${pkgs.opencomposite}/lib/opencomposite"
+#      ],
+#      "version" : 1
+#    }
+#  '';
+#  xdg.configFile."openxr/1/active_runtime.json".source = "${pkgs.monado}/share/openxr/1/openxr_monado.json";
   home.packages = with pkgs; [
     obs-studio
     v4l-utils
   ];
-  services.dunst.settings.global.monitor = "DP-2";
+  services.dunst.settings.global.monitor = "${top_monitor}";
   wayland.windowManager.hyprland.settings = {
-    cursor.no_hardware_cursors = 1;
     monitor = [
-      #"DP-4, 5120x1440@120, 1619x1440, 1, transform, 0, bitdepth, 10" # Bottom
-      "DP-1, 1920x1080@60, 0x0, 1" # Bottom
-      #"HDMI-A-2, 3840x2160@60, 0x0, 1.333333, transform, 1" # Left
-      #"HDMI-A-1, 1920x1080@60, 0x0, 1.333333, transform, 1" # Left
-      "HDMI-A-1, disable"
-      #"DP-6, 3840x2160@60, 6739x0, 1.333333, transform, 3" # Right
-      #"DP-3, 1920x1080@60, 6739x0, 1.333333, transform, 3" # Right
-      "DP-3, disable"
-      #"DP-5, 5120x1440@120, 1619x0, 1, transform, 2, bitdepth, 10" # Top
-      #"DP-2, 1920x1080@60, 1619x0, 1, transform, 2, bitdepth, 10" # Top
-      "DP-2, disable"
+      "${left_monitor}, 3840x2160@60, 0x0, 1.333333, transform, 1"
+      "${top_monitor}, 5120x1440@60, 1619x0, 1, transform, 2, bitdepth, 8"
+      "${bottom_monitor}, 5120x1440@240, 1619x1440, 1, transform, 0, bitdepth, 8"
+      "${right_monitor}, 3840x2160@60, 6739x0, 1.333333, transform, 3"
     ];
     exec-once = [
-      "uwsm app -- systemctl --user stop hyprpaper"
       "uwsm app -- ${pkgs.writeScriptBin "fix-monitors.sh" (builtins.readFile ./fix-monitors.sh)}/bin/fix-monitors.sh lock"
       # Webcam autofocus is terrible, force focus.
       "uwsm app -- v4l2-ctl -d /dev/video3 --set-ctrl=focus_automatic_continuous=0"
@@ -67,24 +84,24 @@
     };
     background = [
       {
-        monitor = "DP-1"; # Bottom
+        monitor = "${bottom_monitor}"; # Bottom
         path = "/home/azelphur/.wallpaper/bottom.png";
       }
       {
-        monitor = "DP-2"; # Top
+        monitor = "${top_monitor}"; # Top
         path = "/home/azelphur/.wallpaper/top.png";
       }
       {
-        monitor = "DP-3"; # Right
+        monitor = "${right_monitor}"; # Right
         path = "/home/azelphur/.wallpaper/right.png";
       }
       {
-        monitor = "HDMI-A-1"; # Left
+        monitor = "${left_monitor}"; # Left
         path = "/home/azelphur/.wallpaper/left.png";
       }
     ];
     input-field = {
-        monitor = "DP-1";
+        monitor = "${bottom_monitor}";
         size = "320, 50";
         outline_thickness = 3;
         dots_size = 0.33; # Scale of input-field height, 0.2 - 0.8
@@ -114,19 +131,19 @@
     };
   };
   wayland.windowManager.hyprland.extraConfig = ''
- # Begin monitor HDMI-A-1
-workspace = 11, monitor:HDMI-A-1, default:true
-workspace = 12, monitor:HDMI-A-1
-workspace = 13, monitor:HDMI-A-1
-workspace = 14, monitor:HDMI-A-1
-workspace = 15, monitor:HDMI-A-1
-workspace = 16, monitor:HDMI-A-1
-workspace = 17, monitor:HDMI-A-1
-workspace = 18, monitor:HDMI-A-1
-workspace = 19, monitor:HDMI-A-1
-workspace = 10, monitor:HDMI-A-1
-bind = $mainMod, 1, submap, HDMI-A-1-workspace
-submap = HDMI-A-1-workspace
+# Begin monitor HDMI-A-2
+workspace = 11, monitor:HDMI-A-2, default:true
+workspace = 12, monitor:HDMI-A-2
+workspace = 13, monitor:HDMI-A-2
+workspace = 14, monitor:HDMI-A-2
+workspace = 15, monitor:HDMI-A-2
+workspace = 16, monitor:HDMI-A-2
+workspace = 17, monitor:HDMI-A-2
+workspace = 18, monitor:HDMI-A-2
+workspace = 19, monitor:HDMI-A-2
+workspace = 10, monitor:HDMI-A-2
+bind = $mainMod, 1, submap, HDMI-A-2-workspace
+submap = HDMI-A-2-workspace
 bindrt = $mainMod, SUPER_L, submap, reset
 bind = $mainMod, 1, workspace, 11
 bind = $mainMod, 1, submap, reset
@@ -151,8 +168,8 @@ bind = $mainMod, 0, submap, reset
 bind= , escape, submap, reset
 submap = reset
 
-bind = $ctrlMod, 1, submap, HDMI-A-1-movetoworkspace
-submap = HDMI-A-1-movetoworkspace
+bind = $ctrlMod, 1, submap, HDMI-A-2-movetoworkspace
+submap = HDMI-A-2-movetoworkspace
 bindrt = $ctrlMod, SUPER_L, submap, reset
 bind = $ctrlMod, 1, movetoworkspace, 11
 bind = $ctrlMod, 1, submap, reset
@@ -177,8 +194,8 @@ bind = $ctrlMod, 0, submap, reset
 bind= , escape, submap, reset
 submap = reset
 
-bind = $shiftMod, 1, submap, HDMI-A-1-movetoworkspacesilent
-submap = HDMI-A-1-movetoworkspacesilent
+bind = $shiftMod, 1, submap, HDMI-A-2-movetoworkspacesilent
+submap = HDMI-A-2-movetoworkspacesilent
 bindrt = $shiftMod, SUPER_L, submap, reset
 bind = $shiftMod, 1, movetoworkspacesilent, 11
 bind = $shiftMod, 1, submap, reset
@@ -203,21 +220,21 @@ bind = $shiftMod, 0, submap, reset
 bind= , escape, submap, reset
 submap = reset
 
-# End monitor HDMI-A-1
+# End monitor HDMI-A-2
 
-# Begin monitor DP-2
-workspace = 21, monitor:DP-2, default:true
-workspace = 22, monitor:DP-2
-workspace = 23, monitor:DP-2
-workspace = 24, monitor:DP-2
-workspace = 25, monitor:DP-2
-workspace = 26, monitor:DP-2
-workspace = 27, monitor:DP-2
-workspace = 28, monitor:DP-2
-workspace = 29, monitor:DP-2
-workspace = 20, monitor:DP-2
-bind = $mainMod, 2, submap, DP-2-workspace
-submap = DP-2-workspace
+# Begin monitor DP-4
+workspace = 21, monitor:DP-4, default:true
+workspace = 22, monitor:DP-4
+workspace = 23, monitor:DP-4
+workspace = 24, monitor:DP-4
+workspace = 25, monitor:DP-4
+workspace = 26, monitor:DP-4
+workspace = 27, monitor:DP-4
+workspace = 28, monitor:DP-4
+workspace = 29, monitor:DP-4
+workspace = 20, monitor:DP-4
+bind = $mainMod, 2, submap, DP-4-workspace
+submap = DP-4-workspace
 bindrt = $mainMod, SUPER_L, submap, reset
 bind = $mainMod, 1, workspace, 21
 bind = $mainMod, 1, submap, reset
@@ -242,8 +259,8 @@ bind = $mainMod, 0, submap, reset
 bind= , escape, submap, reset
 submap = reset
 
-bind = $ctrlMod, 2, submap, DP-2-movetoworkspace
-submap = DP-2-movetoworkspace
+bind = $ctrlMod, 2, submap, DP-4-movetoworkspace
+submap = DP-4-movetoworkspace
 bindrt = $ctrlMod, SUPER_L, submap, reset
 bind = $ctrlMod, 1, movetoworkspace, 21
 bind = $ctrlMod, 1, submap, reset
@@ -268,8 +285,8 @@ bind = $ctrlMod, 0, submap, reset
 bind= , escape, submap, reset
 submap = reset
 
-bind = $shiftMod, 2, submap, DP-2-movetoworkspacesilent
-submap = DP-2-movetoworkspacesilent
+bind = $shiftMod, 2, submap, DP-4-movetoworkspacesilent
+submap = DP-4-movetoworkspacesilent
 bindrt = $shiftMod, SUPER_L, submap, reset
 bind = $shiftMod, 1, movetoworkspacesilent, 21
 bind = $shiftMod, 1, submap, reset
@@ -294,7 +311,7 @@ bind = $shiftMod, 0, submap, reset
 bind= , escape, submap, reset
 submap = reset
 
-# End monitor DP-2
+# End monitor DP-4
 
 # Begin monitor DP-1
 workspace = 31, monitor:DP-1, default:true
@@ -387,19 +404,19 @@ submap = reset
 
 # End monitor DP-1
 
-# Begin monitor DP-3
-workspace = 41, monitor:DP-3, default:true
-workspace = 42, monitor:DP-3
-workspace = 43, monitor:DP-3
-workspace = 44, monitor:DP-3
-workspace = 45, monitor:DP-3
-workspace = 46, monitor:DP-3
-workspace = 47, monitor:DP-3
-workspace = 48, monitor:DP-3
-workspace = 49, monitor:DP-3
-workspace = 40, monitor:DP-3
-bind = $mainMod, 4, submap, DP-3-workspace
-submap = DP-3-workspace
+# Begin monitor DP-5
+workspace = 41, monitor:DP-5, default:true
+workspace = 42, monitor:DP-5
+workspace = 43, monitor:DP-5
+workspace = 44, monitor:DP-5
+workspace = 45, monitor:DP-5
+workspace = 46, monitor:DP-5
+workspace = 47, monitor:DP-5
+workspace = 48, monitor:DP-5
+workspace = 49, monitor:DP-5
+workspace = 40, monitor:DP-5
+bind = $mainMod, 4, submap, DP-5-workspace
+submap = DP-5-workspace
 bindrt = $mainMod, SUPER_L, submap, reset
 bind = $mainMod, 1, workspace, 41
 bind = $mainMod, 1, submap, reset
@@ -424,8 +441,8 @@ bind = $mainMod, 0, submap, reset
 bind= , escape, submap, reset
 submap = reset
 
-bind = $ctrlMod, 4, submap, DP-3-movetoworkspace
-submap = DP-3-movetoworkspace
+bind = $ctrlMod, 4, submap, DP-5-movetoworkspace
+submap = DP-5-movetoworkspace
 bindrt = $ctrlMod, SUPER_L, submap, reset
 bind = $ctrlMod, 1, movetoworkspace, 41
 bind = $ctrlMod, 1, submap, reset
@@ -450,8 +467,8 @@ bind = $ctrlMod, 0, submap, reset
 bind= , escape, submap, reset
 submap = reset
 
-bind = $shiftMod, 4, submap, DP-3-movetoworkspacesilent
-submap = DP-3-movetoworkspacesilent
+bind = $shiftMod, 4, submap, DP-5-movetoworkspacesilent
+submap = DP-5-movetoworkspacesilent
 bindrt = $shiftMod, SUPER_L, submap, reset
 bind = $shiftMod, 1, movetoworkspacesilent, 41
 bind = $shiftMod, 1, submap, reset
@@ -476,7 +493,9 @@ bind = $shiftMod, 0, submap, reset
 bind= , escape, submap, reset
 submap = reset
 
-# End monitor DP-3
+# End monitor DP-5
+
+
 '';
   services.hyprpaper.settings = {
     preload = [
@@ -486,14 +505,14 @@ submap = reset
       "~/.wallpaper/bottom.png"
     ];
     wallpaper = [
-      "DP-1,~/.wallpaper/bottom.png"
-      "DP-2,~/.wallpaper/top.png"
-      "DP-3,~/.wallpaper/right.png"
-      "HDMI-A-1,~/.wallpaper/left.png"
+      "${bottom_monitor},~/.wallpaper/bottom.png"
+      "${top_monitor},~/.wallpaper/top.png"
+      "${right_monitor},~/.wallpaper/right.png"
+      "${left_monitor},~/.wallpaper/left.png"
     ];
   };
 
-  programs.waybar.settings.mainBar.output = "DP-2";
+  programs.waybar.settings.mainBar.output = "${top_monitor}";
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "azelphur";

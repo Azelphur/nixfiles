@@ -1,3 +1,4 @@
-export AQ_DRM_DEVICES="$(readlink -f "/dev/dri/by-path/pci-0000:0c:00.0-card")"
+#export AQ_DRM_DEVICES="$(readlink -f "/dev/dri/by-path/pci-0000:0c:00.0-card")"
+#export XRT_COMPOSITOR_FORCE_GPU_INDEX=1
 export HYPRCURSOR_THEME=rose-pine-hyprcursor
 export XDG_MENU_PREFIX=plasma-

@@ -21,7 +21,7 @@
       hl = "heroku logs --tail -a";
       hr = "heroku run -a";
       random = "openssl rand -hex 12";
-      b = "cd /etc/nixos && sudo nix flake update && sudo nixos-rebuild switch --upgrade && sudo nix-env --delete-generations +5";
+      b = "cd /etc/nixos && sudo nix flake update && sudo nixos-rebuild switch --upgrade --show-trace && sudo nix-env --delete-generations +5";
       grimblast = "grimblast-wrapper";
       ut = "./.ut";
     };

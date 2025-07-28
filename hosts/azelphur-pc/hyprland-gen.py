@@ -1,4 +1,4 @@
-monitors = ["HDMI-A-1", "DP-2", "DP-1", "DP-3"]
+monitors = ["HDMI-A-2", "DP-4", "DP-1", "DP-5"]
 
 def calc_ws_number(monitor_number, i):
     ws_number = ((monitor_number+1)*10)+i+1

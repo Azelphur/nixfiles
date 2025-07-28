@@ -1,12 +1,12 @@
 { configs, pkgs, inputs, ... }: let
   hy3 = (pkgs.hyprlandPlugins.hy3.overrideAttrs (o: rec {
-    version = "0.49.0";
+    version = "0.50.0";
 
     src = pkgs.fetchFromGitHub {
       owner = "outfoxxed";
       repo = "hy3";
-      rev = "refs/tags/hl${version}";
-      hash = "sha256-dYxkdbg6yj8HhuBkCmklMQVR17N7P32R8ir7b7oNxm4=";
+      rev = "master";
+      hash = "sha256-1BTJSqkj+lkIry27HuqA5UB7uRqAUvGT7LAUDQhKjU0=";
     };
   }));
 in {
@@ -131,7 +131,6 @@ in {
       "$shiftMod" = "SUPER_SHIFT";
       exec-once = [
         "uwsm app -- discord"
-        "uwsm app -- nextcloud"
         "uwsm app -- gnome-keyring-daemon"
         "XDG_CURRENT_DESKTOP=KDE uwsm app -- go-hass-agent run"
       ];
@@ -228,6 +227,7 @@ in {
       ];
       debug = {
         disable_logs = false;
+        suppress_errors = true;
       };
     };
   };

@@ -48,7 +48,9 @@
       HostName azelphur-framework.internal
     '';
   };
-
+  nixpkgs.config.permittedInsecurePackages = [
+    "libsoup-2.74.3"
+  ];
   #services.network-manager-applet.enable = true;
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -97,7 +99,7 @@
     google-chrome
     playerctl
     grimblast
-    #gimp
+    gimp
     networkmanagerapplet
     brightnessctl
     slack

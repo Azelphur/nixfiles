@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 # This seems to make my monitors work more reliably. No idea why. Yay bugs.
+exit
+
+TOP="DP-3"
+BOTTOM="DP-4"
+LEFT="HDMI-A-2"
+RIGHT="DP-5"
 
 # Disable all monitors apart from one, run it at 1080p
 hyprctl keyword monitor DP-1, 1920x1080@60
