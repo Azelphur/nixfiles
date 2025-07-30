@@ -39,7 +39,7 @@ in
   wayland.windowManager.hyprland.settings = {
     monitor = [
       "${left_monitor}, 3840x2160@60, 0x0, 1.333333, transform, 1"
-      "${top_monitor}, 5120x1440@60, 1619x0, 1, transform, 2, bitdepth, 8"
+      "${top_monitor}, 5120x1440@240, 1619x0, 1, transform, 2, bitdepth, 8"
       "${bottom_monitor}, 5120x1440@240, 1619x1440, 1, transform, 0, bitdepth, 8"
       "${right_monitor}, 3840x2160@60, 6739x0, 1.333333, transform, 3"
     ];
