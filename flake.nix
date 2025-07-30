@@ -26,6 +26,8 @@
     #    url = "github:VirtCode/hypr-dynamic-cursors";
     #    inputs.hyprland.follows = "hyprland"; # to make sure that the plugin is built for the correct version of hyprland
     #};
+    lsfg-vk-flake.url = "github:pabloaul/lsfg-vk-flake/main";
+    lsfg-vk-flake.inputs.nixpkgs.follows = "nixpkgs";
 
     rose-pine-hyprcursor = {
       url = "github:ndom91/rose-pine-hyprcursor";
@@ -70,7 +72,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixvim, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, nixvim, home-manager, lsfg-vk-flake, ... }@inputs: {
     nixosConfigurations.azelphur-pc = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
@@ -78,6 +80,7 @@
         ./hosts/azelphur-pc/configuration.nix
         inputs.home-manager.nixosModules.default
         inputs.stylix.nixosModules.stylix
+        lsfg-vk-flake.nixosModules.default
       ];
     };
     nixosConfigurations.azelphur-framework = nixpkgs.lib.nixosSystem {

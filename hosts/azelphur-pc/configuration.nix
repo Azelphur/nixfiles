@@ -11,6 +11,10 @@
     inputs.home-manager.nixosModules.default
     ./vfio.nix
   ];
+  services.lsfg-vk = {
+    enable = true;
+    ui.enable = true; # installs gui for configuring lsfg-vk
+  };
   services.monado = {
     enable = true;
     defaultRuntime = true; # Register as default OpenXR runtime
