@@ -140,6 +140,8 @@
     screen
     pciutils
     usbutils
+    radeontop
+    nvtopPackages.amd
     gamescope
     (python3.withPackages(ps: with ps; [ 
       requests
