@@ -5,13 +5,9 @@
     ../../modules/home-manager/default/default.nix
     inputs.nixvim.homeManagerModules.nixvim
   ];
-  home.packages = with pkgs; [
-      conky
-  ];
   wayland.windowManager.hyprland.settings = {
     exec-once = [
-      "nm-applet"
-      "conky"
+      "uwsm app -- nm-applet"
     ];
     bindd = [] ++ (
       # workspaces
@@ -89,7 +85,6 @@
   # plain files is through 'home.file'.
   home.file = {
     ".wallpaper.png".source = ./wallpaper.png;
-    ".config/conky/conky.conf".source = ./conky.conf;
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
