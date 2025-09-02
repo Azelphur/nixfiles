@@ -5,6 +5,8 @@
     ./go-hass-agent.nix
   ];
 
+  services.flatpak.enable = true;
+
   xdg = {
     terminal-exec = {
       enable = true;
