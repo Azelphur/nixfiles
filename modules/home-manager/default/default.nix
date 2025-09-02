@@ -13,6 +13,7 @@
     ../nixvim/nixvim.nix
     ../dunst/dunst.nix
     ../fastfetch/fastfetch.nix
+    ../firefox/firefox.nix
     ../scripts/scripts.nix
     ../spicetify/spicetify.nix
     ../fuzzel/fuzzel.nix
@@ -104,7 +105,6 @@
     networkmanagerapplet
     brightnessctl
     slack
-    firefox
     pavucontrol
     btop
     electrum

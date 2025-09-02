@@ -3,7 +3,7 @@
 {
   programs.firefox = {
     enable = true;
-    nativeMessagingHosts = [ pkgs.plasma-browser-integration ];
+    nativeMessagingHosts = [ pkgs.kdePackages.plasma-browser-integration ];
   };
   xdg.mimeApps = {
     enable =  true;
