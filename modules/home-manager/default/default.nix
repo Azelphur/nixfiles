@@ -2,25 +2,26 @@
 
 {
   imports = [
-    ../gwenview/gwenview.nix
-    ../hyprland/hyprland.nix
-    ../hyprlock/hyprlock.nix
-    ../hypridle/hypridle.nix
-    ../waybar/waybar.nix
-    ../stylix/stylix.nix
-    ../kitty/kitty.nix
-    ../zsh/zsh.nix
-    ../nixvim/nixvim.nix
+    ../cliphist/cliphist.nix
     ../dunst/dunst.nix
     ../fastfetch/fastfetch.nix
     ../firefox/firefox.nix
+    ../fuzzel/fuzzel.nix
+    ../gwenview/gwenview.nix
+    ../hypridle/hypridle.nix
+    ../hyprland/hyprland.nix
+    ../hyprlock/hyprlock.nix
+    ../kitty/kitty.nix
+    ../kodi/kodi.nix
+    ../nixcord/nixcord.nix
+    ../nixvim/nixvim.nix
+    ../stylix/stylix.nix
     ../scripts/scripts.nix
     ../spicetify/spicetify.nix
-    ../fuzzel/fuzzel.nix
-    ../cliphist/cliphist.nix
-    ../nixcord/nixcord.nix
     ../uwsm/uwsm.nix
+    ../waybar/waybar.nix
     ../yazi/yazi.nix
+    ../zsh/zsh.nix
   ];
   qt.enable = true;
   nixpkgs.config.allowUnfree = true;
