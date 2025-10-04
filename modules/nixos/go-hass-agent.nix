@@ -31,7 +31,7 @@ let
       glfw
     ];
 
-    vendorHash = "sha256-PVicvYGaZxNVUbmNCEGUd4BZklhgaSMKpeiy898YTbM=";
+    vendorHash = "sha256-A0uygP8ZwNfByWMA1yRMv0fN73vUSNYwyeCFGkPPyoA=";
     meta = with pkgs.lib; {
       description = "Go-based Home Assistant agent";
       homepage = "https://github.com/joshuar/go-hass-agent";
