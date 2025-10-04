@@ -22,7 +22,8 @@ in {
     enable = true;
     #package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     plugins = with pkgs; [
-      hy3
+      hyprlandPlugins.hy3
+      #hy3
       #inputs.hy3.packages.x86_64-linux.hy3
       #inputs.hypr-dynamic-cursors.packages.${pkgs.system}.hypr-dynamic-cursors
     ];
