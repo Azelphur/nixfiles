@@ -3,13 +3,13 @@
 let
   go-hass-agent = pkgs.buildGoModule (finalAttrs: {
     pname = "go-hass-agent";
-    version = "13.2.7";
+    version = "14.0.2";
 
     src = pkgs.fetchFromGitHub {
       owner = "joshuar";
       repo = "go-hass-agent";
       tag = "v${finalAttrs.version}";
-      hash = "sha256-nec5gH/p65sfxNDD+5TEc7POP7B2MOA23aMqJ9aXAz8=";
+      hash = "sha256-aZsGCyV7Kbp/IrwU0O471rX48uVHvkd3Giefrm3Gbu4=";
     };
 
     nativeBuildInputs = with pkgs; [
