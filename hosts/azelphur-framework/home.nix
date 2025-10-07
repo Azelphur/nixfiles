@@ -3,7 +3,7 @@
 {
   imports = [
     ../../modules/home-manager/default/default.nix
-    inputs.nixvim.homeManagerModules.nixvim
+    inputs.nixvim.homeModules.nixvim
   ];
   wayland.windowManager.hyprland.settings = {
     exec-once = [

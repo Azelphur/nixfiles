@@ -9,7 +9,7 @@ in
 {
   imports = [
     ../../modules/home-manager/default/default.nix
-    inputs.nixvim.homeManagerModules.nixvim
+    inputs.nixvim.homeModules.nixvim
   ];
 #  xdg.configFile."openvr/openvrpaths.vrpath".text = ''
 #    {
