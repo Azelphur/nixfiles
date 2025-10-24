@@ -91,6 +91,7 @@
     screen
     pciutils
     usbutils
+    ethtool
     (python3.withPackages(ps: with ps; [ 
       requests
       virtualenv
