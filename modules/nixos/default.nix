@@ -78,7 +78,7 @@
 
   users.users.azelphur = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" "adbusers" "networkmanager" "dialout"];
+    extraGroups = [ "wheel" "docker" "adbusers" "networkmanager" "dialout" "input"];
     shell = pkgs.zsh;
   };
 
