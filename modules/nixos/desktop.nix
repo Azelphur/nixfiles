@@ -6,6 +6,15 @@
   ];
 
   services.flatpak.enable = true;
+  services.geoclue2 = {
+    enable = true;
+    enableDemoAgent = true;
+    enableWifi = true;
+    geoProviderUrl = "https://api.beacondb.net/v1/geolocate";
+    submitData = true;
+    submissionUrl = "https://api.beacondb.net/v2/geosubmit";
+    submissionNick = "geoclue";
+  };
 
   xdg = {
     terminal-exec = {
