@@ -5,6 +5,7 @@
 { config, lib, pkgs, inputs, ... }:
 
 {
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../modules/nixos/default.nix
@@ -16,7 +17,9 @@
     defaultRuntime = true; # Register as default OpenXR runtime
     highPriority = true;
   };
-  services.udev.extraRules = ''
+  services.udev.packages = lib.singleton (pkgs.writeTextFile
+  { name = "wolf-virtual-inputs";
+    text = ''
     # Allows Wolf to acces /dev/uinput
     KERNEL=="uinput", SUBSYSTEM=="misc", MODE="0660", GROUP="input", OPTIONS+="static_node=uinput"
 
@@ -31,7 +34,9 @@
     SUBSYSTEMS=="input", ATTRS{name}=="Wolf PS5 (virtual) pad", MODE="0660", GROUP="input"
     SUBSYSTEMS=="input", ATTRS{name}=="Wolf gamepad (virtual) motion sensors", MODE="0660", GROUP="input"
     SUBSYSTEMS=="input", ATTRS{name}=="Wolf Nintendo (virtual) pad", MODE="0660", GROUP="input"
-  '';
+    '';
+    destination = "/etc/udev/rules.d/85-wolf-virtual-inputs.rules";
+  });
   systemd.user.services.monado.environment = {
     STEAMVR_LH_ENABLE = "1";
     XRT_COMPOSITOR_COMPUTE = "1";
@@ -46,7 +51,6 @@
   #    };
   #  }
   #];
-
   vfio.enable = true;
   #hardware.nvidia-container-toolkit.enable = true;
   hardware.graphics = {
