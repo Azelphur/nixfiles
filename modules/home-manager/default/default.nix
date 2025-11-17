@@ -13,6 +13,7 @@
     ../hyprlock/hyprlock.nix
     ../kitty/kitty.nix
     ../kodi/kodi.nix
+    ../mangohud/mangohud.nix
     ../nixcord/nixcord.nix
     ../nixvim/nixvim.nix
     ../stylix/stylix.nix
