@@ -76,8 +76,6 @@
     borgbackup
     radeontop
     nvtopPackages.amd
-    lsfg-vk
-    lsfg-vk-ui
     freecad
   ];
 }
