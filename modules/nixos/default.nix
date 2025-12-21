@@ -6,9 +6,6 @@
     ./desktop.nix
     ./go-hass-agent.nix
   ];
-  # Fixes /bin/bash and such like not existing
-  services.envfs.enable = true;
-
   # Firmware updates
   services.fwupd.enable = true;
 
