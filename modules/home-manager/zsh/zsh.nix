@@ -40,7 +40,29 @@
     initContent = ''
       fastfetch --logo-width 40 --logo-height 20
       if [ -z "''${WAYLAND_DISPLAY}" ] && [ "''${XDG_VTNR}" -eq 1 ] && uwsm check may-start; then
-          exec uwsm start hyprland-uwsm.desktop
+        TARGET_MONITORS=5
+        echo "Waiting until $TARGET_MONITORS monitors are connected..."
+        echo "Press any key to continue without waiting."
+
+        while true; do
+            # Count connected monitors
+            connected_count=$(grep '^connected$' /sys/class/drm/*/status 2>/dev/null | wc -l)
+
+            echo -ne "\r$connected_count/$TARGET_MONITORS monitors connected..."
+
+            # Break if enough monitors are connected
+            if [ "$connected_count" -ge "$TARGET_MONITORS" ]; then
+                echo -e "\nTarget number of monitors connected!"
+                break
+            fi
+
+            # Non-blocking keypress detection
+            if read -t 1 -n 1 key; then
+                echo -e "\nUser pressed a key, continuing without all monitors."
+                break
+            fi
+        done
+        exec uwsm start hyprland-uwsm.desktop
       fi
     '';
   };
