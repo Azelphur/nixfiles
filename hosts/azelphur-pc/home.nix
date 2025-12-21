@@ -46,7 +46,6 @@ in
     exec-once = [
       "uwsm app -- ${pkgs.writeScriptBin "fix-monitors.sh" (builtins.readFile ./fix-monitors.sh)}/bin/fix-monitors.sh lock"
       "uwsm app -- hyprlock --no-fade-in --immediate-render --grace 0"
-      "uwsm app -- steam -silent"
       # Webcam autofocus is terrible, force focus.
       "uwsm app -- v4l2-ctl -d /dev/video3 --set-ctrl=focus_automatic_continuous=0"
       "uwsm app -- v4l2-ctl -d /dev/video3 --set-ctrl=focus_absolute=0"
