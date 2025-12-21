@@ -62,7 +62,7 @@ in
     ];
     input = {
       kb_layout = "gb";
-    }
+    };
 #    workspace = [] ++ (
 #      builtins.concatLists (builtins.genList udo 
 #          i: let
