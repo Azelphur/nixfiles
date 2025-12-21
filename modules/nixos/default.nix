@@ -54,9 +54,15 @@
   };
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = false;
-  boot.loader.systemd-boot.configurationLimit = 10;
-  boot.loader.efi.canTouchEfiVariables = true;
+
+  boot.loader = {
+    efi.canTouchEfiVariables = true;
+    timeout = 1;
+    systemd-boot = {
+      enable = false;
+      configurationLimit = 10;
+    };
+  };
 
   time.timeZone = "Europe/London";
 
