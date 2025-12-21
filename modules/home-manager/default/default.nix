@@ -114,7 +114,6 @@
     pulseaudio # Even though we use pipewire, we use pactl for waybar volume control
     unzip
     openscad
-    flutterPackages-source.stable
     android-studio
     yt-dlp
     whois
