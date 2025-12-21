@@ -51,7 +51,7 @@
   #    };
   #  }
   #];
-  vfio.enable = true;
+  vfio.enable = false;
   #hardware.nvidia-container-toolkit.enable = true;
   hardware.graphics = {
     enable32Bit = true;
