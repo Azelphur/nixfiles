@@ -9,6 +9,10 @@
     exec-once = [
       "uwsm app -- nm-applet"
     ];
+    input = {
+      kb_layout = "gb";
+      kb_variant = "colemak";
+    };
     bindd = [] ++ (
       # workspaces
       # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}

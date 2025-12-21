@@ -60,6 +60,9 @@ in
     windowrulev2 = [
       "workspace 11 silent,class:discord"
     ];
+    input = {
+      kb_layout = "gb";
+    }
 #    workspace = [] ++ (
 #      builtins.concatLists (builtins.genList udo 
 #          i: let

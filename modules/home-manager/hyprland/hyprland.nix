@@ -188,9 +188,6 @@ in {
         force_default_wallpaper = 0;
       };
       input = {
-        kb_layout = "gb,gb";
-        kb_variant = "colemak,";
-        kb_options = "grp:alt_shift_toggle";
         follow_mouse = 1;
         touchpad = {
           natural_scroll = false;
