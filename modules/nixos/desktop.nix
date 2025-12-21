@@ -77,5 +77,6 @@
     radeontop
     nvtopPackages.amd
     freecad
+    dmidecode
   ];
 }
