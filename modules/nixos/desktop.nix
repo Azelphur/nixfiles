@@ -77,6 +77,7 @@
     radeontop
     nvtopPackages.amd
     freecad
+    vulkan-tools
     dmidecode
   ];
 }
