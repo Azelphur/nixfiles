@@ -3,13 +3,13 @@
 let
   go-hass-agent = pkgs.buildGoModule (finalAttrs: {
     pname = "go-hass-agent";
-    version = "14.0.2";
+    version = "14.1.1";
 
     src = pkgs.fetchFromGitHub {
       owner = "joshuar";
       repo = "go-hass-agent";
       tag = "v${finalAttrs.version}";
-      hash = "sha256-aZsGCyV7Kbp/IrwU0O471rX48uVHvkd3Giefrm3Gbu4=";
+      hash = "sha256-kWrMBbSbq5DoQZdy/OgL7p9iOSNiCFn0lcZCOKihaVo=";
     };
 
     nativeBuildInputs = with pkgs; [
@@ -31,7 +31,7 @@ let
       glfw
     ];
 
-    vendorHash = "sha256-A0uygP8ZwNfByWMA1yRMv0fN73vUSNYwyeCFGkPPyoA=";
+    vendorHash = "sha256-VRjL4p1UIvWrXOI++cgxVpFhNCE49KTNMwOCrWKtruQ=";
     meta = with pkgs.lib; {
       description = "Go-based Home Assistant agent";
       homepage = "https://github.com/joshuar/go-hass-agent";
