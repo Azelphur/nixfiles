@@ -19,9 +19,9 @@
       frameless = true; # set some Vencord options
       plugins = {
         alwaysTrust.enable = true;
-        clearURLs.enable = true;  
+        ClearURLs.enable = true;  
         copyFileContents.enable = true;
-        customRPC.enable = true;
+        CustomRPC.enable = true;
         forceOwnerCrown.enable = true;
         imageZoom.enable = true;
         memberCount.enable = true;
@@ -29,7 +29,7 @@
         messageLogger.enable = true;
         noF1.enable = true;
         permissionsViewer.enable = true;
-        pinDMs.enable = true;
+        PinDMs.enable = true;
         previewMessage.enable = true;
         serverInfo.enable = true;
         showHiddenChannels.enable = true;
