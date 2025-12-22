@@ -55,7 +55,14 @@ in
       "[workspace 12 silent] uwsm app -- thunderbird"
     ];
     bindd = [
-      "$shiftMod, d, Toggle display source, exec, uwsm app -- toggle-source"
+      ", XF86Tools, Swap to last clipboard entry, exec, uwsm app -- cliphist list | head -n 2 | tail -n 1 | cliphist decode | wl-copy" # F13 / fn+F1
+      ", XF86Launch5, Toggle headphones / speaker, exec, /home/azelphur/.bin/swap-audio-sources.sh" # F14 / fn+F2
+      ", XF86Launch6, Color picker, exec, uwsm app -- hyprpicker | wl-copy" # F15 / fn+F3
+      # XF86Launch7 / XF86Launch7
+      ", XF86Calculator, Launch Firefox, exec, uwsm app -- firefox" # Circle button (far left)
+      ", XF86Mail, Launch Terminal, exec, uwsm app -- kitty" # Triangle button (second)
+      ", Help, Launch File Browser, exec, uwsm app -- dolphin" # Square button (third)
+      ", Cancel, Screenshot, exec, uwsm app -- grimblast copysave area" # Cross button (last)
     ];
     windowrulev2 = [
       "workspace 11 silent,class:discord"
