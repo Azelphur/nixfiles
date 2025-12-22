@@ -11,6 +11,7 @@
   }));
 in {
   home.packages = with pkgs; [
+    pkgs.hyprpicker
     (pkgs.writeShellScriptBin "grimblast-wrapper" ''
       hyprctl clients -j | jq -r ".[].address" | xargs -I {} hyprctl setprop address:{} opaque on > /dev/null
       grimblast "$@"
