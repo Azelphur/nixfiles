@@ -24,6 +24,11 @@
       };
     };
   };
+
+  console = lib.mkForce {
+    font = "Lat2-Terminus16";
+    keyMap = "colemak";
+  };
   services.blueman.enable = true;
   networking.networkmanager.enable = true;
   systemd.services.NetworkManager-wait-online.enable = false;
