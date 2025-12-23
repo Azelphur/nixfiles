@@ -39,7 +39,10 @@
     };
     initContent = ''
       fastfetch --logo-width 40 --logo-height 20
-      if [ -z "''${WAYLAND_DISPLAY}" ] && [ "''${XDG_VTNR}" -eq 1 ] && uwsm check may-start; then
+      if [ -z "''${WAYLAND_DISPLAY}" ] \
+          && [ "''${XDG_VTNR}" -eq 1 ] \
+          && [ "''$(hostname)" = "azelphur-pc" ] \
+          && uwsm check may-start; then
         TARGET_MONITORS=5
         echo "Waiting until $TARGET_MONITORS monitors are connected..."
         echo "Press any key to continue without waiting."
