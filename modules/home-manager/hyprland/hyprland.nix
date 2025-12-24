@@ -222,7 +222,7 @@ in {
       windowrulev2 = [
         "opacity 1.0 0.8,class:(.*)"
         "opacity 1.0 1.0,title:(.*)(- YouTube)(.*)"
-        "opacity 1.0 1.0,class:^(com\.github\.iwalton3\.jellyfin-media-player)$"
+        "opacity 1.0 1.0,class:org.jellyfin.JellyfinDesktop"
       ];
       debug = {
         disable_logs = false;
