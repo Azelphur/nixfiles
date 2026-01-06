@@ -1,12 +1,12 @@
 { configs, pkgs, inputs, ... }: let
   hy3 = (pkgs.hyprlandPlugins.hy3.overrideAttrs (o: rec {
-    version = "0.51.0";
+    version = "0.52.0";
 
     src = pkgs.fetchFromGitHub {
       owner = "outfoxxed";
       repo = "hy3";
       rev = "master";
-      hash = "sha256-FZveUS0+HN4tOF/O55uQ2k8sYA5xwNL6nAyAIoIn5K4=";
+      hash = "sha256-Wuk2MULnGfgAbP1N/Rp6H6k7zG/ynDiy54mPvkt/4bM=";
     };
   }));
 in {
@@ -23,8 +23,8 @@ in {
     enable = true;
     #package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     plugins = with pkgs; [
-      hyprlandPlugins.hy3
-      #hy3
+      #hyprlandPlugins.hy3
+      hy3
       #inputs.hy3.packages.x86_64-linux.hy3
       #inputs.hypr-dynamic-cursors.packages.${pkgs.system}.hypr-dynamic-cursors
     ];
