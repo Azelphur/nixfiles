@@ -118,6 +118,7 @@
     yt-dlp
     whois
     obs-studio
+    obs-studio-plugins.droidcam-obs
     telegram-desktop
     kdePackages.dolphin
     kdePackages.kate
