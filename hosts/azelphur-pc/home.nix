@@ -508,17 +508,24 @@ submap = reset
 
 '';
   services.hyprpaper.settings = {
-    preload = [
-      "~/.wallpaper/left.png"
-      "~/.wallpaper/right.png"
-      "~/.wallpaper/top.png"
-      "~/.wallpaper/bottom.png"
-    ];
+    splash = false;
     wallpaper = [
-      "${bottom_monitor},~/.wallpaper/bottom.png"
-      "${top_monitor},~/.wallpaper/top.png"
-      "${right_monitor},~/.wallpaper/right.png"
-      "${left_monitor},~/.wallpaper/left.png"
+      {
+        monitor = "${bottom_monitor}";
+        path = "~/.wallpaper/bottom.png";
+      }
+      {
+        monitor = "${top_monitor}";
+        path = "~/.wallpaper/top.png";
+      }
+      {
+        monitor = "${right_monitor}";
+        path = "~/.wallpaper/right.png";
+      }
+      {
+        monitor = "${left_monitor}";
+        path = "~/.wallpaper/left.png";
+      }
     ];
   };
 
