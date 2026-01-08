@@ -36,6 +36,8 @@
     options = "--delete-older-than 10d";
   };
 
+  programs.command-not-found.enable = true;
+
   programs.git = {
     enable = true;
     config = {
@@ -109,6 +111,7 @@
     pciutils
     usbutils
     ethtool
+    nettools
     (python3.withPackages(ps: with ps; [ 
       requests
       virtualenv
