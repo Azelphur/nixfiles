@@ -37,11 +37,12 @@
   home.homeDirectory = "/home/azelphur";
   stylix.targets.hyprpaper.enable = lib.mkForce false;
   services.hyprpaper.settings = {
-    preload = [
-      "~/.wallpaper.png"
-    ];
+    splash = false;
     wallpaper = [
-      "eDP-1,~/.wallpaper.png"
+      {
+        monitor = "eDP-1";
+        path = "~/.wallpaper.png";
+      }
     ];
   };
   programs.hyprlock.settings = lib.mkForce {
