@@ -63,8 +63,17 @@ in
       ", Help, Launch File Browser, exec, uwsm app -- dolphin" # Square button (third)
       ", Cancel, Screenshot, exec, uwsm app -- grimblast copysave area" # Cross button (last)
     ];
-    windowrulev2 = [
-      "workspace 11 silent,class:discord"
+    windowrule = [
+      {
+        name = "discord";
+        "match:class" = "discord";
+        workspace = "11 silent";
+      }
+      {
+        name = "spotify";
+        "match:class" = "spotify";
+        workspace = "12 silent";
+      }
     ];
     input = {
       kb_layout = "gb";

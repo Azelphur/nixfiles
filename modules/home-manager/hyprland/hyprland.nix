@@ -219,10 +219,22 @@ in {
       binds = {
         scroll_event_delay = 0;
       };
-      windowrulev2 = [
-        "opacity 1.0 0.8,class:(.*)"
-        "opacity 1.0 1.0,title:(.*)(- YouTube)(.*)"
-        "opacity 1.0 1.0,class:org.jellyfin.JellyfinDesktop"
+      windowrule = [
+        {
+          name = "transparency";
+          "match:class" = "(.*)";
+          opacity = "1.0 0.8";
+        }
+        {
+          name = "Youtube";
+          "match:title" = "(.*)(- YouTube)(.*)";
+          opacity = "1.0 1.0";
+        }
+        {
+          name = "Jellyfin";
+          "match:class" = "org.jellyfin.JellyfinDesktop";
+          opacity = "1.0 1.0";
+        }
       ];
       debug = {
         disable_logs = false;
