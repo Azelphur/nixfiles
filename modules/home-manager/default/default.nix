@@ -51,6 +51,10 @@
       HostName azelphur-framework.internal
     '';
   };
+  services.kdeconnect = {
+    enable = true;
+    indicator = true;
+  };
   nixpkgs.config.permittedInsecurePackages = [
     "libsoup-2.74.3" # OrcaSlicer dependency
     "qtwebengine-5.15.19" # Jellyfin dependency
