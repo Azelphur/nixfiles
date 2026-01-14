@@ -6,7 +6,7 @@
       owner = "outfoxxed";
       repo = "hy3";
       rev = "master";
-      hash = "sha256-Wuk2MULnGfgAbP1N/Rp6H6k7zG/ynDiy54mPvkt/4bM=";
+      hash = "sha256-N0kFdc6tSE0yFeQ/Iit3KNrz4nf2K5xvP3juL7SUyhc=";
     };
   }));
 in {
