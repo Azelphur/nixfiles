@@ -8,34 +8,15 @@ let
 in
 {
   imports = [
-    ../../modules/home-manager/default/default.nix
-    inputs.nixvim.homeModules.nixvim
-  ];
-#  xdg.configFile."openvr/openvrpaths.vrpath".text = ''
-#    {
-#      "config" :
-#      [
-#        "~/.local/share/Steam/config"
-#      ],
-#      "external_drivers" : null,
-#      "jsonid" : "vrpathreg",
-#      "log" :
-#      [
-#        "~/.local/share/Steam/logs"
-#      ],
-#      "runtime" :
-#      [
-#        "${pkgs.opencomposite}/lib/opencomposite"
-#      ],
-#      "version" : 1
-#    }
-#  '';
-#  xdg.configFile."openxr/1/active_runtime.json".source = "${pkgs.monado}/share/openxr/1/openxr_monado.json";
-  home.packages = with pkgs; [
-    v4l-utils
+    ../../modules/home-manager/roles/default.nix
   ];
   services.dunst.settings.global.monitor = "${top_monitor}";
+
   wayland.windowManager.hyprland.settings = {
+    workspace = [
+      "w[tv1]r[30-39], gapsout:10 1280 10 1280, gapsin:0"
+      "w[tv1]r[20-29], gapsout:10 1280 10 1280, gapsin:0"
+    ];
     monitor = [
       "${left_monitor}, 3840x2160@60, 0x0, 1.333333, transform, 1"
       "${top_monitor}, 5120x1440@240, 1620x0, 1, transform, 2, bitdepth, 8"
@@ -43,16 +24,15 @@ in
       "${right_monitor}, 3840x2160@60, 6740x0, 1.333333, transform, 3"
     ];
     exec-once = [
-      "uwsm app -- ${pkgs.writeScriptBin "fix-monitors.sh" (builtins.readFile ./fix-monitors.sh)}/bin/fix-monitors.sh lock"
       "uwsm app -- hyprlock --no-fade-in --immediate-render --grace 0"
       # Webcam autofocus is terrible, force focus.
       "uwsm app -- v4l2-ctl -d /dev/video3 --set-ctrl=focus_automatic_continuous=0"
       "uwsm app -- v4l2-ctl -d /dev/video3 --set-ctrl=focus_absolute=0"
-      "uwsm app -- streamcontroller -b"
       "[workspace 11 silent] uwsm app -- element-desktop"
       "[workspace 12 silent] uwsm app -- spotify"
       "[workspace 12 silent] uwsm app -- thunderbird"
     ];
+    # Binds for extra buttons on the Keychron Q6 HE
     bindd = [
       ", XF86Tools, Swap to last clipboard entry, exec, uwsm app -- cliphist list | head -n 2 | tail -n 1 | cliphist decode | wl-copy" # F13 / fn+F1
       ", XF86Launch5, Toggle headphones / speaker, exec, /home/azelphur/.bin/swap-audio-sources.sh" # F14 / fn+F2
@@ -63,6 +43,7 @@ in
       ", Help, Launch File Browser, exec, uwsm app -- dolphin" # Square button (third)
       ", Cancel, Screenshot, exec, uwsm app -- grimblast copysave area" # Cross button (last)
     ];
+
     windowrule = [
       {
         name = "discord";
@@ -71,30 +52,26 @@ in
       }
       {
         name = "spotify";
-        "match:class" = "spotify";
+        "match:class" = "Spotify";
         workspace = "12 silent";
       }
+      {
+        name = "PIPWindow";
+        "match:title" = "PIPWindow";
+        float = "on";
+        move = "4210 40";
+        opacity = 1;
+        pin = "on";
+        no_initial_focus = "on";
+        monitor = bottom_monitor;
+      }
     ];
+
     input = {
       kb_layout = "gb";
     };
-#    workspace = [] ++ (
-#      builtins.concatLists (builtins.genList udo 
-#          i: let
-#	    monitors = ["HDMI-A-1" "DP-2" "DP-1" "DP-3"];
-#	    ws = let
-#	      x = i + 10;
-#	    in
-#	      builtins.toString (x);
-#	    monitorNum = builtins.floor i / 10;
-#          in [
-#	    "${ws}, monitor:${builtins.elemAt monitors monitorNum}${if (lib.trivial.mod i 10 == 1) then ", default:true" else ""}"
-#          ]
-#        )
-#        40)
-#    );
   };
-  programs.hyprlock.settings = lib.mkForce {
+  programs.hyprlock.settings = {
     general = {
       disable_loading_bar = true;
       grace = 0;
@@ -149,6 +126,7 @@ in
         valign = "center";
     };
   };
+
   wayland.windowManager.hyprland.extraConfig = ''
 # Begin monitor HDMI-A-2
 workspace = 11, monitor:HDMI-A-2, default:true
@@ -516,78 +494,31 @@ submap = reset
 
 
 '';
-  services.hyprpaper.settings = {
-    splash = false;
-    wallpaper = [
-      {
-        monitor = "${bottom_monitor}";
-        path = "~/.wallpaper/bottom.png";
-      }
-      {
-        monitor = "${top_monitor}";
-        path = "~/.wallpaper/top.png";
-      }
-      {
-        monitor = "${right_monitor}";
-        path = "~/.wallpaper/right.png";
-      }
-      {
-        monitor = "${left_monitor}";
-        path = "~/.wallpaper/left.png";
-      }
-    ];
+
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      splash = false;
+      wallpaper = [
+        {
+          monitor = "${bottom_monitor}";
+          path = "~/.wallpaper/bottom.png";
+        }
+        {
+          monitor = "${top_monitor}";
+          path = "~/.wallpaper/top.png";
+        }
+        {
+          monitor = "${right_monitor}";
+          path = "~/.wallpaper/right.png";
+        }
+        {
+          monitor = "${left_monitor}";
+          path = "~/.wallpaper/left.png";
+        }
+      ];
+    };
   };
 
   programs.waybar.settings.mainBar.output = "${top_monitor}";
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
-  home.username = "azelphur";
-  home.homeDirectory = "/home/azelphur";
-
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
-  home.stateVersion = "24.05"; # Please read the comment before changing.
-
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
-  home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
-
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
-  };
-
-  # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. These will be explicitly sourced when using a
-  # shell provided by Home Manager. If you don't want to manage your shell
-  # through Home Manager then you have to manually source 'hm-session-vars.sh'
-  # located at either
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/azelphur/etc/profile.d/hm-session-vars.sh
-  #
-  home.sessionVariables = {
-    # EDITOR = "emacs";
-  };
-
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
 } 

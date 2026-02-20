@@ -5,153 +5,119 @@
 { config, lib, pkgs, inputs, ... }:
 
 {
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  imports = [ # Include the results of the hardware scan.
+  imports = [ 
     ./hardware-configuration.nix
-    ../../modules/nixos/default.nix
-    inputs.home-manager.nixosModules.default
-    ./vfio.nix
+    ../../modules/nixos/hardware/amd.nix
+    ../../modules/nixos/hardware/keychron.nix
+    ../../modules/nixos/common/games-on-whales.nix
   ];
-  services.monado = {
-    enable = true;
-    defaultRuntime = true; # Register as default OpenXR runtime
-    highPriority = true;
-  };
-
-  # udev rule for Keychron Q6 HE, without it, the configuration tool does not work.
-  services.udev.extraRules = ''
-    KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="0b61", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
-  '';
-
-  # udev rules for wolf, this can't go in extraRules as it needs to execute before 99.
-  services.udev.packages = lib.singleton (pkgs.writeTextFile
-  { name = "wolf-virtual-inputs";
-    text = ''
-    # Allows Wolf to acces /dev/uinput
-    KERNEL=="uinput", SUBSYSTEM=="misc", MODE="0660", GROUP="input", OPTIONS+="static_node=uinput"
-
-    # Allows Wolf to access /dev/uhid
-    KERNEL=="uhid", TAG+="uaccess"
-
-    # Move virtual keyboard and mouse into a different seat
-    SUBSYSTEMS=="input", ATTRS{id/vendor}=="ab00", MODE="0660", GROUP="input", ENV{ID_SEAT}="seat9"
-
-    # Joypads
-    SUBSYSTEMS=="input", ATTRS{name}=="Wolf X-Box One (virtual) pad", MODE="0660", GROUP="input"
-    SUBSYSTEMS=="input", ATTRS{name}=="Wolf PS5 (virtual) pad", MODE="0660", GROUP="input"
-    SUBSYSTEMS=="input", ATTRS{name}=="Wolf gamepad (virtual) motion sensors", MODE="0660", GROUP="input"
-    SUBSYSTEMS=="input", ATTRS{name}=="Wolf Nintendo (virtual) pad", MODE="0660", GROUP="input"
-    '';
-    destination = "/etc/udev/rules.d/85-wolf-virtual-inputs.rules";
-  });
-  systemd.user.services.monado.environment = {
-    STEAMVR_LH_ENABLE = "1";
-    XRT_COMPOSITOR_COMPUTE = "1";
-  };
-  #boot.kernelPatches = [
-  #  {
-  #name = "amdgpu-ignore-ctx-privileges";
-  #    patch = pkgs.fetchpatch {
-  #      name = "cap_sys_nice_begone.patch";
-  #      url = "https://github.com/Frogging-Family/community-patches/raw/master/linux61-tkg/cap_sys_nice_begone.mypatch";
-  #      hash = "sha256-Y3a0+x2xvHsfLax/uwycdJf3xLxvVfkfDVqjkxNaYEo=";
-  #    };
-  #  }
-  #];
-  vfio.enable = false;
-  #hardware.nvidia-container-toolkit.enable = true;
-  hardware.graphics = {
-    enable32Bit = true;
-    enable = true;
-  };
-  #hardware.nvidia = {
-    # Modesetting is required.
-    #modesetting.enable = true;
-
-    # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-    # Enable this if you have graphical corruption issues or application crashes after waking
-    # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead 
-    # of just the bare essentials.
-    #powerManagement.enable = false;
-
-    # Fine-grained power management. Turns off GPU when not in use.
-    # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-    #powerManagement.finegrained = false;
-
-    # Use the NVidia open source kernel module (not to be confused with the
-    # independent third-party "nouveau" open source driver).
-    # Support is limited to the Turing and later architectures. Full list of 
-    # supported GPUs is at: 
-    # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus 
-    # Only available from driver 515.43.04+
-    # Currently alpha-quality/buggy, so false is currently the recommended setting.
-    #open = false;
-
-    # Enable the Nvidia settings menu,
-	# accessible via `nvidia-settings`.
-    #nvidiaSettings = true;
-
-    # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    #package = config.boot.kernelPackages.nvidiaPackages.production;
-  #};
-  #services.xserver.videoDrivers = ["nvidia"];
   networking.hostName = "azelphur-pc"; # Define your hostname.
-  boot.kernelModules = [ "v4l2loopback" ];
-  boot.extraModulePackages = with config.boot.kernelPackages; [
-    v4l2loopback
+  home-manager.users.${config.my.user.name}.imports = [
+    ./home.nix
   ];
-  boot.extraModprobeConfig = ''
-    options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
-  '';
-  security.polkit.enable = true;
 
-  stylix.image = ./wallpaper.png;
-  home-manager = {
-    # also pass inputs to home-manager modules
-    extraSpecialArgs = { inherit inputs; };
-    users = {
-      "azelphur" = import ./home.nix;
+  # Enable support for cross compilation for raspberry pi
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  nix.settings = {
+   extra-platforms = [ "aarch64-linux" ];
+  };
+
+  age.secrets = {
+    "borg-passphrase" = {
+      file = ../../secrets/borg-passphrase.age;
+    };
+    "azelphur-pc-health-check-url" = {
+      file = ../../secrets/azelphur-pc-health-check-url.age;
     };
   };
-  environment.systemPackages = with pkgs; [
-    tpm2-tss
-    opencomposite
-  ];
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
 
-  # List services that you want to enable:
+  systemd.services.borgmatic.serviceConfig.EnvironmentFile = config.age.secrets.azelphur-pc-health-check-url.path;
 
+  services.borgmatic = {
+    enable = true;
+    configurations."azelphur-pc" = {
+      source_directories = [ "/home/${config.my.user.name}" ];
+      exclude_patterns = [
+        "*.pyc"
+        "/home/*/.cache"
+        "/home/*/.config/discord"
+        "/home/*/.config/Slack"
+        "/home/*/.steam-shared"
+        "/home/*/Steam"
+        "/home/*/.steam"
+        "/home/*/.local/share/Steam"
+        "/home/*/Downloads"
+        "/home/*/.bitcoin/blocks"
+        "/home/*/.thumbnails"
+        "/home/*/Nextcloud" # Already backed up
+      ];
+      repositories = [
+        {
+          label = "onsite";
+          path = "ssh://azelphur@azelphur-server/mnt/pools/backups/azelphur-pc.borg";
+        }
+        {
+          label = "offsite";
+          path = "ssh://azelphur@azelphur-backup/home/azelphur/azelphur-pc.borg";
+        }
+      ];
+      encryption_passcommand = "cat ${config.age.secrets.borg-passphrase.path}";
+      keep_hourly = 4;
+      keep_daily = 7;
+      keep_weekly = 4;
+      keep_monthly = 6;
+      keep_yearly = 2;
+      checks = [
+        {
+          name = "repository";
+          # These checks were taking days and burning all I/O time
+          max_duration = 1800;
+        }
+        {
+          name = "archives";
+          frequency = "2 weeks";
+        }
+      ];
+      healthchecks = {
+        ping_url = "\${HEALTHCHECK_URL}";
+        send_logs = true;
+      };
+    };
+  };
 
+  age.secrets = {
+    "nut-admin" = {
+      file = ../../secrets/nut-admin.age;
+    };
+  };
 
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
-
-  # This option defines the first version of NixOS you have installed on this particular machine,
-  # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
-  #
-  # Most users should NEVER change this value after the initial install, for any reason,
-  # even if you've upgraded your system to a new NixOS release.
-  #
-  # This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
-  # so changing it will NOT upgrade your system - see https://nixos.org/manual/nixos/stable/#sec-upgrading for how
-  # to actually do that.
-  #
-  # This value being lower than the current NixOS release does NOT mean your system is
-  # out of date, out of support, or vulnerable.
-  #
-  # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
-  # and migrated your data accordingly.
-  #
-  # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "24.05"; # Did you read the comment?
+  power.ups = {
+    enable = true;
+    mode = "standalone";
+    ups."azelphur-pc" = {
+      description = "APC SUA2200i in Alfies room";
+      driver = "snmp-ups";
+      port = "10.0.1.13";
+      directives = [
+        "community = public"
+        "mibs = apcc"
+        "snmp_version = v1"
+        "pollfreq = 15"
+      ];
+    };
+    users."nut-admin" = {
+      # A file that contains just the password.
+      passwordFile = config.age.secrets.nut-admin.path;
+      upsmon = "primary";
+    };
+    upsmon.monitor."azelphur-pc" = {
+      system = "azelphur-pc@localhost";
+      powerValue = 1;
+      user = "nut-admin";
+      passwordFile = config.age.secrets.nut-admin.path;
+      type = "primary";
+    };
+  };
 
 }
 
