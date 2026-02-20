@@ -50,12 +50,12 @@ in
       cec-volume-down = {
         name = "CEC Volume Down";
         key = "Volume Down";
-        command = "cec-send volume_down";
+        command = "cec-send volume_up";
       };
       cec-volume-up = {
         name = "CEC Volume Up";
         key = "Volume Up";
-        command = "cec-send volume_up";
+        command = "cec-send volume_down";
       };
       cec-volume-mute = {
         name = "CEC Volume Mute";
