@@ -15,25 +15,31 @@ let
     inherit src;
 
     npmDepsHash = "sha256-rScsGZMdyd8chY380MxZEA6OkwqkH46LlvjCTBOohfE=";
+    buildPhase = ''
+      runHook preBuild
 
+      npm run build:js
+      npm run build:css
+
+      runHook postBuild
+    '';
     installPhase = ''
+      runHook preInstall
       mkdir -p $out
-      cp -r dist/* $out/
-      cp -r node_modules $out/
+      cp -r web $out/web
+      cp -r node_modules $out/node_modules
+      runHook postInstall
     '';
   };
-
 in pkgs.buildGoModule (finalAttrs: {
   pname = "go-hass-agent";
   version = "14.8.0";
   inherit src;
 
-
-  #src = /home/azelphur/Code/github/go-hass-agent;
-
   nativeBuildInputs = with pkgs; [
     pkg-config
     git
+    breakpointHook
   ];
 
   subPackages = [ "." ];
@@ -50,20 +56,16 @@ in pkgs.buildGoModule (finalAttrs: {
     mesa
     glfw
   ];
+  preBuild = ''
+    cp -r ${nodeAssets}/web/* ./web
+    cp -r ${nodeAssets}/node_modules ./node_modules
+  '';
 
   ldflags = [
     "-w"
     "-s"
     "-X github.com/joshuar/go-hass-agent/config.AppVersion=${finalAttrs.version}-nixpkgs"
   ];
-
-  #buildPhase = ''
-  #  CGO_ENABLED=0 go build -ldflags="-w -s -X github.com/joshuar/go-hass-agent/config.AppVersion=14.8.0-nix" -o dist/go-hass-agent
-  #'';
-  #installPhase = ''
-  #  mkdir $out/bin
-  #  install -Dm755 ./dist/go-hass-agent $out/bin/go-hass-agent
-  #'';
 
   vendorHash = "sha256-D90MuhN8TwzISqT/c26Fk2HFsSsB5k9WOcS4olZuQ3w=";
   meta = with pkgs.lib; {
