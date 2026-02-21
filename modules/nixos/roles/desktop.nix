@@ -44,6 +44,8 @@
     jellyfin-desktop
     google-chrome
     pwvucontrol
+    mesa-demos
+    vulkan-tools
   ];
 
   fonts = {
