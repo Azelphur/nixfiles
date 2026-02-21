@@ -64,11 +64,12 @@ in
         name = "PIPWindow";
         "match:title" = "PIPWindow";
         float = "on";
-        move = "4210 40";
+        #move = "4210 40";
+        move = "monitor_w-window_w-40 40";
         opacity = 1;
         pin = "on";
         no_initial_focus = "on";
-        monitor = bottom_monitor;
+        #monitor = bottom_monitor;
       }
     ];
 
