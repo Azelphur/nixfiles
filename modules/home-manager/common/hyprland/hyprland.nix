@@ -25,7 +25,7 @@ in {
     #package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     plugins = with pkgs.hyprlandPlugins; [
       hy3
-      hypr-dynamic-cursors
+      #hypr-dynamic-cursors
       #hyprlandPlugins.hyprscrolling
     ];
     settings = {
