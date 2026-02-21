@@ -13,6 +13,11 @@ in
   services.dunst.settings.global.monitor = "${top_monitor}";
 
   wayland.windowManager.hyprland.settings = {
+    # Once, my cards shuffled /dev/dri order and caused performance issues
+    # If that happens again, follow https://wiki.hypr.land/Configuring/Multi-GPU/
+    #env = [
+    #  "AQ_DRM_DEVICES,/dev/dri/card1:/dev/dri/card2"
+    #];
     workspace = [
       "w[tv1]r[30-39], gapsout:10 1280 10 1280, gapsin:0"
       "w[tv1]r[20-29], gapsout:10 1280 10 1280, gapsin:0"
