@@ -1,8 +1,8 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 9aa005a..ba0d843 100644
+index 9aa005a..59b0fce 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -8,17 +8,33 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+@@ -8,22 +8,25 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
  
  include(FetchContent)
  
@@ -11,6 +11,13 @@ index 9aa005a..ba0d843 100644
 -    GIT_REPOSITORY https://github.com/marzer/tomlplusplus.git
 -    GIT_TAG v3.4.0
 -)
+-
+-FetchContent_Declare(
+-    ftxui
+-    GIT_REPOSITORY https://github.com/ArthurSonzogni/FTXUI.git
+-    GIT_TAG v5.0.0
+-)
+-
 +if (DEFINED ENV{tomlplusplus_src})
 +	message("Fetching tomlplusplus source from env var: $ENV{tomlplusplus_src}")
 +	FetchContent_Declare(
@@ -24,25 +31,13 @@ index 9aa005a..ba0d843 100644
 +	    GIT_TAG v3.4.0
 +	)
 +endif ()
- 
--FetchContent_Declare(
--    ftxui
--    GIT_REPOSITORY https://github.com/ArthurSonzogni/FTXUI.git
--    GIT_TAG v5.0.0
--)
-+if (DEFINED ENV{ftxui_src})
-+    message("Fetching FTXUI source from env var: $ENV{ftxui_src}")
-+    FetchContent_Declare(
-+        ftxui
-+        SOURCE_DIR "$ENV{ftxui_src}"
-+    )
-+else ()
-+	FetchContent_Declare(
-+	    ftxui
-+	    GIT_REPOSITORY https://github.com/ArthurSonzogni/FTXUI.git
-+	    GIT_TAG v5.0.0
-+	)
-+endif ()
- 
++
++find_package(ftxui CONFIG REQUIRED)
  set(FTXUI_BUILD_DOCS OFF CACHE BOOL "" FORCE)
  set(FTXUI_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+ 
+-FetchContent_MakeAvailable(tomlplusplus ftxui)
++FetchContent_MakeAvailable(tomlplusplus)
+ 
+ option(ENABLE_CLANG_TIDY "Enable clang-tidy" ON)
+ 

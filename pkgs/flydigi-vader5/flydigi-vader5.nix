@@ -4,6 +4,8 @@
 , cmake
 , ninja
 , ftxui
+, udevCheckHook
+, writeText
 }:
 
 stdenv.mkDerivation rec {
@@ -22,24 +24,19 @@ stdenv.mkDerivation rec {
     sha256 = "sha256:1hvbifzcc97r9jwjzpnq31ynqnj5y93cjz4frmgddnkg8hxmp6w7";
   };
 
-  ftxui_src = builtins.fetchTarball{
-    url = "https://github.com/ArthurSonzogni/FTXUI/archive/refs/tags/v6.1.9.tar.gz";
-    sha256 = "sha256:0yfh0d4l31f5kffr1a9mpn9dc0ny44j39axm288r9ai032hjwsmz";
-  };
-
   nativeBuildInputs = [
     cmake
+    ftxui
+    udevCheckHook
   ];
 
   patches = [ ./patch.patch ];
 
   configurePhase = ''
     export tomlplusplus_src=${tomlplusplus_src}
-    export ftxui_src=${ftxui_src}
   '';
   cmakeFlags = [
     "-Dtomlplusplus_src=${tomlplusplus_src}"
-    "-Dftxui_src=${ftxui_src}"
     "-DCMAKE_BUILD_TYPE=Release"
   ];
 
@@ -53,7 +50,8 @@ stdenv.mkDerivation rec {
   installPhase = ''
     runHook preInstall
     mkdir -p $out/bin
-    install -Dm755 ./um $out/bin/um
+    install -Dm755 ./vader5d $out/bin/vader5d
+    install -Dm755 ./vader5-debug $out/bin/vader5-debug
     runHook postInstall
   '';
 

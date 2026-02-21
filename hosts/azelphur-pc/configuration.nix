@@ -5,19 +5,15 @@
 { config, lib, pkgs, inputs, ... }:
 
 
-let 
-  flydigi-vader5 = pkgs.callPackage ../../pkgs/flydigi-vader5/flydigi-vader5.nix {};
-in
 {
   imports = [ 
     ./hardware-configuration.nix
     ../../modules/nixos/hardware/amd.nix
     ../../modules/nixos/hardware/keychron.nix
+    ../../modules/nixos/hardware/flydigi-vader5.nix
     ../../modules/nixos/common/games-on-whales.nix
   ];
-  environment.systemPackages = [
-    flydigi-vader5
-  ];
+
   networking.hostName = "azelphur-pc"; # Define your hostname.
   home-manager.users.${config.my.user.name}.imports = [
     ./home.nix
