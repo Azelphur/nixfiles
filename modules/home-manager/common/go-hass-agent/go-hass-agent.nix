@@ -1,7 +1,6 @@
 { pkgs, config, ... }:
 
 let
-  go-hass-agent = pkgs.callPackage ../../../../pkgs/go-hass-agent.nix {};
   stop-pipwindow = pkgs.writeShellScriptBin "stop-pipwindow" ''
     hyprctl --instance 0 dispatch closewindow title:PIPWindow
   '';
@@ -11,18 +10,25 @@ let
   '';
 in
 {
-  systemd.user.services.go-hass-agent = {
-    Unit = {
-      description = "go-hass-agent";
-      wantedBy = [ "default.target" ];
-    };
-    Service = {
-      ExecStart = "${go-hass-agent}/bin/go-hass-agent run";
-      Restart = "always";
+  imports = [
+    ../../programs/go-hass-agent.nix
+  ];
+  programs.go-hass-agent = {
+    enable = true;
+    commands = {
+      button = [
+        {
+          name = "Doorbell";
+          exec = "run-pipwindow https://homeassistant.home.azelphur.com/lovelace/doorbell-pipview";
+        }
+        {
+          name = "Close PIPWindow";
+          exec = "stop-pipwindow";
+        }
+      ];
     };
   };
   home.packages = [
-    go-hass-agent
     stop-pipwindow
     run-pipwindow
     pkgs.electron # Used for PIPView
