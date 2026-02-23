@@ -131,13 +131,21 @@
     };
     nixosConfigurations.snake-cam = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
-      modules = [
+      modules = serverModules ++ [
         ./hosts/snake-cam/configuration.nix
-        ./modules/nixos/roles/default.nix
-        ./modules/nixos/common/home-manager.nix
-        inputs.lanzaboote.nixosModules.lanzaboote
-        inputs.nix-index-database.nixosModules.default
       ];
     };
+    # I will leave this here, just in case future self wants an example
+    # Of how to set up a raspberry pi
+    #nixosConfigurations.snake-cam = nixpkgs.lib.nixosSystem {
+    #  specialArgs = {inherit inputs;};
+    #  modules = [
+    #    ./hosts/snake-cam/configuration.nix
+    #    ./modules/nixos/roles/default.nix
+    #    ./modules/nixos/common/home-manager.nix
+    #    inputs.lanzaboote.nixosModules.lanzaboote
+    #    inputs.nix-index-database.nixosModules.default
+    #  ];
+    #};
   };
 }

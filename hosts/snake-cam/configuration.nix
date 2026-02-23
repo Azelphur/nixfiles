@@ -8,15 +8,15 @@
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
-  boot.kernel.sysctl = { "vm.swappiness" = 0;};
-  swapDevices = [{
-    device = "/swapfile";
-    size = 1024; # 1GB
-  }];
+  #boot.kernel.sysctl = { "vm.swappiness" = 0;};
+  #swapDevices = [{
+  #  device = "/swapfile";
+  #  size = 1024; # 1GB
+  #}];
   # NixOS wants to enable GRUB by default
-  boot.loader.grub.enable = false;
+  #boot.loader.grub.enable = false;
   # Enables the generation of /boot/extlinux/extlinux.conf
-  boot.loader.generic-extlinux-compatible.enable = true;
+  #boot.loader.generic-extlinux-compatible.enable = true;
   environment.systemPackages = with pkgs; [
     v4l-utils
   ];
