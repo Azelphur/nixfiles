@@ -2,10 +2,10 @@
 
 let
   stop-pipwindow = pkgs.writeShellScriptBin "stop-pipwindow" ''
-    hyprctl --instance 0 dispatch closewindow title:PIPWindow
+    pkill -f "electron /home/azelphur/.config/pipwindow/pipwindow.js https://homeassistant.home.azelphur.com/dashboard-pipwindows/doorbell"
   '';
   run-pipwindow = pkgs.writeShellScriptBin "run-pipwindow" ''
-    setsid electron /home/azelphur/.config/pipview/pipview.js "$@" >/dev/null 2>&1 < /dev/null &
+    setsid electron /home/azelphur/.config/pipwindow/pipwindow.js "$@" >/dev/null 2>&1 < /dev/null &
     exit 0
   '';
 in
@@ -19,7 +19,7 @@ in
       button = [
         {
           name = "Doorbell";
-          exec = "run-pipwindow https://homeassistant.home.azelphur.com/lovelace/doorbell-pipview";
+          exec = "run-pipwindow https://homeassistant.home.azelphur.com/dashboard-pipwindows/doorbell";
         }
         {
           name = "Close PIPWindow";
@@ -34,6 +34,6 @@ in
     pkgs.electron # Used for PIPView
   ];
   home.file = {
-    ".config/pipview/pipview.js".source = ./pipview.js;
+    ".config/pipwindow/pipwindow.js".source = ./pipwindow.js;
   };
 }
