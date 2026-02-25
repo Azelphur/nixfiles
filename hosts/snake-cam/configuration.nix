@@ -25,7 +25,7 @@
     settings = {
       api.listen = "0.0.0.0:1984";
       streams = {
-        camera = "ffmpeg:device?video=/dev/v4l/by-id/usb-Arducam_Technology_Co.__Ltd._USB_Camera_SN0001-video-index0&input_format=mjpeg&video_size=1280x720";
+        camera = "ffmpeg:device?video=/dev/v4l/by-id/usb-Arducam_Technology_Co.__Ltd._USB_Camera_SN0001-video-index0&input_format=yuyv422&video_size=1920x1080#video=h264#hardware";
       };
     };
   };
