@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, lib, ... }:
+hosts/azelphur-pc/home.nix{ config, pkgs, inputs, lib, ... }:
 
 let
   left_monitor = "HDMI-A-2";
@@ -69,7 +69,7 @@ in
         opacity = 1;
         pin = "on";
         no_initial_focus = "on";
-        #monitor = bottom_monitor;
+        monitor = bottom_monitor;
       }
     ];
 
