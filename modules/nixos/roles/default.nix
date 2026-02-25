@@ -51,6 +51,8 @@
     ];
   };
 
+  sops.defaultSopsFormat = "yaml";
+  sops.age.keyFile = "/var/lib/sops-nix/keys.txt";
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -140,6 +142,7 @@
     busybox
     attic-client
     age
+    sops
     kitty.terminfo
     sbctl
     wget

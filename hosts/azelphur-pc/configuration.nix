@@ -25,16 +25,21 @@
    extra-platforms = [ "aarch64-linux" ];
   };
 
-  age.secrets = {
-    "borg-passphrase" = {
-      file = ../../secrets/borg-passphrase.age;
-    };
-    "azelphur-pc-health-check-url" = {
-      file = ../../secrets/azelphur-pc-health-check-url.age;
-    };
+  sops.defaultSopsFile = ../../secrets/azelphur-pc.yaml;
+  sops.secrets = {
+    borg-passphrase = {};
+    borgmatic-healthcheck-url = {};
+    offsite-repo = {};
+    nut-admin = {};
+  };
+  sops.templates."borgmatic-env" = {
+    content = ''
+      HEALTHCHECK_URL=${config.sops.placeholder.borgmatic-healthcheck-url}
+      OFFSITE_REPO=${config.sops.placeholder.offsite-repo}
+    '';
   };
 
-  systemd.services.borgmatic.serviceConfig.EnvironmentFile = config.age.secrets.azelphur-pc-health-check-url.path;
+  systemd.services.borgmatic.serviceConfig.EnvironmentFile = config.sops.templates."borgmatic-env".path;
 
   services.borgmatic = {
     enable = true;
@@ -61,11 +66,12 @@
         }
         {
           label = "offsite";
-          path = "ssh://azelphur@azelphur-backup/home/azelphur/azelphur-pc.borg";
+          path = "\${OFFSITE_REPO}/azelphur-pc.borg";
         }
       ];
-      encryption_passcommand = "cat ${config.age.secrets.borg-passphrase.path}";
+      encryption_passcommand = "cat ${config.sops.secrets.borg-passphrase.path}";
       keep_hourly = 4;
+
       keep_daily = 7;
       keep_weekly = 4;
       keep_monthly = 6;
@@ -88,12 +94,6 @@
     };
   };
 
-  age.secrets = {
-    "nut-admin" = {
-      file = ../../secrets/nut-admin.age;
-    };
-  };
-
   power.ups = {
     enable = true;
     mode = "standalone";
@@ -110,14 +110,14 @@
     };
     users."nut-admin" = {
       # A file that contains just the password.
-      passwordFile = config.age.secrets.nut-admin.path;
+      passwordFile = config.sops.secrets.nut-admin.path;
       upsmon = "primary";
     };
     upsmon.monitor."azelphur-pc" = {
       system = "azelphur-pc@localhost";
       powerValue = 1;
       user = "nut-admin";
-      passwordFile = config.age.secrets.nut-admin.path;
+      passwordFile = config.sops.secrets.nut-admin.path;
       type = "primary";
     };
   };

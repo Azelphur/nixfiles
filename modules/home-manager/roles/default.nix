@@ -5,7 +5,6 @@
     ../common/nixvim.nix
     ../common/zsh.nix
     inputs.nixvim.homeModules.nixvim
-    inputs.agenix.homeManagerModules.default
   ];
 
   programs.ssh = {

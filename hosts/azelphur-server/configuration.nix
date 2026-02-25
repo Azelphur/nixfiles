@@ -153,21 +153,26 @@
     /srv/nfs/games        *(ro,fsid=1)
   '';
 
-  age.secrets = {
-    "borg-passphrase" = {
-      file = ../../secrets/borg-passphrase.age;
-    };
-    "azelphur-server-health-check-url" = {
-      file = ../../secrets/azelphur-server-health-check-url.age;
-    };
-  };
-
   systemd.timers.borgmatic.timerConfig = {
       OnCalendar = "06:00";
       Persistent = true; # run missed jobs after boot
   };
 
-  systemd.services.borgmatic.serviceConfig.EnvironmentFile = config.age.secrets.azelphur-server-health-check-url.path;
+  sops.defaultSopsFile = ../../secrets/azelphur-server.yaml;
+  sops.secrets = {
+    borg-passphrase = {};
+    borgmatic-healthcheck-url = {};
+    offsite-repo = {};
+    nut-admin = {};
+  };
+  sops.templates."borgmatic-env" = {
+    content = ''
+      HEALTHCHECK_URL=${config.sops.placeholder.borgmatic-healthcheck-url}
+      OFFSITE_REPO=${config.sops.placeholder.offsite-repo}
+    '';
+  };
+
+  systemd.services.borgmatic.serviceConfig.EnvironmentFile = config.sops.templates."borgmatic-env".path;
 
   services.borgmatic = {
     enable = true;
@@ -190,10 +195,10 @@
         }
         {
           label = "offsite";
-          path = "ssh://azelphur@azelphur-backup/home/azelphur/azelphur-server.borg";
+          path = "\${OFFSITE_REPO}/azelphur-server.borg";
         }
       ];
-      encryption_passcommand = "cat ${config.age.secrets.borg-passphrase.path}";
+      encryption_passcommand = "cat ${config.sops.secrets.borg-passphrase.path}";
       keep_hourly = 4;
       keep_daily = 7;
       keep_weekly = 4;
@@ -213,12 +218,6 @@
         ping_url = "\${HEALTHCHECK_URL}";
         send_logs = true;
       };
-    };
-  };
-
-  age.secrets = {
-    "nut-admin" = {
-      file = ../../secrets/nut-admin.age;
     };
   };
 
@@ -248,14 +247,14 @@
     };
     users."nut-admin" = {
       # A file that contains just the password.
-      passwordFile = config.age.secrets.nut-admin.path;
+      passwordFile = config.sops.secrets.nut-admin.path;
       upsmon = "primary";
     };
     upsmon.monitor."azelphur-server" = {
       system = "azelphur-server@localhost";
       powerValue = 1;
       user = "nut-admin";
-      passwordFile = config.age.secrets.nut-admin.path;
+      passwordFile = config.sops.secrets.nut-admin.path;
       type = "primary";
     };
   };
