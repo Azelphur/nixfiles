@@ -51,6 +51,22 @@ in {
           };
         };
       };
+      "Retroarch-saves" = {
+        path = "/home/${config.my.user.name}/.config/retroarch/saves";
+        devices = device_list;
+        versioning = {
+          type = "simple";
+          params.keep = "10";
+        };
+      };
+      "Retroarch-states" = {
+        path = "/home/${config.my.user.name}/.config/Ryujinx/bis/user/states";
+        devices = device_list;
+        versioning = {
+          type = "simple";
+          params.keep = "10";
+        };
+      };
     };
   };
 }
