@@ -3,6 +3,7 @@
 {
   programs.nixvim = {
     enable = true;
+    defaultEditor = true;
     clipboard = {
       providers = {
         wl-copy.enable = true;
