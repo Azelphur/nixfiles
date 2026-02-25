@@ -38,6 +38,9 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    flameshot = {
+      url = "github:flameshot-org/flameshot";
+    };
   };
 
   outputs = unpatchedInputs:
@@ -144,21 +147,14 @@
     };
     nixosConfigurations.snake-cam = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
-      modules = serverModules ++ [
+      modules = [
         ./hosts/snake-cam/configuration.nix
+        ./modules/nixos/roles/default.nix
+        ./modules/nixos/common/home-manager.nix
+        inputs.sops-nix.nixosModules.sops
+        inputs.lanzaboote.nixosModules.lanzaboote
+        inputs.nix-index-database.nixosModules.default
       ];
     };
-    # I will leave this here, just in case future self wants an example
-    # Of how to set up a raspberry pi
-    #nixosConfigurations.snake-cam = nixpkgs.lib.nixosSystem {
-    #  specialArgs = {inherit inputs;};
-    #  modules = [
-    #    ./hosts/snake-cam/configuration.nix
-    #    ./modules/nixos/roles/default.nix
-    #    ./modules/nixos/common/home-manager.nix
-    #    inputs.lanzaboote.nixosModules.lanzaboote
-    #    inputs.nix-index-database.nixosModules.default
-    #  ];
-    #};
   };
 }
