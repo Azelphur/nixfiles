@@ -132,12 +132,6 @@
         ./hosts/azelphur-pc/configuration.nix
       ];
     };
-    nixosConfigurations.azelphur-backup = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
-      modules = serverModules ++ [
-        ./hosts/azelphur-backup/configuration.nix
-      ];
-    };
     nixosConfigurations.azelphur-server = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = serverModules ++ [

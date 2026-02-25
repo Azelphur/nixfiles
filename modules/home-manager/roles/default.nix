@@ -21,10 +21,6 @@
       
       Host azelphur-framework
       HostName 10.0.4.4
-
-      Host azelphur-backup
-      HostName backup.azelphur.com
-      Port 23
     '';
   };
 
