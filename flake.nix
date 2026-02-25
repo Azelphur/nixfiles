@@ -59,6 +59,16 @@
             url = "https://github.com/NixOS/nixpkgs/pull/399463.diff";
             hash = "sha256-3vMQdfBGMt2oHMiB3nuesoyWtR9uk8+HhVZm4jUnPE0=";
           })
+          (patcher.fetchpatch {
+            name = "electrum: 4.6.2 -> 4.7.0";
+            url = "https://github.com/NixOS/nixpkgs/pull/493938.diff";
+            hash = "sha256-zy/iGP9uKGOO0bRhZTiqlgZ3OF6AKpqxOH4X86j7Y3s=";
+          })
+          (patcher.fetchpatch {
+            name = "openscad: apply boost 1.89 patch";
+            url = "https://github.com/NixOS/nixpkgs/pull/493813.diff";
+            hash = "sha256-uvQuKRvyh9m7PSnLl/7UoQO4r6JjuT4nyLtA5OXHgLs=";
+          })
         ];
 
         # Patching a transitive dependency:
