@@ -2,7 +2,7 @@
 
 let
   stop-pipwindow = pkgs.writeShellScriptBin "stop-pipwindow" ''
-    pkill -f "electron /home/azelphur/.config/pipwindow/pipwindow.js https://homeassistant.home.azelphur.com/dashboard-pipwindows/doorbell"
+    pkill -f "electron /home/azelphur/.config/pipwindow/pipwindow.js"
   '';
   run-pipwindow = pkgs.writeShellScriptBin "run-pipwindow" ''
     setsid electron /home/azelphur/.config/pipwindow/pipwindow.js "$@" >/dev/null 2>&1 < /dev/null &
@@ -19,7 +19,7 @@ in
       button = [
         {
           name = "Doorbell";
-          exec = "run-pipwindow https://homeassistant.home.azelphur.com/dashboard-pipwindows/doorbell";
+          exec = "run-pipwindow https://homeassistant.home.azelphur.com/dashboard-pipwindows/doorbell?kiosk";
         }
         {
           name = "Close PIPWindow";
