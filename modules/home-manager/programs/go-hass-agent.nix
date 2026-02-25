@@ -50,6 +50,7 @@ in
         #ExecStartPre = "${pkgs.systemd-credsubst}/bin/systemd-credsubst -c --input ${preferencesTemplate} --output ${config.xdg.configHome}/go-hass-agent/preferences.toml";
         ExecStart = "${go-hass-agent}/bin/go-hass-agent run";
         Restart = "always";
+        RestartSec = 5;
       };
 
       Install = {
