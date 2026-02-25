@@ -1,4 +1,4 @@
-hosts/azelphur-pc/home.nix{ config, pkgs, inputs, lib, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
 let
   left_monitor = "HDMI-A-2";
