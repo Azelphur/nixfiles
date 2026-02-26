@@ -38,9 +38,6 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    flameshot = {
-      url = "github:flameshot-org/flameshot";
-    };
   };
 
   outputs = unpatchedInputs:

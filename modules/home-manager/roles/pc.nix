@@ -12,7 +12,6 @@
     ../common/hyprlock/hyprlock.nix
     ../common/hypridle/hypridle.nix
     ../common/waybar/waybar.nix
-    ../common/flameshot.nix
   ];
 
   stylix.targets.firefox.profileNames = ["default"];
