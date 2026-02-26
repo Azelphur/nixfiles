@@ -345,15 +345,16 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1772097125,
-        "narHash": "sha256-cjKSTQN4QYgD6sIzgWrabh1iEnwKKG0rJ0siLlUuirU=",
+        "lastModified": 1772107971,
+        "narHash": "sha256-rKRHAKnUolC+icX7SwT2lLPBYaCvKKuOyB6q5+3OBj0=",
         "owner": "jovian-experiments",
         "repo": "jovian-nixos",
-        "rev": "4ddea9bdb91eef60da5476fa9155218488c01daa",
+        "rev": "31f540444f8a32555cf88260d660c9f4afe27bbb",
         "type": "github"
       },
       "original": {
         "owner": "jovian-experiments",
+        "ref": "restub-steamos-session-select",
         "repo": "jovian-nixos",
         "type": "github"
       }

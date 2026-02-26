@@ -12,7 +12,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-    jovian-nixos.url = "github:jovian-experiments/jovian-nixos";
+    jovian-nixos.url = "github:jovian-experiments/jovian-nixos?ref=restub-steamos-session-select";
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
