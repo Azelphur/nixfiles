@@ -26,9 +26,6 @@ in
     cecSend
   ];
 
-  # When booting, make plasma the default session instead of Steam/Gamescope
-  xdg.stateFile."steamos-session-select".text = "plasma";
-
   programs.plasma = {
     enable = true;
     # Don't start desktop applications that were open on previous boot
