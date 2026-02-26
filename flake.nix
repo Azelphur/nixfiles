@@ -2,7 +2,7 @@
   description = "A very basic flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable-small";
     home-manager = {
       url = "github:nix-community/home-manager/";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -66,11 +66,6 @@
             name = "electrum: 4.6.2 -> 4.7.0";
             url = "https://github.com/NixOS/nixpkgs/pull/493938.diff";
             hash = "sha256-zy/iGP9uKGOO0bRhZTiqlgZ3OF6AKpqxOH4X86j7Y3s=";
-          })
-          (patcher.fetchpatch {
-            name = "openscad: apply boost 1.89 patch";
-            url = "https://github.com/NixOS/nixpkgs/pull/493813.diff";
-            hash = "sha256-uvQuKRvyh9m7PSnLl/7UoQO4r6JjuT4nyLtA5OXHgLs=";
           })
         ];
 
