@@ -138,7 +138,7 @@ Entry1=Jellyfin;/home/azelphur/.config/flex-launcher/jellyfin.png;jellyfin-deskt
 Entry2=VacuumTube;${pkgs.vacuum-tube}/share/icons/hicolor/256x256/apps/rocks.shy.VacuumTube.png;VacuumTube
 Entry3=Moonlight;/home/azelphur/.config/flex-launcher/moonlight.png;moonlight
 # Logging out drops us back into the steam session
-Entry4=Steam;${pkgs.flex-launcher}/share/flex-launcher/assets/icons/steam.png;qdbus org.kde.Shutdown /Shutdown org.kde.Shutdown.logout
+Entry4=Steam;${pkgs.flex-launcher}/share/flex-launcher/assets/icons/steam.png;steamosctl switch-to-game-mode
 Entry5=Crunchyroll;/home/azelphur/.config/flex-launcher/crunchyroll.png;google-chrome-stable --kiosk --no-first-run --disable-infobars https://www.crunchyroll.com/
 Entry6=Shudder;/home/azelphur/.config/flex-launcher/shudder.png;google-chrome-stable --kiosk --no-first-run --disable-infobars https://www.shudder.com/
 Entry7=Floatplane;/home/azelphur/.config/flex-launcher/floatplane.png;google-chrome-stable --kiosk --no-first-run --disable-infobars https://www.floatplane.com/channel/linustechtips/home/main
