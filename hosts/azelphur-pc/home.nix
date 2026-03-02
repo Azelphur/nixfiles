@@ -24,8 +24,8 @@ in
     ];
     monitor = [
       "${left_monitor}, 3840x2160@60, 0x0, 1.333333, transform, 1"
-      "${top_monitor}, 5120x1440@240, 1620x0, 1, transform, 2, bitdepth, 8"
-      "${bottom_monitor}, 5120x1440@240, 1620x1440, 1, transform, 0, bitdepth, 8"
+      "${top_monitor}, 5120x1440@240, 1620x0, 1, transform, 2, bitdepth, 10, cm, hdr, sdrbrightness, 1.3, sdrsaturation,1.2"
+      "${bottom_monitor}, 5120x1440@240, 1620x1440, 1, transform, 0, bitdepth, 10, cm, hdr, sdrbrightness, 1.3, sdrsaturation,1.2"
       "${right_monitor}, 3840x2160@60, 6740x0, 1.333333, transform, 3"
     ];
     exec-once = [
