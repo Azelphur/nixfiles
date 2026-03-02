@@ -37,7 +37,7 @@
     mpv
     vlc
     file
-    libreoffice
+    libreoffice-fresh
     grimblast
     gimp
     networkmanagerapplet
