@@ -51,7 +51,7 @@
       else
         ICON=""
       fi
-      export PROMPT="%{$fg[cyan]%}┌%{$ICON%}%{$fg[cyan]%}[%{$fg_bold[white]%}%D{%f}%{$reset_color%}%{$fg[cyan]%}/%{$fg_bold[white]%}%D{%m}%{$reset_color%}%{$fg[cyan]%}/%{$fg_bold[white]%}%D{%y}%{$reset_color%}%{$fg[cyan]%}]-[%{$fg_bold[white]%}%D{%H}%{$reset_color%}%{$fg[cyan]%}:%{$fg_bold[white]%}%D{%M}%{$reset_color%}%{$fg[cyan]%}:%{$fg_bold[white]%}%D{%S}%{$reset_color%}%{$fg[cyan]%}]-[%{$fg_bold[white]%}%n%{$reset_color%}%{$fg[cyan]%}%{$fg_bold[white]%}%{$reset_color%}%{$fg[cyan]%}]%{$fg[white]%}-%{$fg[cyan]%}(%{$fg_bold[white]%}%~%{$reset_color%}%{$fg[cyan]%})$(git_prompt_info)
+      export PROMPT="%{$fg[cyan]%}┌%{$ICON%}%{$fg[cyan]%}[%{$fg_bold[white]%}%D{%d}%{$reset_color%}%{$fg[cyan]%}/%{$fg_bold[white]%}%D{%m}%{$reset_color%}%{$fg[cyan]%}/%{$fg_bold[white]%}%D{%y}%{$reset_color%}%{$fg[cyan]%}]-[%{$fg_bold[white]%}%D{%H}%{$reset_color%}%{$fg[cyan]%}:%{$fg_bold[white]%}%D{%M}%{$reset_color%}%{$fg[cyan]%}:%{$fg_bold[white]%}%D{%S}%{$reset_color%}%{$fg[cyan]%}]-[%{$fg_bold[white]%}%n%{$reset_color%}%{$fg[cyan]%}%{$fg_bold[white]%}%{$reset_color%}%{$fg[cyan]%}]%{$fg[white]%}-%{$fg[cyan]%}(%{$fg_bold[white]%}%~%{$reset_color%}%{$fg[cyan]%})$(git_prompt_info)
 └> % %{$reset_color%}";
     '';
   };
