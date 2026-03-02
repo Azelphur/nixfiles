@@ -64,6 +64,11 @@
             url = "https://github.com/NixOS/nixpkgs/pull/493938.diff";
             hash = "sha256-zy/iGP9uKGOO0bRhZTiqlgZ3OF6AKpqxOH4X86j7Y3s=";
           })
+          (patcher.fetchpatch {
+            name = "libretro.melondsds: init at 1.2.0";
+            url = "https://github.com/NixOS/nixpkgs/pull/475067.diff";
+            hash = "sha256-xg0O3B+PTs5yp5Vz8Q9FejEtHqs3izXAOHxbVGxB56I=";
+          })
         ];
 
         # Patching a transitive dependency:

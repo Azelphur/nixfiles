@@ -11,6 +11,7 @@ in {
   environment.systemPackages = with pkgs; [
     nfs-utils
     retroarch-full
+    libretro.melondsds
     ryubing
     es-de
   ];
