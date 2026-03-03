@@ -3,7 +3,6 @@
 {
   environment.systemPackages = with pkgs; [
     obs-studio
-    v4l-utils
   ];
   # Required for virtual camera
   boot.kernelModules = [ "v4l2loopback" ];
