@@ -17,7 +17,13 @@
 
   hardware.xone.enable = true;
 
-  programs.steam.enable = true;
+  programs.steam = {
+    enable = true;
+    extraCompatPackages = with pkgs; [ proton-ge-bin ];
+    gamescopeSession.enable = true;
+  };
+  programs.gamescope.enable = true;
+  programs.gamemode.enable = true;
   programs.kdeconnect.enable = true;
 
   services.printing.enable = true;
@@ -46,6 +52,7 @@
     pwvucontrol
     mesa-demos
     vulkan-tools
+    v4l-utils
   ];
 
   fonts = {
