@@ -30,6 +30,16 @@
     };
   };
 
+  nixpkgs.overlays = [
+    (final: prev: {
+      cecdaemon = prev.cecdaemon.overrideAttrs (old: {
+        patches = (old.patches or []) ++ [
+          ../common/cecdaemon.patch
+        ];
+      });
+    })
+  ];
+
   systemd.services.cecdaemon =
     let
       cecConf = {
@@ -64,7 +74,11 @@
       after = [ "multi-user.target" ];
       wantedBy = [ "multi-user.target" ];
       enable = true;
-      serviceConfig.ExecStart = "${lib.getExe pkgs.cecdaemon} --config=${configFile}";
+      serviceConfig = {
+        ExecStart = "${lib.getExe pkgs.cecdaemon} --socket=/home/azelphur/.cecdaemon.sock --config=${configFile}";
+        Restart = "always";
+        RestartSec = 5;
+      };
     };
 
   home-manager.users.${config.my.user.name}.imports = [
