@@ -1,0 +1,81 @@
+diff --git a/cecdaemon/cecdaemon.py b/cecdaemon/cecdaemon.py
+index 88a39a7..9a1befb 100644
+--- a/cecdaemon/cecdaemon.py
++++ b/cecdaemon/cecdaemon.py
+@@ -2,8 +2,10 @@
+ """
+ 
+ import os
++import socket
+ import sys
+ import logging
++from pathlib import Path
+ from time import sleep
+ from argparse import ArgumentParser
+ from configparser import ConfigParser
+@@ -38,10 +40,9 @@ class CecDaemon():
+ 
+         if 'tv' in conf:
+             tvconf = conf['tv']
+-            Tv(cec, tvconf)
++            self.television = Tv(cec, tvconf)
+         else:
+-            Tv(cec, None)
+-
++            self.television = Tv(cec, None)
+         if 'triggers' in conf:
+             triggerconf = conf['triggers']
+             Trigger(cec, triggerconf)
+@@ -86,17 +87,43 @@ class CecDaemon():
+         parser.add_argument('-c', '--config', help='Configuration file',
+                             metavar="FILE", dest='conffile',
+                             default='/etc/cecdaemon.conf')
++        parser.add_argument('-s', '--socket', help='Socket file',
++                            metavar='file', dest='socketfile',
++                            type=Path, default=None)
+ 
+         self.args = parser.parse_args()
+ 
++    def run_unix_socket(self):
++        if self.args.socketfile.exists():
++            self.args.socketfile.unlink()
++
++        server = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
++        server.bind(str(self.args.socketfile))
++        os.chmod(str(self.args.socketfile), 0o777)
++        while True:
++            server.listen(1)
++            conn, addr = server.accept()
++            datagram = conn.recv(1024)
++            if datagram:
++                datagram = datagram.decode().lower().strip()
++                if datagram in ["volume_up", "volume_down", "toggle_mute", "standby", "wakeup"]:
++                    getattr(self.television, datagram)()
++                    conn.send(b"OK")
++                else:
++                    conn.send(b"Unknown command")
++            conn.close()
++
+     def run(self):
+         """ Keeps the instance of CecDaemon running while python-cec threads
+             do callbacks
+         """
+ 
+         logging.info('Running...')
+-        while True:
+-            sleep(1)
++        if self.args.socketfile:
++            self.run_unix_socket()
++        else:
++            while True:
++                sleep(1)
+ 
+ 
+ def run():
+@@ -106,5 +133,6 @@ def run():
+     daemon.run()
+ 
+ 
++
+ if __name__ == "__main__":
+     run()
