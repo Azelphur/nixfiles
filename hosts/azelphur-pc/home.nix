@@ -18,10 +18,10 @@ in
     #env = [
     #  "AQ_DRM_DEVICES,/dev/dri/card1:/dev/dri/card2"
     #];
-    workspace = [
-      "w[tv1]r[30-39], gapsout:10 1280 10 1280, gapsin:0"
-      "w[tv1]r[20-29], gapsout:10 1280 10 1280, gapsin:0"
-    ];
+
+    scrolling = {
+      fullscreen_on_one_column = false;
+    };
     monitor = [
       "${left_monitor}, 3840x2160@60, 0x0, 1.333333, transform, 1"
       "${top_monitor}, 5120x1440@240, 1620x0, 1, transform, 2, bitdepth, 10, cm, hdr, sdrbrightness, 1.3, sdrsaturation,1.2"
@@ -50,6 +50,17 @@ in
     ];
 
     windowrule = [
+      {
+        name = "Games";
+        "match:class" = "steam_app_[0-9]+";
+        monitor = bottom_monitor;
+        size = "5120 1440";
+        fullscreen = true;
+        render_unfocused = true;
+        border_size = 0;
+        rounding = 0;
+        decorate = false;
+      }
       {
         name = "discord";
         "match:class" = "discord";
@@ -135,16 +146,16 @@ in
 
   wayland.windowManager.hyprland.extraConfig = ''
 # Begin monitor HDMI-A-2
-workspace = 11, monitor:HDMI-A-2, default:true
-workspace = 12, monitor:HDMI-A-2
-workspace = 13, monitor:HDMI-A-2
-workspace = 14, monitor:HDMI-A-2
-workspace = 15, monitor:HDMI-A-2
-workspace = 16, monitor:HDMI-A-2
-workspace = 17, monitor:HDMI-A-2
-workspace = 18, monitor:HDMI-A-2
-workspace = 19, monitor:HDMI-A-2
-workspace = 10, monitor:HDMI-A-2
+workspace = 11, monitor:HDMI-A-2, default:true, layoutopt:direction:down
+workspace = 12, monitor:HDMI-A-2, layoutopt:direction:down
+workspace = 13, monitor:HDMI-A-2, layoutopt:direction:down
+workspace = 14, monitor:HDMI-A-2, layoutopt:direction:down
+workspace = 15, monitor:HDMI-A-2, layoutopt:direction:down
+workspace = 16, monitor:HDMI-A-2, layoutopt:direction:down
+workspace = 17, monitor:HDMI-A-2, layoutopt:direction:down
+workspace = 18, monitor:HDMI-A-2, layoutopt:direction:down
+workspace = 19, monitor:HDMI-A-2, layoutopt:direction:down
+workspace = 10, monitor:HDMI-A-2, layoutopt:direction:down
 bind = $mainMod, 1, submap, HDMI-A-2-workspace
 submap = HDMI-A-2-workspace
 bindrt = $mainMod, SUPER_L, submap, reset
@@ -408,16 +419,16 @@ submap = reset
 # End monitor DP-1
 
 # Begin monitor DP-5
-workspace = 41, monitor:DP-5, default:true
-workspace = 42, monitor:DP-5
-workspace = 43, monitor:DP-5
-workspace = 44, monitor:DP-5
-workspace = 45, monitor:DP-5
-workspace = 46, monitor:DP-5
-workspace = 47, monitor:DP-5
-workspace = 48, monitor:DP-5
-workspace = 49, monitor:DP-5
-workspace = 40, monitor:DP-5
+workspace = 41, monitor:DP-5, default:true, layoutopt:direction:down
+workspace = 42, monitor:DP-5, layoutopt:direction:down
+workspace = 43, monitor:DP-5, layoutopt:direction:down
+workspace = 44, monitor:DP-5, layoutopt:direction:down
+workspace = 45, monitor:DP-5, layoutopt:direction:down
+workspace = 46, monitor:DP-5, layoutopt:direction:down
+workspace = 47, monitor:DP-5, layoutopt:direction:down
+workspace = 48, monitor:DP-5, layoutopt:direction:down
+workspace = 49, monitor:DP-5, layoutopt:direction:down
+workspace = 40, monitor:DP-5, layoutopt:direction:down
 bind = $mainMod, 4, submap, DP-5-workspace
 submap = DP-5-workspace
 bindrt = $mainMod, SUPER_L, submap, reset
@@ -497,9 +508,7 @@ bind= , escape, submap, reset
 submap = reset
 
 # End monitor DP-5
-
-
-'';
+  '';
 
   services.hyprpaper = {
     enable = true;

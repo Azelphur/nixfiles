@@ -60,14 +60,14 @@
             hash = "sha256-3vMQdfBGMt2oHMiB3nuesoyWtR9uk8+HhVZm4jUnPE0=";
           })
           (patcher.fetchpatch {
-            name = "electrum: 4.6.2 -> 4.7.0";
-            url = "https://github.com/NixOS/nixpkgs/pull/493938.diff";
-            hash = "sha256-zy/iGP9uKGOO0bRhZTiqlgZ3OF6AKpqxOH4X86j7Y3s=";
-          })
-          (patcher.fetchpatch {
             name = "libretro.melondsds: init at 1.2.0";
             url = "https://github.com/NixOS/nixpkgs/pull/475067.diff";
             hash = "sha256-xg0O3B+PTs5yp5Vz8Q9FejEtHqs3izXAOHxbVGxB56I=";
+          })
+          (patcher.fetchpatch {
+            name = "hyprland: 0.54.0 -> 0.54.1";
+            url = "https://github.com/NixOS/nixpkgs/pull/496364.diff";
+            hash = "sha256-jSRgHzy2TDXS77Y2PFAnXfyUyozI9Gm4O8oZjSlGPF8=";
           })
         ];
 

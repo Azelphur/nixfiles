@@ -1,15 +1,6 @@
-{ configs, pkgs, inputs, ... }: let
-  hy3_git = (pkgs.hyprlandPlugins.hy3.overrideAttrs (o: rec {
-    version = "0.52.0";
+{ configs, pkgs, inputs, ... }:
 
-    src = pkgs.fetchFromGitHub {
-      owner = "outfoxxed";
-      repo = "hy3";
-      rev = "master";
-      hash = "sha256-N0kFdc6tSE0yFeQ/Iit3KNrz4nf2K5xvP3juL7SUyhc=";
-    };
-  }));
-in {
+{
   home.packages = with pkgs; [
     playerctl
     pkgs.hyprpicker
@@ -22,12 +13,20 @@ in {
   wayland.windowManager.hyprland = {
     enable = true;
     systemd.enable = true;
-    #package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     plugins = with pkgs.hyprlandPlugins; [
-      hy3
       #hypr-dynamic-cursors
-      #hyprlandPlugins.hyprscrolling
     ];
+    extraConfig = ''
+    submap = fit-switch
+    bindrt = $mainMod, SUPER_L, submap, reset
+    bind = , escape, submap, reset
+    bind = $mainMod, F, layoutmsg, fit active
+    bind = $mainMod, V, layoutmsg, fit visible
+    bind = $mainMod, A, layoutmsg, fit all
+    bind = $mainMod, E, layoutmsg, fit toend
+    bind = $mainMod, B, layoutmsg, fit tobeg
+    submap = reset
+    '';
     settings = {
       "plugin:dynamic-cursors" = {
         # enables the plugin
@@ -140,6 +139,7 @@ in {
         "$mainMod, D, Launch Dolphin, exec, uwsm app -- dolphin"
         "$shiftMod, Q, Close, killactive"
         "$mainMod, F, Fullscreen, fullscreen"
+        "$shiftMod, F, Tiled fullscreen, layoutmsg, colresize 1"
         #"$shiftMod, F, Fake fullscreen,fakefullscreen"
         "$shiftMod, Space, Toggle Floating, togglefloating"
         "$mainMod, J, Toggle split, togglesplit"
@@ -154,32 +154,34 @@ in {
         "$mainMod, F5, Spotify Media Play, exec, playerctl --player=spotify play-pause"
         "$mainMod, F8, Spotify Media Next, exec, playerctl --player=spotify next"
         "$mainMod, F7, Spotify Media Previous, exec, playerctl --player=spotify previous"
-        "$mainMod, mouse_up, Zoom Out, exec, python /home/azelphur/.bin/cursor_zoom_factor.py out"
-        "$mainMod, mouse_down, Zoom In, exec, python /home/azelphur/.bin/cursor_zoom_factor.py in"
-        "$mainMod, minus, Zoom Out, exec, python /home/azelphur/.bin/cursor_zoom_factor.py out"
-        "$mainMod, equal, Zoom In, exec, python /home/azelphur/.bin/cursor_zoom_factor.py in"
-        "$shiftMod, left, Move window left, hy3:movewindow, l"
-        "$shiftMod, right, Move window right, hy3:movewindow, r"
-        "$shiftMod, up, Move window up, hy3:movewindow, u"
-        "$shiftMod, down, Move window down, hy3:movewindow, d"
-        "$mainMod, H, Horizontal split, hy3:makegroup, h"
-        "$mainMod, V, Vertical split, hy3:makegroup, v"
-        "$shiftMod, H, Change to horizontal split, hy3:changegroup, h"
-        "$shiftMod, V, Change to vertical split, hy3:changegroup, v"
+        "$mainMod, mouse_down, Zoom In, exec, hyprctl -q keyword cursor:zoom_factor $(hyprctl getoption cursor:zoom_factor -j | jq '.float * 1.1')"
+        "$mainMod, mouse_up, Zoom Out, exec, hyprctl -q keyword cursor:zoom_factor $(hyprctl getoption cursor:zoom_factor -j | jq '(.float * 0.9) | if . < 1 then 1 else . end')"
+        "$shiftMod, mouse_up, Reset Zoom, exec, hyprctl -q keyword cursor:zoom_factor 1"
+        "$shiftMod, mouse_down, Reset Zoom, exec, hyprctl -q keyword cursor:zoom_factor 1"
+        "$shiftMod, minus, Reset Zoom, exec, hyprctl -q keyword cursor:zoom_factor 1"
+        "$mainMod, O, Execute a fit opiration, submap, fit-switch"
+        "$mainMod, up, Move layout up, layoutmsg, move -col"
+        "$mainMod, down, Move layout down, layoutmsg, move +col"
+        "$mainMod, left, Move layout left, layoutmsg, move -col"
+        "$mainMod, right, Move layout right, layoutmsg, move +col"
+        "$shiftMod, up, Move window left, layoutmsg, swapcol l"
+        "$shiftMod, down, Move window right, layoutmsg, swapcol r" 
+        "$shiftMod, left, Move window left, layoutmsg, swapcol l"
+        "$shiftMod, right, Move window right, layoutmsg, swapcol r"
+      ];
+      binde = [
+        "$mainMod, equal, exec, hyprctl -q keyword cursor:zoom_factor $(hyprctl getoption cursor:zoom_factor -j | jq '.float * 1.1')"
+        "$mainMod, minus, exec, hyprctl -q keyword cursor:zoom_factor $(hyprctl getoption cursor:zoom_factor -j | jq '(.float * 0.9) | if . < 1 then 1 else . end')"
       ];
       bindm = [
         "$mainMod, mouse:272, movewindow"
         "$mainMod, mouse:273, resizewindow"
       ];
       general = {
-        #"col.active_border" = "0000FF 0000FF 0000FF 45deg";
-        #"col.inactive_border" = "333333 333333";
-
         gaps_in = 5;
         gaps_out = 10;
         border_size = 2;
-
-        layout = "hy3";
+        layout = "scrolling";
       };
       misc = {
         disable_hyprland_logo = true;
@@ -234,10 +236,6 @@ in {
           opacity = "1.0 1.0";
         }
       ];
-      debug = {
-        disable_logs = false;
-        suppress_errors = true;
-      };
     };
   };
   home.file = {
