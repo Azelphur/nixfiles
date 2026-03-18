@@ -20,7 +20,6 @@ in {
     package = pkgs.checkmk-agent.override {
       plugins = [
         (pkgs.runCommandNoCC "smart_posix" {} ''
-          echo $out
           mkdir -p $out
           ln -s ${smart_posix}/bin/smart_posix $out/smart_posix
         '')
