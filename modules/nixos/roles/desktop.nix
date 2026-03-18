@@ -62,6 +62,7 @@ in {
     vulkan-tools
     v4l-utils
     music-assistant-companion
+    sweethome3d.application
   ];
 
   #systemd.user.services.music-assistant-companion = {
