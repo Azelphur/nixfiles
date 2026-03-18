@@ -26,6 +26,19 @@ in
     cecSend
   ];
 
+  services.mpdris2 = {
+    notifications = true;
+    enable = true;
+    mpd.host = "127.0.0.1";
+  };
+  services.mpd = {
+    enable = true;
+    musicDirectory = "/home/azelphur/Music";
+    # Optional:
+    network.listenAddress = "any"; # if you want to allow non-localhost connections
+    network.startWhenNeeded = true; # systemd feature: only start MPD service upon connection to its socket
+  };
+
   programs.plasma = {
     enable = true;
     # Don't start desktop applications that were open on previous boot
