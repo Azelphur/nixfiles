@@ -258,4 +258,111 @@
       type = "primary";
     };
   };
+  services.samba = {
+    enable = true;
+    securityType = "user";
+    openFirewall = true;
+    settings = {
+      global = {
+        "workgroup" = "WORKGROUP";
+        "server string" = "smbnix";
+        "netbios name" = "smbnix";
+        "security" = "user";
+        #"use sendfile" = "yes";
+        #"max protocol" = "smb2";
+        # note: localhost is the ipv6 localhost ::1
+        #"hosts allow" = "10.0.0. 127.0.0.1 localhost";
+        "hosts allow" = "0.0.0.0/0";
+        #"hosts deny" = "0.0.0.0/0";
+        "guest account" = "nobody";
+        "map to guest" = "bad user";
+      };
+      "public-dump" = {
+        "path" = "/mnt/pools/downloads/public-dump";
+        "browseable" = "yes";
+        "read only" = "no";
+        "guest ok" = "yes";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+        "force user" = "storage";
+        "force group" = "storage";
+      };
+      "paperless" = {
+        "path" = "/mnt/pools/paperless/consume";
+        "browseable" = "yes";
+        "read only" = "no";
+        "guest ok" = "no";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+        "force user" = "storage";
+        "force group" = "storage";
+      };
+      "paperless-duplex" = {
+        "path" = "/mnt/pools/paperless/consume-duplex";
+        "browseable" = "yes";
+        "read only" = "no";
+        "guest ok" = "no";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+        "force user" = "storage";
+        "force group" = "storage";
+      };
+      "tv" = {
+        "path" = "/mnt/pools/media/tv";
+        "browseable" = "yes";
+        "read only" = "yes";
+        "guest ok" = "yes";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+        "force user" = "storage";
+        "force group" = "storage";
+      };
+      "movies" = {
+        "path" = "/mnt/pools/media/movies";
+        "browseable" = "yes";
+        "read only" = "yes";
+        "guest ok" = "yes";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+        "force user" = "storage";
+        "force group" = "storage";
+      };
+      "torrents-completed" = {
+        "path" = "/mnt/pools/downloads/torrents/completed";
+        "browseable" = "yes";
+        "read only" = "yes";
+        "guest ok" = "yes";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+        "force user" = "storage";
+        "force group" = "storage";
+      };
+      "games" = {
+        "path" = "/mnt/pools/games";
+        "browseable" = "yes";
+        "read only" = "yes";
+        "guest ok" = "yes";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+        "force user" = "storage";
+        "force group" = "storage";
+      };
+
+      #"private" = {
+      #  "path" = "/mnt/Shares/Private";
+      #  "browseable" = "yes";
+      #  "read only" = "no";
+      #  "guest ok" = "no";
+      #  "create mask" = "0644";
+      #  "directory mask" = "0755";
+      #  "force user" = "username";
+      #  "force group" = "groupname";
+      #};
+    };
+  };
+
+  services.samba-wsdd = {
+    enable = true;
+    openFirewall = true;
+  };
 }
