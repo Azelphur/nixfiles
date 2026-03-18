@@ -22,7 +22,13 @@ in {
   programs.steam = {
     enable = true;
     extraCompatPackages = with pkgs; [ proton-ge-bin ];
-    gamescopeSession.enable = true;
+    package = pkgs.steam.override {
+      extraEnv = {
+        MANGOHUD = "1";
+        GAMEMODERUN = "1";
+        PROTON_ENABLE_HDR = "1";
+      };
+    };
   };
   programs.gamescope.enable = true;
   programs.gamemode.enable = true;
