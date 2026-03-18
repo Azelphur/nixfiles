@@ -5,6 +5,7 @@
     ../common/docker.nix
     ../common/obs-studio.nix
     ../common/home-assistant-shutdown.nix
+    ../common/orca-slicer.nix
   ];
   home-manager.users.${config.my.user.name}.imports = [
     inputs.plasma-manager.homeModules.plasma-manager
@@ -31,7 +32,6 @@
     kdePackages.dolphin
     kdePackages.kate
     kdePackages.ark
-    orca-slicer
     tigervnc
     ffmpeg-full
     mpv
