@@ -63,6 +63,7 @@ in {
     v4l-utils
     music-assistant-companion
     sweethome3d.application
+    grayjay
   ];
 
   #systemd.user.services.music-assistant-companion = {
