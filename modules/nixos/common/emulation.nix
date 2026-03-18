@@ -3,7 +3,7 @@
 
 let
   es-de = import ../../../pkgs/es-de.nix {inherit pkgs;};
-  device_list = [ "azelphur-framework" "master-bedroom-mini-pc" "living-room-mini-pc" ];
+  device_list = [ "azelphur-pc" "azelphur-framework" "master-bedroom-mini-pc" "living-room-mini-pc" ];
 in {
   home-manager.users.${config.my.user.name}.imports = [
     ../../home-manager/common/emulation/emulation.nix
