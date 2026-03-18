@@ -5,6 +5,7 @@
     fastfetch
     python3Packages.pygments
     fzf
+    openssl
   ];
   programs.zsh = {
     enable = true;
