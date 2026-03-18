@@ -1,6 +1,8 @@
 { config, pkgs, inputs, ... }:
 
-{
+let
+  music-assistant-companion = pkgs.callPackage ../../../pkgs/music-assistant-companion.nix {};
+in {
   imports = [
       ../common/emulation.nix
   ];
@@ -53,8 +55,20 @@
     mesa-demos
     vulkan-tools
     v4l-utils
+    music-assistant-companion
   ];
 
+  #systemd.user.services.music-assistant-companion = {
+  #  wantedBy = [
+  #    "pipewire.service"
+  #  ];
+  #  after = [
+  #    "graphical.target"
+  #  ];
+  #  serviceConfig = {
+  #    ExecStart = "${music-assistant-companion}/bin/music-assistant-companion";
+  #  };
+  #};
   fonts = {
     packages = [
       pkgs.font-awesome
