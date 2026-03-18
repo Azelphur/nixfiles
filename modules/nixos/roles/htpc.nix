@@ -11,6 +11,7 @@
   jovian.steam.autoStart = true;
   jovian.steam.user = "azelphur";
   jovian.steam.desktopSession = "plasma";
+  programs.fcast-receiver.enable = true;
 
   environment.systemPackages = with pkgs; [
     vacuum-tube
