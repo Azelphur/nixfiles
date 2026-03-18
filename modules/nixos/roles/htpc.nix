@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../common/crunchyroll-linux.nix
   ];
   services.desktopManager.plasma6.enable = true;
 
@@ -19,17 +20,17 @@
     snapcast
   ];
 
-  systemd.user.services.snapclient = {
-    wantedBy = [
-      "pipewire.service"
-    ];
-    after = [
-      "pipewire.service"
-    ];
-    serviceConfig = {
-      ExecStart = "${pkgs.snapcast}/bin/snapclient";
-    };
-  };
+  #systemd.user.services.snapclient = {
+  #  wantedBy = [
+  #    "pipewire.service"
+  #  ];
+  #  after = [
+  #    "pipewire.service"
+  #  ];
+  #  serviceConfig = {
+  #    ExecStart = "${pkgs.snapcast}/bin/snapclient";
+  #  };
+  #};
 
   nixpkgs.overlays = [
     (final: prev: {
