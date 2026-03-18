@@ -141,6 +141,7 @@
     tpm2-tss
     busybox
     attic-client
+    lm_sensors
     age
     sops
     kitty.terminfo
