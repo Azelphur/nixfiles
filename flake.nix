@@ -64,11 +64,6 @@
             url = "https://github.com/NixOS/nixpkgs/pull/475067.diff";
             hash = "sha256-xg0O3B+PTs5yp5Vz8Q9FejEtHqs3izXAOHxbVGxB56I=";
           })
-          (patcher.fetchpatch {
-            name = "hyprland: 0.54.0 -> 0.54.1";
-            url = "https://github.com/NixOS/nixpkgs/pull/496364.diff";
-            hash = "sha256-jSRgHzy2TDXS77Y2PFAnXfyUyozI9Gm4O8oZjSlGPF8=";
-          })
         ];
 
         # Patching a transitive dependency:
