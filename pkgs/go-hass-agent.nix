@@ -2,20 +2,20 @@
 
 let
   pname = "go-hass-agent";
-  version = "14.9.0";
+  version = "14.11.0";
 
   src = fetchFromGitHub {
     owner = "joshuar";
     repo = "go-hass-agent";
     tag = "v${version}";
-    hash = "sha256-vY2a4nSjRzs3QahPXgKIe1YGzp7FRMxscsCP9VH9fYg=";
+    hash = "sha256-mC/Y1z2kudBZOEQU5S17ROx3iHPpDGGSkUJe7MMb/iE=";
   };
 
   nodeAssets = buildNpmPackage {
     pname = "go-hass-agent-assets";
     inherit src version;
 
-    npmDepsHash = "sha256-rScsGZMdyd8chY380MxZEA6OkwqkH46LlvjCTBOohfE=";
+    npmDepsHash = "sha256-LwOVVVGWufQ+Q3jiv0H9lf7zg3R9fXvvAlLiUWqtmZs=";
     buildPhase = ''
       runHook preBuild
       npm run build:js
@@ -42,12 +42,12 @@ in buildGoModule (finalAttrs: {
     "-X github.com/joshuar/go-hass-agent/config.AppVersion=${finalAttrs.version}-nixpkgs"
   ];
 
-  vendorHash = "sha256-Lbctnz/YV8taCHpJG9XnheT0W4mVxDlewb/nTP5WnHU=";
+  vendorHash = "sha256-Xz7u8SSlxlDB5HbKMbm1xVYrtp1/zy2yBgoWS3NcTew=";
 
   meta = with lib; {
-    description = "Go-based Home Assistant agent";
+    description = "Home Assistant native app for desktop/laptop devices";
     homepage = "https://github.com/joshuar/go-hass-agent";
-    changelog = "https://github.com/joshuar/go-hass-agent/releases/tag/v${finalAttrs.version}";
+    changelog = "https://github.com/joshuar/go-hass-agent/blob/v${finalAttrs.version}/CHANGELOG.md";
     downloadPage = "https://github.com/joshuar/go-hass-agent/";
     longDescription = ''
       Go Hass Agent is an application to expose sensors, controls, and events
