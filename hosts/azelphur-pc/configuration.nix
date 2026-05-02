@@ -39,6 +39,7 @@
     '';
   };
 
+
   systemd.services.borgmatic.serviceConfig.EnvironmentFile = config.sops.templates."borgmatic-env".path;
 
   services.borgmatic = {
@@ -66,7 +67,7 @@
         }
         {
           label = "offsite";
-          path = "\${OFFSITE_REPO}/azelphur-pc.borg";
+          path = "\${OFFSITE_REPO}/./azelphur-pc.borg";
         }
       ];
       encryption_passcommand = "cat ${config.sops.secrets.borg-passphrase.path}";
