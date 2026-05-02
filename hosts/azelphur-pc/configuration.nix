@@ -25,6 +25,11 @@
    extra-platforms = [ "aarch64-linux" ];
   };
 
+  services.udev.extraRules = ''
+    KERNEL=="card*", KERNELS=="0000:03:00.0", SUBSYSTEM=="drm", SUBSYSTEMS=="pci", SYMLINK+="dri/big"
+    KERNEL=="card*", KERNELS=="0000:15:00.0", SUBSYSTEM=="drm", SUBSYSTEMS=="pci", SYMLINK+="dri/little"
+  '';
+
   sops.defaultSopsFile = ../../secrets/azelphur-pc.yaml;
   sops.secrets = {
     borg-passphrase = {};

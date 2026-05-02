@@ -15,10 +15,9 @@ in
   wayland.windowManager.hyprland.settings = {
     # Once, my cards shuffled /dev/dri order and caused performance issues
     # If that happens again, follow https://wiki.hypr.land/Configuring/Multi-GPU/
-    #env = [
-    #  "AQ_DRM_DEVICES,/dev/dri/card1:/dev/dri/card2"
-    #];
-
+    env = [
+      "AQ_DRM_DEVICES,/dev/dri/big:/dev/dri/little"
+    ];
     scrolling = {
       fullscreen_on_one_column = false;
     };
