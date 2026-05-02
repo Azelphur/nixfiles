@@ -47,6 +47,7 @@
     yt-dlp
     rpi-imager
     rose-pine-hyprcursor
+    prusa-slicer
   ];
 
   programs.virt-manager.enable = true;
