@@ -142,6 +142,7 @@
   # NFS
   fileSystems."/srv/nfs/games" = {
     device = "/mnt/pools/games";
+    fsType = "none";
     options = ["bind"];
     depends = [
       "/mnt/pools/games"
