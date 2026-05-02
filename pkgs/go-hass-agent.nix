@@ -2,20 +2,20 @@
 
 let
   pname = "go-hass-agent";
-  version = "14.9.0";
+  version = "14.10.2";
 
   src = fetchFromGitHub {
     owner = "joshuar";
     repo = "go-hass-agent";
     tag = "v${version}";
-    hash = "sha256-vY2a4nSjRzs3QahPXgKIe1YGzp7FRMxscsCP9VH9fYg=";
+    hash = "sha256-PsR3UISsxKZ+Pn3beFrUpTBYy9uppOZS8c2MlV26PJg=";
   };
 
   nodeAssets = buildNpmPackage {
     pname = "go-hass-agent-assets";
     inherit src version;
 
-    npmDepsHash = "sha256-rScsGZMdyd8chY380MxZEA6OkwqkH46LlvjCTBOohfE=";
+    npmDepsHash = "sha256-SDEKgO4gJAWIVYR5+Hsngi0wahgwj1Ix2PYQ2EOoq3E=";
     buildPhase = ''
       runHook preBuild
       npm run build:js
@@ -42,7 +42,7 @@ in buildGoModule (finalAttrs: {
     "-X github.com/joshuar/go-hass-agent/config.AppVersion=${finalAttrs.version}-nixpkgs"
   ];
 
-  vendorHash = "sha256-Lbctnz/YV8taCHpJG9XnheT0W4mVxDlewb/nTP5WnHU=";
+  vendorHash = "sha256-Wlk/vAy31xvvAB+Q9UUFrXbkwL0CadAm+KzZC20TBXM=";
 
   meta = with lib; {
     description = "Go-based Home Assistant agent";
