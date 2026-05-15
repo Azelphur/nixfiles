@@ -222,6 +222,9 @@
     };
   };
 
+  systemd.services.upsdrv.after = [ "network-online.target" ];
+  systemd.services.upsdrv.wants = [ "network-online.target" ];
+
   power.ups = {
     enable = true;
     mode = "netserver";
