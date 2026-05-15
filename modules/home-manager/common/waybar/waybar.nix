@@ -40,7 +40,7 @@ with config.lib.stylix.colors.withHashtag;
         };
       };
       clock = {
-        format = "{:%d %b %Y - %H:%M}";
+        format = "{:%a %d %b %Y - %H:%M}";
       };
       mpris = {
         format = "{dynamic}";
