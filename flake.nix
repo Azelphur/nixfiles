@@ -50,11 +50,6 @@
         # Patching a direct dependency:
         nixpkgs.patches = [
           (patcher.fetchpatch {
-            name = "python3Packages.cec: init at 0.2.8, cecdaemon: init at 1.0.0-unstable-2025-11-12";
-            url = "https://github.com/NixOS/nixpkgs/pull/464399.diff";
-            hash = "sha256-Xuhx1R8OvMR+KPNAMrJ5MzZFHntO37EfaRjw7jt6l4k=";
-          })
-          (patcher.fetchpatch {
             name = "nixos/cmk-agent: init module, cmk-agent: init at 2.3.0";
             url = "https://github.com/NixOS/nixpkgs/pull/399463.diff";
             hash = "sha256-3vMQdfBGMt2oHMiB3nuesoyWtR9uk8+HhVZm4jUnPE0=";

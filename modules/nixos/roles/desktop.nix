@@ -3,6 +3,7 @@
 let
   music-assistant-companion = pkgs.callPackage ../../../pkgs/music-assistant-companion.nix {};
   uvtools = pkgs.callPackage ../../../pkgs/uvtools.nix {};
+  my-jellyfin-desktop = pkgs.callPackage ../../../pkgs/jellyfin-desktop/jellyfin-desktop.nix {};
 in {
   imports = [
       ../common/emulation.nix
@@ -23,6 +24,7 @@ in {
   programs.steam = {
     enable = true;
     extraCompatPackages = with pkgs; [ proton-ge-bin ];
+    gamescopeSession.enable = true;
     package = pkgs.steam.override {
       extraEnv = {
         MANGOHUD = "1";
@@ -79,6 +81,7 @@ in {
   #    ExecStart = "${music-assistant-companion}/bin/music-assistant-companion";
   #  };
   #};
+
   fonts = {
     packages = [
       pkgs.font-awesome
