@@ -2,6 +2,7 @@
 
 let
   music-assistant-companion = pkgs.callPackage ../../../pkgs/music-assistant-companion.nix {};
+  uvtools = pkgs.callPackage ../../../pkgs/uvtools.nix {};
 in {
   imports = [
       ../common/emulation.nix
@@ -62,6 +63,7 @@ in {
     vulkan-tools
     v4l-utils
     music-assistant-companion
+    uvtools
     sweethome3d.application
     grayjay
   ];

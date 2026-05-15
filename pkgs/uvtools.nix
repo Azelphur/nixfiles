@@ -1,43 +1,59 @@
-{
-  buildDotnetModule,
-  dotnetCorePackages,
-  emgucv,
-  fetchFromGitHub,
-  lib,
-}:
-buildDotnetModule rec {
-  pname = "UVtools";
-  version = "6.0.1";
-  src = fetchFromGitHub {
-    owner = "sn4k3";
-    repo = "UVtools";
-    rev = "v${version}";
-    hash = "";
-  };
+{ pkgs ? import <nixpkgs> { } }:
 
-  nugetDeps = ./deps.json;
+pkgs.stdenv.mkDerivation rec {
+    pname = "uvtools";
+    version = "v6.0.1";
 
-  dotnet-sdk = dotnetCorePackages.sdk_9_0;
-  dotnet-runtime = dotnetCorePackages.runtime_9_0;
+    src = builtins.fetchurl {
+        url = "https://github.com/sn4k3/UVtools/releases/download/${version}/UVtools_linux-x64_${version}.AppImage";
+        sha256 = "sha256:1syncv0pgnky70nw7wxjpryqn98nzv4cxs4w0cn2irg0vp6ya42i";
+    };
 
-  runtimeDeps = [
-    emgucv
-  ];
+    nativeBuildInputs = [
+        pkgs.libsForQt5.qt5.wrapQtAppsHook
+        pkgs.coreutils
+        pkgs.qt5.qtwayland
+        pkgs.libsForQt5.qt5.qtwayland
+        pkgs.libsForQt5.qt5.qttools
+        pkgs.dbus
+        pkgs.gtk3
+        pkgs.qt5.qtbase
+        pkgs.mono
+        pkgs.bash
+        pkgs.steam-run
+        pkgs.icu
+        pkgs.ffmpeg
+        pkgs.fuse
+        pkgs.libdc1394
+        pkgs.libgdiplus
+        pkgs.libgeotiff
+        pkgs.libjpeg_turbo
+        pkgs.libpng
+        pkgs.openexr
+        pkgs.openjpeg
+        pkgs.tbb
+        pkgs.zlib
+    ];
 
-  # available projects:
-  # - UVtools.Installer/UVtools.Installer.wixproj  (needs WixToolset, not in nixpkgs)
-  # - UVtools.Core/UVtools.Core.csproj
-  # - UVtools.UI/UVtools.UI.csproj
-  # - Scripts/UVtools.ScriptSample/UVtools.ScriptSample.csproj
-  # - UVtools.AvaloniaControls/UVtools.AvaloniaControls.csproj
-  # - UVtools.Cmd/UVtools.Cmd.csproj
-  # TODO: install the UI, and maybe AvaloniaControls too
-  projectFile = "UVtools.Cmd/UVtools.Cmd.csproj";
+    unpackPhase = "true";
+    buildPhase = "true";
 
-  passthru.updateScript = ./update.sh;
+    installPhase = ''
+    echo "Creating a wrapper for UVtools"
+    mkdir -p $out/bin
 
-  meta = {
-    description = "MSLA/DLP, file analysis, calibration, repair, conversion and manipulation";
-    maintainers = with lib.maintainers; [ colinsane ];
-  };
+    cat > $out/bin/uvtools <<EOF
+    #!/bin/sh
+    exec env LD_LIBRARY_PATH=${pkgs.icu}/lib:\$LD_LIBRARY_PATH \
+    ${pkgs.appimage-run}/bin/appimage-run ${src} "\$@"
+    EOF
+    chmod +x $out/bin/uvtools
+    '';
+
+    meta = with pkgs.lib; {
+        description = "3D Print File Analysis and Repair Tool";
+        homepage = "https://github.com/sn4k3/UVtools";
+        license = licenses.gpl3;
+        platforms = [ "x86_64-linux" ];
+    };
 }
