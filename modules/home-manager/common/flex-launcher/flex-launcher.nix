@@ -134,7 +134,7 @@ ButtonDPadRight=:right
 
 # Menu configurations
 [Main]
-Entry1=Jellyfin;/home/azelphur/.config/flex-launcher/jellyfin.png;jellyfin-desktop --tv --fullscreen
+Entry1=Jellyfin;/home/azelphur/.config/flex-launcher/jellyfin.png;QTWEBENGINE_FORCE_USE_GDM=0 jellyfin-desktop --tv --fullscreen
 Entry2=VacuumTube;${pkgs.vacuum-tube}/share/icons/hicolor/256x256/apps/rocks.shy.VacuumTube.png;VacuumTube
 Entry3=Moonlight;/home/azelphur/.config/flex-launcher/moonlight.png;moonlight
 # Logging out drops us back into the steam session
