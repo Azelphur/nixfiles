@@ -142,7 +142,6 @@
         "$shiftMod, F, Tiled fullscreen, layoutmsg, colresize 1"
         #"$shiftMod, F, Fake fullscreen,fakefullscreen"
         "$shiftMod, Space, Toggle Floating, togglefloating"
-        "$mainMod, J, Toggle split, togglesplit"
         ", XF86AudioRaiseVolume, Raise Volume, exec, pactl set-sink-volume @DEFAULT_SINK@ +5%"
         ", XF86AudioLowerVolume, Lower Volume, exec, pactl set-sink-volume @DEFAULT_SINK@ -5%"
         ", XF86AudioMute, Mute Volume, exec, pactl set-sink-mute @DEFAULT_SINK@ toggle"
