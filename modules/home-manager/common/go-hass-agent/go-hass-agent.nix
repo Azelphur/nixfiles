@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, monitors, ... }:
 
 let
   stop-pipwindow = pkgs.writeShellScriptBin "stop-pipwindow" ''
@@ -8,6 +8,9 @@ let
     setsid electron /home/azelphur/.config/pipwindow/pipwindow.js "$@" >/dev/null 2>&1 < /dev/null &
     exit 0
   '';
+  toggleSimrig = import ../../../../hosts/azelphur-pc/scripts/toggle-simrig.nix {
+    inherit pkgs monitors;
+  };
 in
 {
   imports = [
@@ -19,11 +22,19 @@ in
       button = [
         {
           name = "Doorbell";
-          exec = "run-pipwindow https://homeassistant.home.azelphur.com/dashboard-pipwindows/doorbell?kiosk";
+          exec = "${run-pipwindow}/bin/run-pipwindow https://homeassistant.home.azelphur.com/dashboard-pipwindows/doorbell?kiosk";
         }
         {
           name = "Close PIPWindow";
-          exec = "stop-pipwindow";
+          exec = "${stop-pipwindow}/bin/stop-pipwindow";
+        }
+        {
+          name = "Switch to simrig";
+          exec = "${toggleSimrig}/bin/toggle-simrig simrig";
+        }
+        {
+          name = "Switch to desktop";
+          exec = "${toggleSimrig}/bin/toggle-simrig desktop";
         }
       ];
     };

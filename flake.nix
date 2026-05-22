@@ -38,6 +38,8 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    opendeck-nix.url = "github:Azelphur/opendeck-nix";
+    opendeck-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = unpatchedInputs:
@@ -117,6 +119,7 @@
       specialArgs = {inherit inputs;};
       modules = desktopModules ++ [
         ./hosts/azelphur-pc/configuration.nix
+        inputs.opendeck-nix.nixosModules.default
       ];
     };
     nixosConfigurations.azelphur-server = nixpkgs.lib.nixosSystem {

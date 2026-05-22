@@ -11,13 +11,20 @@
     ../../modules/nixos/hardware/amd.nix
     ../../modules/nixos/hardware/keychron.nix
     ../../modules/nixos/hardware/flydigi-vader5.nix
+    ../../modules/nixos/hardware/fanatec.nix
     ../../modules/nixos/common/games-on-whales.nix
   ];
 
   networking.hostName = "azelphur-pc"; # Define your hostname.
+  programs.opendeck.enable = true;
+  environment.systemPackages = with pkgs; [ 
+    wineWow64Packages.stable
+    winetricks
+  ];
   home-manager.users.${config.my.user.name}.imports = [
     ./home.nix
   ];
+  home-manager.extraSpecialArgs.monitors = import ./monitors.nix;
 
   # Enable support for cross compilation for raspberry pi
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];

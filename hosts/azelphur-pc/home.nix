@@ -1,16 +1,23 @@
-{ config, pkgs, inputs, lib, ... }:
+{ config, pkgs, inputs, lib, monitors, ... }:
 
 let
   left_monitor = "HDMI-A-2";
   top_monitor = "DP-4";
   bottom_monitor = "DP-1";
   right_monitor = "DP-5";
+  simrig_monitor = "DP-3";
+  toggleSimrig = import ./scripts/toggle-simrig.nix {
+    inherit pkgs monitors;
+  };
 in
 {
   imports = [
     ../../modules/home-manager/roles/default.nix
   ];
-  services.dunst.settings.global.monitor = "${top_monitor}";
+  home.packages = [
+    toggleSimrig
+  ];
+  services.dunst.settings.global.monitor = "${monitors.top}";
 
   wayland.windowManager.hyprland.settings = {
     # Once, my cards shuffled /dev/dri order and caused performance issues
@@ -26,6 +33,7 @@ in
       "${top_monitor}, 5120x1440@240, 1620x0, 1, transform, 2, bitdepth, 10, cm, hdr, sdrbrightness, 1.3, sdrsaturation,1.2"
       "${bottom_monitor}, 5120x1440@240, 1620x1440, 1, transform, 0, bitdepth, 10, cm, hdr, sdrbrightness, 1.3, sdrsaturation,1.2"
       "${right_monitor}, 3840x2160@60, 6740x0, 1.333333, transform, 3"
+      "${simrig_monitor}, disable"
     ];
     exec-once = [
       "uwsm app -- hyprlock --no-fade-in --immediate-render --grace 0"
@@ -35,6 +43,7 @@ in
       "[workspace 11 silent] uwsm app -- element-desktop"
       "[workspace 12 silent] uwsm app -- spotify"
       "[workspace 12 silent] uwsm app -- thunderbird"
+      "[workspace 99 silent] uwsm app -- edmarketconnector"
     ];
     # Binds for extra buttons on the Keychron Q6 HE
     bindd = [
@@ -96,23 +105,27 @@ in
     };
     background = [
       {
-        monitor = "${bottom_monitor}"; # Bottom
+        monitor = "${bottom_monitor}"; 
         path = "/home/azelphur/.wallpaper/bottom.png";
       }
       {
-        monitor = "${top_monitor}"; # Top
+        monitor = "${top_monitor}"; 
         path = "/home/azelphur/.wallpaper/top.png";
       }
       {
-        monitor = "${right_monitor}"; # Right
+        monitor = "${right_monitor}";
         path = "/home/azelphur/.wallpaper/right.png";
       }
       {
-        monitor = "${left_monitor}"; # Left
+        monitor = "${left_monitor}";
         path = "/home/azelphur/.wallpaper/left.png";
       }
+      {
+        monitor = "${simrig_monitor}"; 
+        path = "/home/azelphur/.wallpaper/simrig.png";
+      }
     ];
-    input-field = {
+    input-field = [{
         monitor = "${bottom_monitor}";
         size = "320, 50";
         outline_thickness = 3;
@@ -140,7 +153,36 @@ in
         position = "0, -20";
         halign = "center";
         valign = "center";
-    };
+    }
+    {
+        monitor = "${simrig_monitor}";
+        size = "320, 50";
+        outline_thickness = 3;
+        dots_size = 0.33; # Scale of input-field height, 0.2 - 0.8
+        dots_spacing = 0.15; # Scale of dots' absolute size, 0.0 - 1.0
+        dots_center = false;
+        dots_rounding = -1; # -1 default circle, -2 follow input-field rounding
+        outer_color = "rgb(151515)";
+        inner_color = "rgb(200, 200, 200)";
+        font_color = "rgb(10, 10, 10)";
+        #fade_on_empty = true
+        fade_timeout = 1000; # Milliseconds before fade_on_empty is triggered.
+        placeholder_text = "<i>Input Password...</i>"; # Text rendered in the input box when it's empty.
+        hide_input = false;
+        rounding = -1; # -1 means complete rounding (circle/oval)
+        check_color = "rgb(204, 136, 34)";
+        fail_color = "rgb(204, 34, 34)"; # if authentication failed, changes outer_color and fail message color
+        fail_text = "<i>$FAIL <b>($ATTEMPTS)</b></i>"; # can be set to empty
+        fail_transition = 300; # transition time in ms between normal outer_color and fail_color
+        capslock_color = -1;
+        numlock_color = -1;
+        bothlock_color = -1; # when both locks are active. -1 means don't change outer color (same for above)
+        invert_numlock = false; # change color if numlock is off
+        swap_font_color = false; # see below
+        position = "0, -20";
+        halign = "center";
+        valign = "center";
+    }];
   };
 
   wayland.windowManager.hyprland.extraConfig = ''
@@ -507,6 +549,97 @@ bind= , escape, submap, reset
 submap = reset
 
 # End monitor DP-5
+
+# Begin monitor DP-3
+workspace = 51, monitor:DP-3, default:true
+workspace = 52, monitor:DP-3
+workspace = 53, monitor:DP-3
+workspace = 54, monitor:DP-3
+workspace = 55, monitor:DP-3
+workspace = 56, monitor:DP-3
+workspace = 57, monitor:DP-3
+workspace = 58, monitor:DP-3
+workspace = 59, monitor:DP-3
+workspace = 50, monitor:DP-3
+bind = $mainMod, 5, submap, DP-3-workspace
+submap = DP-3-workspace
+bindrt = $mainMod, SUPER_L, submap, reset
+bind = $mainMod, 1, workspace, 51
+bind = $mainMod, 1, submap, reset
+bind = $mainMod, 2, workspace, 52
+bind = $mainMod, 2, submap, reset
+bind = $mainMod, 3, workspace, 53
+bind = $mainMod, 3, submap, reset
+bind = $mainMod, 4, workspace, 54
+bind = $mainMod, 4, submap, reset
+bind = $mainMod, 5, workspace, 55
+bind = $mainMod, 5, submap, reset
+bind = $mainMod, 6, workspace, 56
+bind = $mainMod, 6, submap, reset
+bind = $mainMod, 7, workspace, 57
+bind = $mainMod, 7, submap, reset
+bind = $mainMod, 8, workspace, 58
+bind = $mainMod, 8, submap, reset
+bind = $mainMod, 9, workspace, 59
+bind = $mainMod, 9, submap, reset
+bind = $mainMod, 0, workspace, 50
+bind = $mainMod, 0, submap, reset
+bind= , escape, submap, reset
+submap = reset
+
+bind = $ctrlMod, 5, submap, DP-3-movetoworkspace
+submap = DP-3-movetoworkspace
+bindrt = $ctrlMod, SUPER_L, submap, reset
+bind = $ctrlMod, 1, movetoworkspace, 51
+bind = $ctrlMod, 1, submap, reset
+bind = $ctrlMod, 2, movetoworkspace, 52
+bind = $ctrlMod, 2, submap, reset
+bind = $ctrlMod, 3, movetoworkspace, 53
+bind = $ctrlMod, 3, submap, reset
+bind = $ctrlMod, 4, movetoworkspace, 54
+bind = $ctrlMod, 4, submap, reset
+bind = $ctrlMod, 5, movetoworkspace, 55
+bind = $ctrlMod, 5, submap, reset
+bind = $ctrlMod, 6, movetoworkspace, 56
+bind = $ctrlMod, 6, submap, reset
+bind = $ctrlMod, 7, movetoworkspace, 57
+bind = $ctrlMod, 7, submap, reset
+bind = $ctrlMod, 8, movetoworkspace, 58
+bind = $ctrlMod, 8, submap, reset
+bind = $ctrlMod, 9, movetoworkspace, 59
+bind = $ctrlMod, 9, submap, reset
+bind = $ctrlMod, 0, movetoworkspace, 50
+bind = $ctrlMod, 0, submap, reset
+bind= , escape, submap, reset
+submap = reset
+
+bind = $shiftMod, 5, submap, DP-3-movetoworkspacesilent
+submap = DP-3-movetoworkspacesilent
+bindrt = $shiftMod, SUPER_L, submap, reset
+bind = $shiftMod, 1, movetoworkspacesilent, 51
+bind = $shiftMod, 1, submap, reset
+bind = $shiftMod, 2, movetoworkspacesilent, 52
+bind = $shiftMod, 2, submap, reset
+bind = $shiftMod, 3, movetoworkspacesilent, 53
+bind = $shiftMod, 3, submap, reset
+bind = $shiftMod, 4, movetoworkspacesilent, 54
+bind = $shiftMod, 4, submap, reset
+bind = $shiftMod, 5, movetoworkspacesilent, 55
+bind = $shiftMod, 5, submap, reset
+bind = $shiftMod, 6, movetoworkspacesilent, 56
+bind = $shiftMod, 6, submap, reset
+bind = $shiftMod, 7, movetoworkspacesilent, 57
+bind = $shiftMod, 7, submap, reset
+bind = $shiftMod, 8, movetoworkspacesilent, 58
+bind = $shiftMod, 8, submap, reset
+bind = $shiftMod, 9, movetoworkspacesilent, 59
+bind = $shiftMod, 9, submap, reset
+bind = $shiftMod, 0, movetoworkspacesilent, 50
+bind = $shiftMod, 0, submap, reset
+bind= , escape, submap, reset
+submap = reset
+
+# End monitor DP-3
   '';
 
   services.hyprpaper = {
@@ -530,9 +663,13 @@ submap = reset
           monitor = "${left_monitor}";
           path = "~/.wallpaper/left.png";
         }
+        {
+          monitor = "${simrig_monitor}";
+          path = "~/.wallpaper/simrig.png";
+        }
       ];
     };
   };
 
-  programs.waybar.settings.mainBar.output = "${top_monitor}";
+  programs.waybar.settings.mainBar.output = [ "${monitors.top}" "${monitors.simrig}" ];
 } 

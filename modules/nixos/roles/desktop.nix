@@ -15,8 +15,10 @@ in {
 
   services.displayManager = {
     sddm.enable = true;
-    autoLogin.enable = true;
-    autoLogin.user = config.my.user.name;
+    autoLogin = {
+      enable = true;
+      user = config.my.user.name;
+    };
   };
 
   hardware.xone.enable = true;
@@ -68,6 +70,8 @@ in {
     uvtools
     sweethome3d.application
     grayjay
+    min-ed-launcher
+    edmarketconnector
   ];
 
   #systemd.user.services.music-assistant-companion = {
