@@ -22,7 +22,7 @@ DefaultMenu=Main
 VSync=true
 #FPSLimit=
 #ApplicationTimeout=15
-OnLaunch=Blank
+OnLaunch=Quit
 WrapEntries=false
 ResetOnBack=false
 MouseSelect=true
@@ -134,11 +134,10 @@ ButtonDPadRight=:right
 
 # Menu configurations
 [Main]
-Entry1=Jellyfin;/home/azelphur/.config/flex-launcher/jellyfin.png;QTWEBENGINE_FORCE_USE_GDM=0 jellyfin-desktop --tv --fullscreen
-Entry2=VacuumTube;${pkgs.vacuum-tube}/share/icons/hicolor/256x256/apps/rocks.shy.VacuumTube.png;VacuumTube
+Entry1=Jellyfin;/home/azelphur/.config/flex-launcher/jellyfin.png;QTWEBENGINE_FORCE_USE_GDM=0 ww -fa Jellyfin -c jellyfin-desktop --tv --fullscreen
+Entry2=VacuumTube;${pkgs.vacuum-tube}/share/icons/hicolor/256x256/apps/rocks.shy.VacuumTube.png;ww -fa 'VacuumTube' -c VacuumTube
 Entry3=Moonlight;/home/azelphur/.config/flex-launcher/moonlight.png;moonlight
-# Logging out drops us back into the steam session
-Entry4=Steam;${pkgs.flex-launcher}/share/flex-launcher/assets/icons/steam.png;steamosctl switch-to-game-mode
+Entry4=Steam;${pkgs.flex-launcher}/share/flex-launcher/assets/icons/steam.png;bash -lc "steam steam://open/bigpicture > /tmp/steam.log 2>&1"
 Entry5=Crunchyroll;/home/azelphur/.config/flex-launcher/crunchyroll.png;google-chrome-stable --kiosk --no-first-run --disable-infobars https://www.crunchyroll.com/
 Entry6=Shudder;/home/azelphur/.config/flex-launcher/shudder.png;google-chrome-stable --kiosk --no-first-run --disable-infobars https://www.shudder.com/
 Entry7=Floatplane;/home/azelphur/.config/flex-launcher/floatplane.png;google-chrome-stable --kiosk --no-first-run --disable-infobars https://www.floatplane.com/channel/linustechtips/home/main

@@ -1,17 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  cecSend = pkgs.writeShellScriptBin "cec-send" ''
-    #!/usr/bin/env bash
-    set -euo pipefail
-
-    if [ "$#" -ne 1 ]; then
-      echo "usage: cec-send <command>" >&2
-      exit 1
-    fi
-
-    echo "$1" | ${pkgs.netcat}/bin/nc -U /home/azelphur/.cecdaemon.sock
-  '';
+  ww = pkgs.writeShellScriptBin "ww" (builtins.readFile ../common/ww/ww);
 in
 {
   imports = [
@@ -23,8 +13,19 @@ in
   ];
   nixpkgs.config.allowUnfree = true;
   home.packages = [
-    cecSend
+    ww
   ];
+
+  xdg.desktopEntries.flex-launcher-ww = {
+    name = "Flex Launcher (WW)";
+    type = "Application";
+    genericName = "Application Launcher";
+    comment = "Customizable HTPC Application Launcher";
+    exec = "${ww}/bin/ww -f flex-launcher -c flex-launcher";
+    terminal = false;
+    icon = "flex-launcher";
+    categories = [ "Video" "AudioVideo" ];
+  };
 
   services.mpdris2 = {
     notifications = true;
@@ -79,7 +80,32 @@ in
       #"services/plasma-manager-commands.desktop".cec-volume-up = [ "Volume Up" ];
       # Disable the sleep button (we have no way of waking back up)
       "org_kde_powerdevil".Sleep = [ ];
-      "kwin"."Window Close" = ["Alt+F4" "Home Page"];
+      "kwin"."Window Close" = ["Alt+F4" "Sleep"];
+      "services/flex-launcher-ww.desktop"._launch = "Home Page";
+      kwin.ExposeAll = ["Menu" "Ctrl+F10" "Launch (C)"];
+    };
+    configFile = {
+      kwinrulesrc."28ac492a-765a-45d9-a61c-cdd0815ec315".Description = "PIPWindow";
+      kwinrulesrc."28ac492a-765a-45d9-a61c-cdd0815ec315".above = true;
+      kwinrulesrc."28ac492a-765a-45d9-a61c-cdd0815ec315".aboverule = 2;
+      kwinrulesrc."28ac492a-765a-45d9-a61c-cdd0815ec315".layer = "osd";
+      kwinrulesrc."28ac492a-765a-45d9-a61c-cdd0815ec315".layerrule = 2;
+      kwinrulesrc."28ac492a-765a-45d9-a61c-cdd0815ec315".position = "1050,0";
+      kwinrulesrc."28ac492a-765a-45d9-a61c-cdd0815ec315".positionrule = 2;
+      kwinrulesrc."28ac492a-765a-45d9-a61c-cdd0815ec315".size = "870,700";
+      kwinrulesrc."28ac492a-765a-45d9-a61c-cdd0815ec315".sizerule = 2;
+      kwinrulesrc."28ac492a-765a-45d9-a61c-cdd0815ec315".skippager = true;
+      kwinrulesrc."28ac492a-765a-45d9-a61c-cdd0815ec315".skippagerrule = 2;
+      kwinrulesrc."28ac492a-765a-45d9-a61c-cdd0815ec315".skipswitcher = true;
+      kwinrulesrc."28ac492a-765a-45d9-a61c-cdd0815ec315".skipswitcherrule = 2;
+      kwinrulesrc."28ac492a-765a-45d9-a61c-cdd0815ec315".skiptaskbar = true;
+      kwinrulesrc."28ac492a-765a-45d9-a61c-cdd0815ec315".skiptaskbarrule = 2;
+      kwinrulesrc."28ac492a-765a-45d9-a61c-cdd0815ec315".title = "PIPWindow";
+      kwinrulesrc."28ac492a-765a-45d9-a61c-cdd0815ec315".titlematch = 1;
+      kwinrulesrc."28ac492a-765a-45d9-a61c-cdd0815ec315".wmclass = "electron electron";
+      kwinrulesrc."28ac492a-765a-45d9-a61c-cdd0815ec315".wmclasscomplete = true;
+      kwinrulesrc."28ac492a-765a-45d9-a61c-cdd0815ec315".wmclassmatch = 1;
+      kwinrulesrc.General.rules = "28ac492a-765a-45d9-a61c-cdd0815ec315";
     };
 
     kscreenlocker = {
@@ -103,7 +129,7 @@ in
       {
         location = "bottom";
         height = 48;
-        #hiding = "autohide";
+        hiding = "autohide";
         widgets = [
           "org.kde.plasma.kickoff"
           {
