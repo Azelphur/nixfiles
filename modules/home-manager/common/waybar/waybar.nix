@@ -5,6 +5,16 @@ with config.lib.stylix.colors.withHashtag;
   home.packages = with pkgs; [
     playerctl
   ];
+  # When switching monitor layout, waybar crashes until the layout has stabilised.
+  systemd.user.services.waybar = {
+    Unit = {
+      StartLimitIntervalSec = 0;
+    };
+
+    Service = {
+      RestartSec = 5;
+    };
+  };
   programs.waybar = {
     enable = true;
     systemd.enable = true;
