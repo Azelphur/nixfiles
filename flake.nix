@@ -79,15 +79,13 @@
       serverModules = baseModules ++ [
         ./modules/nixos/common/linux-lts.nix
       ];
-      pcModules = baseModules ++ [
-        ./modules/nixos/common/linux-latest.nix
-      ];
       htpcModules = baseModules ++ [
-        inputs.jovian-nixos.nixosModules.default
         ./modules/nixos/roles/desktop.nix
+        ./modules/nixos/common/linux-latest.nix
         ./modules/nixos/roles/htpc.nix
       ];
       desktopModules = baseModules ++ [
+        ./modules/nixos/common/linux-latest.nix
         ./modules/nixos/roles/desktop.nix
         ./modules/nixos/roles/pc.nix
         inputs.stylix.nixosModules.stylix
