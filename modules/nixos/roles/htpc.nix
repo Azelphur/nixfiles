@@ -7,14 +7,16 @@
   services.desktopManager.plasma6.enable = true;
 
   environment.etc."wallpaper.png".source = ../../../assets/htpc-background.png;
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 32 * 1024; # 64GB
+    }
+  ];
   environment.sessionVariables = {
     QTWEBENGINE_FORCE_USE_GBM = 0;
   };
 
-  jovian.steam.enable = true;
-  jovian.steam.autoStart = true;
-  jovian.steam.user = "azelphur";
-  jovian.steam.desktopSession = "plasma";
   programs.fcast-receiver.enable = true;
 
   environment.systemPackages = with pkgs; [
