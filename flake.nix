@@ -37,7 +37,7 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    opendeck-nix.url = "github:Azelphur/opendeck-nix";
+    opendeck-nix.url = "github:Kitt3120/opendeck-nix";
     opendeck-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
