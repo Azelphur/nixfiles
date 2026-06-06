@@ -9,6 +9,7 @@ let
   toggleSimrig = import ./scripts/toggle-simrig.nix {
     inherit pkgs monitors;
   };
+  eliteIntel = pkgs.callPackage ../../pkgs/elite-intel.nix { };
 in
 {
   imports = [
@@ -16,6 +17,7 @@ in
   ];
   home.packages = [
     toggleSimrig
+    eliteIntel
   ];
   services.dunst.settings.global.monitor = "${monitors.top}";
 
