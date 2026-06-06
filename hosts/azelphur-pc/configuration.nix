@@ -15,6 +15,7 @@
     ../../modules/nixos/common/games-on-whales.nix
   ];
 
+  programs.localsend.enable = true;
   networking.hostName = "azelphur-pc"; # Define your hostname.
   programs.opendeck.enable = true;
   environment.systemPackages = with pkgs; [ 
