@@ -25,6 +25,7 @@
     };
     stylix = {
       url = "github:danth/stylix";
+      #url = "github:nix-community/stylix/pull/2337/head";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     spicetify-nix = {
@@ -99,6 +100,12 @@
       specialArgs = {inherit inputs;};
       modules = htpcModules ++ [
         ./hosts/living-room-mini-pc/configuration.nix
+      ];
+    };
+    nixosConfigurations.green-bedroom-mini-pc = nixpkgs.lib.nixosSystem {
+      specialArgs = {inherit inputs;};
+      modules = htpcModules ++ [
+        ./hosts/green-bedroom-mini-pc/configuration.nix
       ];
     };
     nixosConfigurations.azelphur-framework = nixpkgs.lib.nixosSystem {
