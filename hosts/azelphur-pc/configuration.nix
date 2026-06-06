@@ -21,7 +21,10 @@
   environment.systemPackages = with pkgs; [ 
     wineWow64Packages.stable
     winetricks
+    nodejs_26 # required for opendeck
   ];
+  programs.ydotool.enable = true;
+  users.users.${config.my.user.name}.extraGroups = ["ydotool"];
   home-manager.users.${config.my.user.name}.imports = [
     ./home.nix
   ];
@@ -35,7 +38,7 @@
 
   services.udev.extraRules = ''
     KERNEL=="card*", KERNELS=="0000:03:00.0", SUBSYSTEM=="drm", SUBSYSTEMS=="pci", SYMLINK+="dri/big"
-    KERNEL=="card*", KERNELS=="0000:15:00.0", SUBSYSTEM=="drm", SUBSYSTEMS=="pci", SYMLINK+="dri/little"
+    KERNEL=="card*", KERNELS=="0000:14:00.0", SUBSYSTEM=="drm", SUBSYSTEMS=="pci", SYMLINK+="dri/little"
   '';
 
   sops.defaultSopsFile = ../../secrets/azelphur-pc.yaml;
