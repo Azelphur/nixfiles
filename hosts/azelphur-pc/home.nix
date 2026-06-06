@@ -19,6 +19,20 @@ in
     toggleSimrig
     eliteIntel
   ];
+  programs.go-hass-agent = {
+    commands = {
+      button = [
+        {
+          name = "Switch to simrig";
+          exec = "${toggleSimrig}/bin/toggle-simrig simrig";
+        }
+        {
+          name = "Switch to desktop";
+          exec = "${toggleSimrig}/bin/toggle-simrig desktop";
+        }
+      ];
+    };
+  };
   services.dunst.settings.global.monitor = "${monitors.top}";
 
   wayland.windowManager.hyprland.settings = {
