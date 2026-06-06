@@ -11,4 +11,5 @@
     ../../modules/nixos/hardware/amd.nix
   ];
   networking.hostName = "living-room-mini-pc";
+  services.flatpak.enable = true;
 }
