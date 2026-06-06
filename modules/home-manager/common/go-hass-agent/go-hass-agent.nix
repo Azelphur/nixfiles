@@ -8,9 +8,6 @@ let
     setsid electron /home/azelphur/.config/pipwindow/pipwindow.js "$@" >/dev/null 2>&1 < /dev/null &
     exit 0
   '';
-  toggleSimrig = import ../../../../hosts/azelphur-pc/scripts/toggle-simrig.nix {
-    inherit pkgs monitors;
-  };
 in
 {
   imports = [
@@ -27,14 +24,6 @@ in
         {
           name = "Close PIPWindow";
           exec = "${stop-pipwindow}/bin/stop-pipwindow";
-        }
-        {
-          name = "Switch to simrig";
-          exec = "${toggleSimrig}/bin/toggle-simrig simrig";
-        }
-        {
-          name = "Switch to desktop";
-          exec = "${toggleSimrig}/bin/toggle-simrig desktop";
         }
       ];
     };
