@@ -16,6 +16,11 @@
   boot.zfs.forceImportRoot = false;
   networking.hostId = "04e573d8";
 
+  services.udev.extraRules = ''
+    KERNEL=="card*", KERNELS=="0000:03:00.0", SUBSYSTEM=="drm", SUBSYSTEMS=="pci", SYMLINK+="dri/intel"
+    KERNEL=="card*", KERNELS=="0000:10:00.0", SUBSYSTEM=="drm", SUBSYSTEMS=="pci", SYMLINK+="dri/integrated"
+  '';
+
   swapDevices = [
     {
       device = "/swapfile";
@@ -101,6 +106,14 @@
       "noatime"
     ];
   };
+  fileSystems."/mnt/drives/HDD-14TB-9MHA39LK" = {
+    fsType = "ext4";
+    device = "UUID=140e77ed-be9c-41f3-9527-b43e5c54c594";
+    options = [
+      "rw"
+      "noatime"
+    ];
+  };
   fileSystems."/mnt/pools/games" = {
     fsType = "fuse.mergerfs";
     device = "/mnt/drives/HDD-*/games";
@@ -118,6 +131,7 @@
       "/mnt/drives/HDD-16TB-ZL2H3HWC"
       "/mnt/drives/HDD-16TB-ZL2H46P2"
       "/mnt/drives/HDD-18TB-ZR5BN1EW"
+      "/mnt/drives/HDD-14TB-9MHA39LK"
     ];
   };
   fileSystems."/mnt/pools/media" = {
@@ -136,6 +150,7 @@
       "/mnt/drives/HDD-16TB-ZL2H3HWC"
       "/mnt/drives/HDD-16TB-ZL2H46P2"
       "/mnt/drives/HDD-18TB-ZR5BN1EW"
+      "/mnt/drives/HDD-14TB-9MHA39LK"
     ];
   };
 
