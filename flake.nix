@@ -3,6 +3,11 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs-2505.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixos-raspberrypi = {
+      url = "github:nvmd/nixos-raspberrypi/main";
+      inputs.nixpkgs.follows = "nixpkgs-2505";
+    };
     home-manager = {
       url = "github:nix-community/home-manager/";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -87,7 +92,8 @@
         inputs.stylix.nixosModules.stylix
       ];
       inherit (inputs)
-        nixpkgs;
+        nixpkgs
+        nixos-raspberrypi;
     in
     {
     nixosConfigurations.master-bedroom-mini-pc = nixpkgs.lib.nixosSystem {
@@ -134,6 +140,23 @@
         ./hosts/snake-cam/configuration.nix
         ./modules/nixos/roles/default.nix
         ./modules/nixos/common/home-manager.nix
+        inputs.sops-nix.nixosModules.sops
+        inputs.lanzaboote.nixosModules.lanzaboote
+        inputs.nix-index-database.nixosModules.default
+      ];
+    };
+    nixosConfigurations.printer-cam = nixos-raspberrypi.lib.nixosSystem {
+      specialArgs = {inherit inputs;};
+      modules = [
+        ({...}: {
+          imports = with nixos-raspberrypi.nixosModules; [
+            raspberry-pi-5.base
+            raspberry-pi-5.bluetooth
+          ];
+        })
+        ./hosts/printer-cam/configuration.nix
+        ./modules/nixos/roles/default.nix
+        #./modules/nixos/common/home-manager.nix
         inputs.sops-nix.nixosModules.sops
         inputs.lanzaboote.nixosModules.lanzaboote
         inputs.nix-index-database.nixosModules.default
