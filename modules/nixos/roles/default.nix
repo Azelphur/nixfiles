@@ -132,9 +132,12 @@
   networking.firewall.enable = false;
 
   programs.iotop.enable = true;
-  # Required for iotop
   boot.kernel.sysctl = {
+    # Required for iotop
     "kernel.task_delayacct" = 1;
+    # Nextcloud client eats lots of inotify
+    "fs.inotify.max_user_watches" = 524288;
+    "fs.inotify.max_user_instances" = 512;
   };
 
   environment.systemPackages = with pkgs; [
