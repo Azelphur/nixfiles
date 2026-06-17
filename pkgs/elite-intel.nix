@@ -13,11 +13,11 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "elite-intel";
-  version = "1.0.0022";
+  version = "1.0.0026";
 
   src = fetchurl {
     url = "https://github.com/stone-alex/EliteIntel/releases/download/v-${finalAttrs.version}/elite_intel_-${finalAttrs.version}.zip";
-    hash = "sha256-3w8ThF8aCiA3pFdoBhzQKpYyWy5lMVqd9aO9+3djeZA=";
+    hash = "sha256-CcDeCkLYue/26QeZd6TxFEQujMYcPtHtGLLw2WMKHmA=";
   };
 
   nativeBuildInputs = [
