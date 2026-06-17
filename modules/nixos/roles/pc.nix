@@ -6,6 +6,7 @@
     ../common/obs-studio.nix
     ../common/home-assistant-shutdown.nix
     ../common/orca-slicer.nix
+    ../common/vscode/vscode.nix
   ];
   home-manager.users.${config.my.user.name}.imports = [
     inputs.plasma-manager.homeModules.plasma-manager
