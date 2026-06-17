@@ -268,6 +268,7 @@
       # A file that contains just the password.
       passwordFile = config.sops.secrets.nut-admin.path;
       upsmon = "primary";
+      instcmds = ["ALL"];
     };
     upsmon.monitor."azelphur-server" = {
       system = "azelphur-server@localhost";
