@@ -114,6 +114,14 @@
       "noatime"
     ];
   };
+  fileSystems."/mnt/drives/HDD-14TB-Y6GXJBYC" = {
+    fsType = "ext4";
+    device = "UUID=2e03a618-7bfd-4286-921c-561907174da6";
+    options = [
+      "rw"
+      "noatime"
+    ];
+  };
   fileSystems."/mnt/pools/games" = {
     fsType = "fuse.mergerfs";
     device = "/mnt/drives/HDD-*/games";
@@ -132,6 +140,7 @@
       "/mnt/drives/HDD-16TB-ZL2H46P2"
       "/mnt/drives/HDD-18TB-ZR5BN1EW"
       "/mnt/drives/HDD-14TB-9MHA39LK"
+      "/mnt/drives/HDD-14TB-Y6GXJBYC"
     ];
   };
   fileSystems."/mnt/pools/media" = {
@@ -151,6 +160,7 @@
       "/mnt/drives/HDD-16TB-ZL2H46P2"
       "/mnt/drives/HDD-18TB-ZR5BN1EW"
       "/mnt/drives/HDD-14TB-9MHA39LK"
+      "/mnt/drives/HDD-14TB-Y6GXJBYC"
     ];
   };
 
