@@ -11,10 +11,11 @@
     ../common/dunst/dunst.nix
     ../common/hyprlock/hyprlock.nix
     ../common/hypridle/hypridle.nix
-    ../common/waybar/waybar.nix
+    ../common/yazi/yazi.nix
+    ../common/dank-material-shell/dank-material-shell.nix
   ];
 
-  stylix.targets.firefox.profileNames = ["default"];
+  #stylix.targets.firefox.profileNames = ["default"];
   programs.thunderbird = {
     enable = true;
     profiles.default = {

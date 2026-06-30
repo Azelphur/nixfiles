@@ -10,10 +10,12 @@
   ];
   home-manager.users.${config.my.user.name}.imports = [
     inputs.plasma-manager.homeModules.plasma-manager
+    inputs.dms.homeModules.dank-material-shell
     ../../home-manager/roles/pc.nix
   ];
   stylix.enable = true;
   stylix.base16Scheme = ../../../assets/mytheme.yaml;
+
   services.xserver.enable = true;
   programs.hyprland = {
     enable = true;
@@ -30,7 +32,6 @@
     spice-gtk # required for virt-manager
     borgbackup
     element-desktop
-    kdePackages.dolphin
     kdePackages.kate
     kdePackages.ark
     tigervnc
@@ -56,16 +57,13 @@
   xdg.portal = {
     enable = true;
     config = {
-      hyprland = {
-        default = [
-          "hyprland"
-          "kde"
-        ];
-      };
+      hyprland."org.freedesktop.impl.portal.FileChooser" = "termfilechooser";
+      common."org.freedesktop.impl.portal.FileChooser" = "termfilechooser";
     };
     configPackages = with pkgs; [
       xdg-desktop-portal-hyprland
       kdePackages.xdg-desktop-portal-kde
     ];
+    extraPortals = [ pkgs.xdg-desktop-portal-termfilechooser ];
   };
 }

@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixpkgs-2505.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs-2511.url = "github:nixos/nixpkgs/nixos-25.11";
     nixos-raspberrypi = {
       url = "github:nvmd/nixos-raspberrypi/main";
       inputs.nixpkgs.follows = "nixpkgs-2505";
@@ -33,6 +34,9 @@
       #url = "github:nix-community/stylix/pull/2337/head";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    matugen = {
+      url = "github:InioX/Matugen";
+    };
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -43,8 +47,29 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    opendeck-nix.url = "github:Kitt3120/opendeck-nix";
+    #opendeck-nix.url = "github:Kitt3120/opendeck-nix";
+    opendeck-nix.url = "path:/home/azelphur/Downloads/opendeck-nix";
     opendeck-nix.inputs.nixpkgs.follows = "nixpkgs";
+    partydeck = {
+      url = "github:cseelhoff/partydeck";
+      inputs.nixpkgs.follows = "nixpkgs-2511";
+    };
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    dms-plugins = {
+      url = "git+https://github.com/AvengeMedia/dms-plugins";
+      flake = false;
+    };
+    dms-plugins-taylan = {
+      url = "git+https://github.com/TaylanTatli/dms-plugins";
+      flake = false;
+    };
+    dms-plugin-hass = {
+      url = "git+https://github.com/xxyangyoulin/dms-plugin-hass";
+      flake = false;
+    };
   };
 
   outputs = unpatchedInputs:
@@ -59,7 +84,12 @@
           (patcher.fetchpatch {
             name = "nixos/cmk-agent: init module, cmk-agent: init at 2.3.0";
             url = "https://github.com/NixOS/nixpkgs/pull/399463.diff";
-            hash = "sha256-3vMQdfBGMt2oHMiB3nuesoyWtR9uk8+HhVZm4jUnPE0=";
+            hash = "sha256-jfTIzBu0KfDeCN5I9EOZ4zRhxdMOJQ1ALg/etLNocH4=";
+          })
+          (patcher.fetchpatch {
+            name = "orca-slicer: fix missing preview";
+            url = "https://github.com/NixOS/nixpkgs/pull/531346.diff";
+            hash = "sha256-A+BlbpNobzvj+SEbCN5pErfMnEncDLcGUW5XNFKDpuY=";
           })
         ];
 
@@ -93,7 +123,8 @@
       ];
       inherit (inputs)
         nixpkgs
-        nixos-raspberrypi;
+        nixos-raspberrypi
+        partydeck;
     in
     {
     nixosConfigurations.master-bedroom-mini-pc = nixpkgs.lib.nixosSystem {

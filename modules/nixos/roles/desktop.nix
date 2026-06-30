@@ -13,6 +13,14 @@ in {
     ../../home-manager/roles/desktop.nix
   ];
 
+  xdg = {
+    terminal-exec = {
+      enable = true;
+      settings = {
+        default = [ "kitty.desktop" ];
+      };
+    };
+  };
   services.displayManager = {
     sddm.enable = true;
     autoLogin = {
