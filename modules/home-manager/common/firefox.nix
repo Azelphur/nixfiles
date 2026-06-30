@@ -4,6 +4,10 @@
   programs.firefox = {
     enable = true;
     nativeMessagingHosts = [ pkgs.kdePackages.plasma-browser-integration ];
+    configPath = "${config.xdg.configHome}/mozilla/firefox";
+    profiles = {
+      default = {};
+    };
   };
   xdg.mimeApps = {
     enable =  true;
@@ -16,4 +20,5 @@
       "x-scheme-handler/unknown" = [ "firefox.desktop" ];
     };
   };
+  stylix.targets.firefox.profileNames = [ "default" ];
 }
