@@ -37,8 +37,6 @@ in {
   };
   programs.gamescope.enable = true;
   programs.gamemode.enable = true;
-  programs.kdeconnect.enable = true;
-
   services.printing.enable = true;
 
   services.xserver.xkb = {

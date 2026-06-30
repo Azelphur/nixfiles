@@ -7,7 +7,6 @@ in
   imports = [
     ../common/flex-launcher/flex-launcher.nix
     ../common/retroarch/retroarch.nix
-    ../common/kdeconnect.nix
     #./kodi/kodi.nix
     ../common/vacuum-tube.nix
   ];
