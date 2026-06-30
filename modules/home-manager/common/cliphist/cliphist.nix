@@ -1,14 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    cliphist
-    wl-clipboard
-  ];
-  wayland.windowManager.hyprland.settings = {
-    exec-once = [
-      "wl-paste --watch cliphist store"
-    ];
+  services.cliphist = {
+    enable = true;
   };
   xdg.desktopEntries = {
     cliphist-fuzzel = {
