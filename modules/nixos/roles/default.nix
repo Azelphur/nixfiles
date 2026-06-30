@@ -15,6 +15,9 @@
     };
   };
   virtualisation.diskSize = 32768;
+  home-manager.sharedModules = [
+    inputs.sops-nix.homeManagerModules.sops
+  ];
 
   hardware.enableAllFirmware = true;
 
@@ -159,13 +162,14 @@
     dig
     mtr
     nmap
-    btop
     unzip
     whois
     p7zip
     jq
     smartmontools
     nvtopPackages.full
+    mediainfo
+    iperf
     (python3.withPackages(ps: with ps; [ 
       requests
       virtualenv
