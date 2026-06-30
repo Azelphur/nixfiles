@@ -4,7 +4,9 @@
 
 { config, lib, pkgs, inputs, ... }:
 
-
+let
+  monitors = import ./monitors.nix;
+in
 {
   imports = [ 
     ./hardware-configuration.nix
@@ -29,6 +31,13 @@
     ./home.nix
   ];
   home-manager.extraSpecialArgs.monitors = import ./monitors.nix;
+  environment.variables = {
+    MONITOR_LEFT = monitors.left;
+    MONITOR_RIGHT = monitors.right;
+    MONITOR_TOP = monitors.top;
+    MONITOR_BOTTOM = monitors.bottom;
+    MONITOR_SIMRIG = monitors.simrig;
+  };
 
   # Enable support for cross compilation for raspberry pi
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
