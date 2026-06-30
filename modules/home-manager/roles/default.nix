@@ -4,6 +4,8 @@
   imports = [
     ../common/nixvim.nix
     ../common/zsh.nix
+    ../common/btop/btop.nix
+    ../common/fastfetch/fastfetch.nix
     inputs.nixvim.homeModules.nixvim
   ];
 

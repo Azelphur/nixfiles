@@ -2,7 +2,6 @@
 
 {
   home.packages = with pkgs; [
-    fastfetch
     python3Packages.pygments
     fzf
     openssl
@@ -38,7 +37,8 @@
       plugins = ["colorize" "colored-man-pages" "copypath" "cp" "docker" "extract" "fzf" "heroku" "sudo" "git" "zsh-interactive-cd"];
     };
     initContent = ''
-      fastfetch
+      # https://github.com/fastfetch-cli/fastfetch/issues/2074
+      fastfetch --ds-force-drm
 
       # https://github.com/zsh-users/zsh-syntax-highlighting/issues/956
       autoload -Uz add-zsh-hook
