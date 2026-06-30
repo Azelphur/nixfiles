@@ -8,10 +8,7 @@
   #stylix.targets.vesktop.enable = true;
   programs.nixcord = {
     enable = true;  # enable Nixcord. Also installs discord package
-    #discord.enable = false;
-    #discord.vencord.package = pkgs.vencord;
-    #vesktop.enable = true;
-    #quickCss = "some CSS";  # quickCSS file
+    discord.vencord.enable = true;
     config = {
       enabledThemes = [
         "stylix.theme.css"
@@ -19,9 +16,9 @@
       frameless = true; # set some Vencord options
       plugins = {
         alwaysTrust.enable = true;
-        ClearURLs.enable = true;  
+        clearUrls.enable = true;  
         copyFileContents.enable = true;
-        CustomRPC.enable = true;
+        customRpc.enable = true;
         forceOwnerCrown.enable = true;
         imageZoom.enable = true;
         memberCount.enable = true;
@@ -29,7 +26,7 @@
         messageLogger.enable = true;
         noF1.enable = true;
         permissionsViewer.enable = true;
-        PinDMs.enable = true;
+        pinDms.enable = true;
         previewMessage.enable = true;
         serverInfo.enable = true;
         showHiddenChannels.enable = true;
