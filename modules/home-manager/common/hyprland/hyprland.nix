@@ -17,10 +17,6 @@
     extraConfig = ''
       require("binds")
       require("variables")
-      require("workspaces")
-
-      display_profiles = require("display_profiles")
-      display_profiles.desk()
     '';
   };
   xdg.configFile."hypr" = {

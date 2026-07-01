@@ -587,11 +587,7 @@
           "enabled": true,
           "id": "clock"
         },
-        "weather",
-        {
-          "id": "dankKDEConnect",
-          "enabled": true
-        }
+        "weather"
       ],
       "enabled": true,
       "fontScale": 1,
@@ -613,6 +609,14 @@
       "position": 0,
       "rightWidgets": [
         "systemTray",
+        {
+          "enabled": true,
+          "id": "dankKDEConnect"
+        },
+        {
+          "id": "grimblast",
+          "enabled": true
+        },
         "clipboard",
         "cpuUsage",
         "memUsage",

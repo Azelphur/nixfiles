@@ -9,7 +9,10 @@
       mediainfo
       imagemagick
     ];
-    plugins = { inherit (pkgs.yaziPlugins) mediainfo; };
+    plugins = { inherit (pkgs.yaziPlugins)
+      smart-enter
+      mediainfo;
+    };
     settings = {
       opener = {
         open = [
@@ -30,10 +33,23 @@
           { mime = "application/subrip"; run = "mediainfo"; }
         ];
       };
+
       tasks.image_alloc = 1073741824;
     };
+    keymap = {
+      mgr.prepend_keymap = [
+        {
+          on = [ "<Enter>" ];
+          run = "plugin smart-enter";
+          desc = "Smart enter";
+        }
+      ];
+    };
   };
-
+  xdg.configFile."xdg-desktop-portal/portals.conf".text = ''
+    [preferred]
+    org.freedesktop.impl.portal.FileChooser=termfilechooser
+  '';
   xdg.configFile."xdg-desktop-portal-termfilechooser/config" =
   {
     force = true;
@@ -41,6 +57,8 @@
     ''
       [filechooser]
       cmd=${pkgs.xdg-desktop-portal-termfilechooser}/share/xdg-desktop-portal-termfilechooser/yazi-wrapper.sh
+      default_dir=$HOME
+      env=TERMCMD=${pkgs.kitty}/bin/kitty
     '';
   };
 
@@ -50,5 +68,12 @@
       "inode/directory" = ["yazi.desktop"];
       "application/zip" = ["yazi.desktop"];
     };
+  };
+  xdg.portal = {
+    enable = true;
+    config.common.default = "*";
+    extraPortals = [
+      pkgs.xdg-desktop-portal-termfilechooser
+    ];
   };
 }

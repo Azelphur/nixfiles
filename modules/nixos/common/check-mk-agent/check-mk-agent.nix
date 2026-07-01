@@ -14,8 +14,9 @@ in {
   # New checkmk doesn't listen on 6556 unless you allow legacy allow-legacy-pull
   systemd.tmpfiles.rules = [
     "f /var/lib/check_mk_agent/allow-legacy-pull 0644 root root -"
+    "L /bin/bash - - - - /run/current-system/sw/bin/bash"
   ];
-  services.cmk-agent = {
+  services.checkmk-agent = {
     enable = true;
     package = pkgs.checkmk-agent.override {
       plugins = [

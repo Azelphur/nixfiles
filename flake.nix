@@ -106,6 +106,7 @@
         inputs.sops-nix.nixosModules.sops
         inputs.lanzaboote.nixosModules.lanzaboote
         inputs.nix-index-database.nixosModules.default
+        inputs.stylix.nixosModules.stylix
       ];
       serverModules = baseModules ++ [
         ./modules/nixos/common/linux-lts.nix
@@ -119,7 +120,6 @@
         ./modules/nixos/common/linux-latest.nix
         ./modules/nixos/roles/desktop.nix
         ./modules/nixos/roles/pc.nix
-        inputs.stylix.nixosModules.stylix
       ];
       inherit (inputs)
         nixpkgs

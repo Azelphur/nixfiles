@@ -25,7 +25,7 @@ in
     RestartSec = "2s";
   };
 
-  sops.defaultSopsFile = ../../../../secrets/azelphur-pc.yaml;
+  sops.defaultSopsFile = ../../../../secrets/secrets.yaml;
   sops.age.keyFile = "/var/lib/sops-nix/keys.txt";
   sops.secrets = {
     ha-token = {};
@@ -39,7 +39,7 @@ in
     };
     plugins = {
       dankKDEConnect.src = inputs.dms-plugins + "/DankKDEConnect";
-
+      dankBatteryAlerts.src = inputs.dms-plugins + "/DankBatteryAlerts";
       grimblast.src = inputs.dms-plugins-taylan + "/grimblast";
       homeAssistantMonitor = {
         src = inputs.dms-plugin-hass;

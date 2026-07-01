@@ -76,8 +76,6 @@ in {
     uvtools
     sweethome3d.application
     grayjay
-    min-ed-launcher
-    edmarketconnector
   ];
 
   #systemd.user.services.music-assistant-companion = {

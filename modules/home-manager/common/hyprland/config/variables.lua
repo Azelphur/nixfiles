@@ -44,7 +44,4 @@ hl.config({
             color = "rgba(" .. colors.base00 .. "99)",
         },
     },
-    input = {
-        kb_layout = "gb"
-    }
 })

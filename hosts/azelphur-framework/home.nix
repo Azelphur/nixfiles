@@ -4,31 +4,34 @@
   imports = [
     ../../modules/home-manager/roles/default.nix
   ];
-  wayland.windowManager.hyprland.settings = {
-    exec-once = [
-      "uwsm app -- nm-applet"
-    ];
-    input = {
-      kb_layout = "gb";
-      kb_variant = "colemak";
+  wayland.windowManager.hyprland = {
+    extraConfig = ''
+      -- Switch workspaces with mainMod + [0-9]
+      -- Move active window to a workspace with mainMod + SHIFT + [0-9]
+      for i = 1, 10 do
+          local key = i % 10 -- 10 maps to key 0
+          hl.bind(b({modifiers.mainMod, key}), hl.dsp.focus({ workspace = i}))
+          hl.bind(b({modifiers.shiftMod, key}), hl.dsp.window.move({ workspace = i }))
+      end
+      hl.monitor({
+        output = "eDP-1",
+        mode = "2256x1504@60",
+        position = "0x0",
+        scale = 1,
+        disabled = false,
+      })
+    ''; 
+    settings = {
+      config = {
+        input = {
+          kb_layout = "gb";
+          kb_variant = "colemak";
+        };
+      };
+      exec_cmd = [
+        "uwsm app -- nm-applet"
+      ];
     };
-    bindd = [] ++ (
-      # workspaces
-      # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
-      builtins.concatLists (builtins.genList (
-          x: let
-            ws = let
-              c = (x + 1) / 10;
-            in
-              builtins.toString (x + 1 - (c * 10));
-          in [
-            "$mainMod, ${ws}, Switch to workspace ${ws}, workspace, ${toString (x + 1)}"
-            "$shiftMod, ${ws}, Move active window to workspace ${ws}, movetoworkspacesilent, ${toString (x + 1)}"
-          ]
-        )
-        10)
-    );
-    monitor = ", preferred, auto, 1";
   };
 
   services.hyprpaper = {

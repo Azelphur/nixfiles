@@ -4,6 +4,8 @@
   imports = [
     ../common/user.nix
   ];
+  stylix.enable = true;
+  stylix.base16Scheme = ../../../assets/mytheme.yaml;
   # Increase resources available to dev VM
   virtualisation.vmVariant = {
     virtualisation = {
