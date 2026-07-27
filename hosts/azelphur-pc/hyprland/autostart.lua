@@ -1,0 +1,5 @@
+hl.on("hyprland.start", function()
+  hl.exec_cmd("uwsm app -- spotify")
+  hl.exec_cmd("uwsm app -- hyprlock --no-fade-in --immediate-render --grace 0")
+  hl.exec_cmd("uwsm app -- thunderbird")
+end)

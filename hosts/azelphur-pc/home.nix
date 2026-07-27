@@ -39,6 +39,7 @@ in
       require("workspaces")
       require("display_profiles")
       require("binds_azelphur_pc")
+      require("autostart")
       display_profiles = require("display_profiles")
       display_profiles.desk()
     '';
@@ -102,6 +103,7 @@ in
   xdg.configFile."hypr/monitors.lua".source = ./hyprland/monitors.lua;
   xdg.configFile."hypr/display_profiles.lua".source = ./hyprland/display_profiles.lua;
   xdg.configFile."hypr/workspaces.lua".source = ./hyprland/workspaces.lua;
+  xdg.configFile."hypr/autostart.lua".source = ./hyprland/autostart.lua;
 
   programs.hyprlock.settings = {
     general = {
