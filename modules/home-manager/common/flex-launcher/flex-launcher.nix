@@ -7,6 +7,7 @@
     "Desktop/flex-launcher.desktop".source = "${pkgs.flex-launcher}/share/applications/flex-launcher.desktop";
     ".config/flex-launcher/background.png".source = ./assets/background.png;
     ".config/flex-launcher/jellyfin.png".source = ./assets/jellyfin.png;
+    ".config/flex-launcher/seerr.png".source = ./assets/seerr.png;
     ".config/flex-launcher/exit.png".source = ./assets/exit.png;
     ".config/flex-launcher/moonlight.png".source = ./assets/moonlight.png;
     ".config/flex-launcher/shudder.png".source = ./assets/shudder.png;
@@ -14,6 +15,7 @@
     ".config/flex-launcher/homeassistant.png".source = ./assets/homeassistant.png;
     ".config/flex-launcher/crunchyroll.png".source = ./assets/crunchyroll.png;
     ".config/flex-launcher/musicassistant.png".source = ./assets/musicassistant.png;
+    ".config/flex-launcher/plezy.png".source = ./assets/plezy.png;
     ".config/flex-launcher/config.ini".text = ''
 # Flex Launcher v2.2 sample configuration file
 # For documentation of these settings, visit: https://complexlogic.github.io/flex-launcher/configuration
@@ -22,7 +24,7 @@ DefaultMenu=Main
 VSync=true
 #FPSLimit=
 #ApplicationTimeout=15
-OnLaunch=Quit
+OnLaunch=None
 WrapEntries=false
 ResetOnBack=false
 MouseSelect=true
@@ -135,16 +137,18 @@ ButtonDPadRight=:right
 # Menu configurations
 [Main]
 Entry1=Jellyfin;/home/azelphur/.config/flex-launcher/jellyfin.png;QTWEBENGINE_FORCE_USE_GDM=0 ww -fa Jellyfin -c jellyfin-desktop --tv --fullscreen
-Entry2=VacuumTube;${pkgs.vacuum-tube}/share/icons/hicolor/256x256/apps/rocks.shy.VacuumTube.png;ww -fa 'VacuumTube' -c VacuumTube
-Entry3=Moonlight;/home/azelphur/.config/flex-launcher/moonlight.png;moonlight
+Entry2=Plezy;/home/azelphur/.config/flex-launcher/plezy.png;plezy
+Entry3=VacuumTube;${pkgs.vacuum-tube}/share/icons/hicolor/256x256/apps/rocks.shy.VacuumTube.png;ww -fa 'VacuumTube' -c VacuumTube
 Entry4=Steam;${pkgs.flex-launcher}/share/flex-launcher/assets/icons/steam.png;bash -lc "steam steam://open/bigpicture > /tmp/steam.log 2>&1"
-Entry5=Crunchyroll;/home/azelphur/.config/flex-launcher/crunchyroll.png;google-chrome-stable --kiosk --no-first-run --disable-infobars https://www.crunchyroll.com/
-Entry6=Shudder;/home/azelphur/.config/flex-launcher/shudder.png;google-chrome-stable --kiosk --no-first-run --disable-infobars https://www.shudder.com/
-Entry7=Floatplane;/home/azelphur/.config/flex-launcher/floatplane.png;google-chrome-stable --kiosk --no-first-run --disable-infobars https://www.floatplane.com/channel/linustechtips/home/main
-Entry8=Music Assistant;/home/azelphur/.config/flex-launcher/musicassistant.png;google-chrome-stable --kiosk --no-first-run --disable-infobars https://musicassistant.home.azelphur.com
-Entry9=Home Assistant;/home/azelphur/.config/flex-launcher/homeassistant.png;google-chrome-stable --kiosk --no-first-run --disable-infobars https://homeassistant.home.azelphur.com
-Entry10=Kodi;${pkgs.flex-launcher}/share/flex-launcher/assets/icons/kodi.png;kodi
-Entry11=System;${pkgs.flex-launcher}/share/flex-launcher/assets/icons/system.png;:submenu System
+Entry5=Moonlight;/home/azelphur/.config/flex-launcher/moonlight.png;moonlight
+Entry6=Seerr;/home/azelphur/.config/flex-launcher/seerr.png;google-chrome-stable --kiosk --no-first-run --disable-infobars https://seerr.home.azelphur.com/
+Entry7=Crunchyroll;/home/azelphur/.config/flex-launcher/crunchyroll.png;google-chrome-stable --kiosk --no-first-run --disable-infobars https://www.crunchyroll.com/
+Entry8=Shudder;/home/azelphur/.config/flex-launcher/shudder.png;google-chrome-stable --kiosk --no-first-run --disable-infobars https://www.shudder.com/
+Entry9=Floatplane;/home/azelphur/.config/flex-launcher/floatplane.png;google-chrome-stable --kiosk --no-first-run --disable-infobars https://www.floatplane.com/channel/linustechtips/home/main
+Entry10=Music Assistant;/home/azelphur/.config/flex-launcher/musicassistant.png;google-chrome-stable --kiosk --no-first-run --disable-infobars https://musicassistant.home.azelphur.com
+Entry11=Home Assistant;/home/azelphur/.config/flex-launcher/homeassistant.png;google-chrome-stable --kiosk --no-first-run --disable-infobars https://homeassistant.home.azelphur.com
+Entry12=Kodi;${pkgs.flex-launcher}/share/flex-launcher/assets/icons/kodi.png;kodi
+Entry13=System;${pkgs.flex-launcher}/share/flex-launcher/assets/icons/system.png;:submenu System
 
 [System]
 Entry1=Exit;/home/azelphur/.config/flex-launcher/exit.png;:quit
