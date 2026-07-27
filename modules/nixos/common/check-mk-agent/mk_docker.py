@@ -149,7 +149,9 @@ class Section(list):
             self.append('<<<<%s>>>>' % piggytarget)
         if name is not None:
             self.append('<<<docker_%s:sep(%d)>>>' % (name, separator))
-            version_json = json.dumps(Section.version_info)
+            version_info = Section.version_info.copy()
+            del version_info['DockerPyVersion']
+            version_json = json.dumps(version_info)
             self.append(self.sep.join(('@docker_version_info', version_json)))
 
     def write(self):
