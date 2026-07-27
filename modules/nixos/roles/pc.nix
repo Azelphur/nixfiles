@@ -48,6 +48,7 @@
     rpi-imager
     rose-pine-hyprcursor
     prusa-slicer
+    wl-clipboard
   ];
 
   xdg.portal = {
