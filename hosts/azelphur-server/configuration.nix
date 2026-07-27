@@ -67,7 +67,7 @@
   # Mount dedicated drive for Downloads
   fileSystems."/mnt/pools/downloads" = {
     fsType = "ext4";
-    device = "UUID=b7d05374-4da6-4f88-ad6f-6f053a5fb5f5";
+    device = "UUID=5aabb700-b42e-4bf6-b342-826993ce4aa2";
     options = [
       "rw"
       "noatime"
