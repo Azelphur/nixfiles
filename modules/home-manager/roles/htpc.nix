@@ -15,6 +15,12 @@ in
     ww
   ];
 
+  systemd.user.services.kdeconnect.Service = {
+    Environment = [
+      "PLASMA_PLATFORM=mediacenter"
+    ];
+  };
+
   xdg.desktopEntries.flex-launcher-ww = {
     name = "Flex Launcher (WW)";
     type = "Application";
