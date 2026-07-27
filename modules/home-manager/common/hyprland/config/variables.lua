@@ -30,6 +30,9 @@ hl.config({
     binds = {
         scroll_event_delay = 0
     },
+    debug = {
+        disable_logs = false
+    },
     decoration = {
         rounding = 10,
         blur = {
