@@ -12,7 +12,7 @@ for monitor_num, monitor in ipairs({ "left", "top", "bottom", "right", "simrig" 
     -- Generate workspace rules binding workspaces to monitors
     for workspace_num=1, 10 do
         hl.workspace_rule({
-            workspace = tostring(monitor_num) .. tostring(workspace_num % 10),
+            workspace = "name:" .. tostring(monitor_num) .. " ➡ " ..  tostring(workspace_num % 10),
             monitor = monitors[monitor],
             default = workspace_num % 10 == 1 and true or false,
         })
@@ -28,11 +28,11 @@ for monitor_num, monitor in ipairs({ "left", "top", "bottom", "right", "simrig" 
         elseif action == "movetoworkspace" then
             modifier = modifiers.shiftMod
             func = hl.dsp.window.move
-            follow = true
+            follow = false
         elseif action == "movetoworkspacesilent" then
             modifier = modifiers.ctrlMod
             func = hl.dsp.window.move
-            follow = false
+            follow = true
         end
         hl.bind(
              b({modifier, tostring(monitor_num)}),
@@ -42,7 +42,8 @@ for monitor_num, monitor in ipairs({ "left", "top", "bottom", "right", "simrig" 
     
         hl.define_submap(monitor .. "-" .. action, function()
             for workspace_num=1, 10 do
-                real_workspace_num = tostring(((monitor_num) * 10) + workspace_num)
+                real_workspace_num = "name:" .. tostring(monitor_num) .. " ➡ " .. tostring(workspace_num)
+                --real_workspace_num = tostring(((monitor_num) * 10) + workspace_num)
                 hl.bind(
                     b({modifier, tostring(workspace_num % 10)}),
                     func({workspace = real_workspace_num, follow = follow}),
