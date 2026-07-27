@@ -23,6 +23,7 @@
     vacuum-tube
     flex-launcher
     snapcast
+    kdePackages.plasma-bigscreen
   ];
 
   #systemd.user.services.snapclient = {
