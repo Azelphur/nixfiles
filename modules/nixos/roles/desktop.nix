@@ -47,7 +47,6 @@ in {
   };
   programs.gamescope.enable = true;
   programs.gamemode.enable = true;
-  services.printing.enable = true;
 
   services.xserver.xkb = {
     layout = "gb";
@@ -78,6 +77,7 @@ in {
     uvtools
     sweethome3d.application
     grayjay
+    plezy
   ];
 
   #systemd.user.services.music-assistant-companion = {
