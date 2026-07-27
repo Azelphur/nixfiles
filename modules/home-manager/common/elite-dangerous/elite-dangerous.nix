@@ -1,43 +1,49 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 let
   elite-intel = pkgs.callPackage ../../../../pkgs/elite-intel.nix {};
-  elite-dangerous = pkgs.writeShellScriptBin "elite-dangerous" ''
-  #!/usr/bin/env bash
-  set -euo pipefail
-
-  steam steam://rungameid/359320
-  hyprctl eval 'hl.exec_cmd("gwenview /home/azelphur/Downloads/EDRefCard_files/pwksfe-vkb-gladiator-nxt-premium-right_vfE1.jpg", {workspace = 52, no_initial_focus = true})'
-  hyprctl eval 'hl.exec_cmd("elite-intel", { workspace = 53, no_initial_focus = true })'
-  hyprctl eval 'hl.exec_cmd("edmarketconnector", { workspace = 54, no_initial_focus = true })'
-  '';
 in
 {
   home.packages = with pkgs; [
     edmarketconnector
     min-ed-launcher
     elite-intel
-    elite-dangerous
   ];
 
-  xdg.desktopEntries."elite-dangerous" = {
-    name = "Elite Dangerous";
-    exec = "${elite-dangerous}/bin/elite-dangerous";
-    icon = "steam_icon_359320";
-    terminal = false;
-    categories = [ "Game" ];
-  };
+  home.activation.edmc-hotkeys = ''
+    PLUGINS="$HOME/.local/share/EDMarketConnector/plugins"
+    TARGET="$PLUGINS/EDMCHotkeys"
+    SRC="${inputs.edmc-hotkeys}"
+
+    mkdir -p "$PLUGINS"
+
+    # copy instead of symlink
+    if [ ! -d "$TARGET" ]; then
+      cp -r "$SRC" "$TARGET"
+      chmod -R u+rw "$TARGET"
+    fi
+  '';
 
   wayland.windowManager.hyprland = {
     extraConfig = ''
       hl.on("window.close", function(w)
         if w.class == "steam_app_359320" then
-          hl.exec_cmd("pkill -f elite_intel.jar")
-          hl.exec_cmd("pkill -f EDMarketConnector.py")
-          hl.exec_cmd("pkill -f gwenview")
+          windows = hl.get_windows({ tag = "elite-dangerous-companion*" })
+          for _, window in pairs(windows) do
+              hl.dispatch(hl.dsp.window.close({ window = "address:"..window.address }))
+          end
+          -- ED Market Connector seems to be special
+          hl.dispatch(hl.dsp.window.close({ window = "class:Edmarketconnector" }))
         end
       end)
-    '';
+      hl.on("window.open", function(w)
+        if w.class == "steam_app_359320" then
+          hl.exec_cmd("gwenview /home/azelphur/Downloads/EDRefCard_files/pwksfe-vkb-gladiator-nxt-premium-right_vfE1.jpg", {workspace = "name:5 ➡ 2", no_initial_focus = true, tag="elite-dangerous-companion"})
+          hl.exec_cmd("elite-intel", { workspace = "name:5 ➡ 3", no_initial_focus = true, tag="elite-dangerous-companion"})
+          hl.exec_cmd("edmarketconnector", { workspace = "name:5 ➡ 3", no_initial_focus = true, tag="elite-dangerous-companion"})
+        end
+      end)
+      '';
     settings = {
       window_rule = [
         {
@@ -46,7 +52,7 @@ in
             class = "steam_app_359320";
           };
           fullscreen = true;
-          workspace = 51;
+          workspace = "name:5 ➡ 1";
           no_initial_focus = true;
         }
       ];
