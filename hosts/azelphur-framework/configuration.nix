@@ -26,5 +26,12 @@
   home-manager.users.${config.my.user.name}.imports = [
     ./home.nix
   ];
+
+  services.upower.enable = true;
+  services.power-profiles-daemon.enable = true;
+  services.logind.settings.Login = {
+    HandleLidSwitch = "ignore";
+    HandleLidSwitchDocked = "ignore";
+  };
 }
 
