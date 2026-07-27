@@ -17,6 +17,10 @@
     extraConfig = ''
       require("binds")
       require("variables")
+      hl.on("hyprland.start", function()
+        hl.exec_cmd("discord")
+        hl.exec_cmd("element-desktop")
+      end)
     '';
   };
   xdg.configFile."hypr" = {
