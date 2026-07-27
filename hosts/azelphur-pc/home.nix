@@ -61,6 +61,38 @@ in
           no_initial_focus = true;
           monitor = monitors.bottom;
         }
+        {
+          name = "Discord";
+          match = {
+            class = "discord";
+          };
+          no_initial_focus = true;
+          workspace = "name:1 ➡ 1";
+        }
+        {
+          name = "Element";
+          match = {
+            class = "element";
+          };
+          no_initial_focus = true;
+          workspace = "name:1 ➡ 1";
+        }
+        {
+          name = "Spotify";
+          match = {
+            class = "Spotify";
+          };
+          no_initial_focus = true;
+          workspace = "name:1 ➡ 2";
+        }
+        {
+          name = "Thunderbird";
+          match = {
+            class = "thunderbird";
+          };
+          no_initial_focus = true;
+          workspace = "name:1 ➡ 2";
+        }
       ];
     };
   };
