@@ -28,8 +28,23 @@
           kb_variant = "colemak";
         };
       };
-      exec_cmd = [
-        "uwsm app -- nm-applet"
+      window_rule = [
+        {
+          name = "Discord";
+          match = {
+            class = "discord";
+          };
+          no_initial_focus = true;
+          workspace = 2;
+        }
+        {
+          name = "Element";
+          match = {
+            class = "element";
+          };
+          no_initial_focus = true;
+          workspace = 2;
+        }
       ];
     };
   };
