@@ -20,10 +20,12 @@
   "niriLayoutRadiusOverride": -1,
   "niriLayoutBorderSize": -1,
   "hyprlandLayoutGapsOverride": -1,
+  "hyprlandLayoutGapsOutOverride": -1,
   "hyprlandLayoutRadiusOverride": -1,
   "hyprlandLayoutBorderSize": -1,
   "hyprlandResizeOnBorder": false,
   "mangoLayoutGapsOverride": -1,
+  "mangoLayoutGapsOutOverride": -1,
   "mangoLayoutRadiusOverride": -1,
   "mangoLayoutBorderSize": -1,
   "mangoTrackpadNaturalScrolling": true,
@@ -89,6 +91,8 @@
   "showBatteryPercentOnlyOnBattery": false,
   "showBatteryTime": false,
   "showBatteryTimeOnlyOnBattery": false,
+  "batteryPillStyle": false,
+  "batteryPillPercentSign": false,
   "showControlCenterButton": true,
   "showCapsLockIndicator": true,
   "controlCenterShowNetworkIcon": true,
@@ -126,13 +130,8 @@
       "width": 50
     },
     {
+      "id": "builtin_vpn",
       "enabled": true,
-      "id": "bluetooth",
-      "width": 50
-    },
-    {
-      "enabled": true,
-      "id": "audioOutput",
       "width": 50
     },
     {
@@ -142,12 +141,27 @@
     },
     {
       "enabled": true,
-      "id": "nightMode",
+      "id": "audioOutput",
       "width": 50
     },
     {
       "enabled": true,
-      "id": "darkMode",
+      "id": "bluetooth",
+      "width": 50
+    },
+    {
+      "id": "colorPicker",
+      "enabled": true,
+      "width": 50
+    },
+    {
+      "id": "plugin_dankKDEConnect",
+      "enabled": true,
+      "width": 50
+    },
+    {
+      "id": "idleInhibitor",
+      "enabled": true,
       "width": 50
     }
   ],
@@ -163,7 +177,7 @@
   "groupActiveWorkspaceApps": true,
   "workspaceFollowFocus": true,
   "showOccupiedWorkspacesOnly": false,
-  "reverseScrolling": false,
+  "reverseScrolling": true,
   "dwlShowAllTags": false,
   "workspaceActiveAppHighlightEnabled": true,
   "workspaceColorMode": "default",
@@ -203,6 +217,7 @@
   "clockCompactMode": false,
   "focusedWindowCompactMode": false,
   "focusedWindowSize": 1,
+  "focusedWindowShowIcon": false,
   "runningAppsCompactMode": true,
   "barMaxVisibleApps": 0,
   "barMaxVisibleRunningApps": 0,
@@ -249,7 +264,7 @@
     }
   ],
   "centeringMode": "index",
-  "clockDateFormat": "",
+  "clockDateFormat": "ddd MMM d",
   "lockDateFormat": "",
   "greeterRememberLastSession": true,
   "greeterRememberLastUser": true,
@@ -263,6 +278,8 @@
   "greeterLockDateFormat": "",
   "greeterFontFamily": "",
   "greeterWallpaperFillMode": "",
+  "greeterSyncPending": false,
+  "greeterSyncBaseline": {},
   "mediaSize": 1,
   "appLauncherViewMode": "list",
   "spotlightModalViewMode": "list",
@@ -390,7 +407,9 @@
   "batteryNotifyCritical": true,
   "batteryLowThreshold": 20,
   "batteryNotifyLow": false,
-  "batteryNotificationType": 0,
+  "batteryChargeLimitNotificationType": 0,
+  "batteryLowNotificationType": 0,
+  "batteryCriticalNotificationType": 0,
   "batteryAutoPowerSaver": false,
   "lockBeforeSuspend": false,
   "loginctlLockIntegration": true,
@@ -407,7 +426,7 @@
   "gtkThemingEnabled": true,
   "qtThemingEnabled": false,
   "syncModeWithPortal": true,
-  "terminalsAlwaysDark": false,
+  "terminalsAlwaysDark": true,
   "muxType": "tmux",
   "muxUseCustomCommand": false,
   "muxCustomCommand": "",
@@ -495,12 +514,14 @@
   "maxFprintTries": 15,
   "enableU2f": false,
   "u2fMode": "or",
-  "lockScreenActiveMonitor": "all",
   "lockScreenInactiveColor": "#000000",
   "lockScreenNotificationMode": 0,
   "lockScreenVideoEnabled": false,
   "lockScreenVideoPath": "",
   "lockScreenVideoCycling": false,
+  "lockScreenWallpaperPath": "",
+  "lockScreenWallpaperFillMode": "",
+  "lockScreenFontFamily": "",
   "hideBrightnessSlider": false,
   "notificationTimeoutLow": 5000,
   "notificationTimeoutNormal": 5000,
@@ -528,7 +549,7 @@
   "osdIdleInhibitorEnabled": true,
   "osdMicMuteEnabled": true,
   "osdCapsLockEnabled": true,
-  "osdPowerProfileEnabled": false,
+  "osdPowerProfileEnabled": true,
   "osdAudioOutputEnabled": true,
   "powerActionConfirm": true,
   "powerActionHoldDuration": 0.5,
@@ -577,17 +598,12 @@
       "borderThickness": 1,
       "bottomGap": 0,
       "centerWidgets": [
+        "weather",
         {
+          "id": "clock",
           "enabled": true,
-          "id": "music",
-          "mediaSize": 3
-        },
-        {
-          "clockCompactMode": false,
-          "enabled": true,
-          "id": "clock"
-        },
-        "weather"
+          "clockCompactMode": false
+        }
       ],
       "enabled": true,
       "fontScale": 1,
@@ -597,32 +613,43 @@
       "id": "default",
       "innerPadding": 4,
       "leftWidgets": [
-        "launcherButton",
         "workspaceSwitcher",
-        "focusedWindow"
+        {
+          "id": "music",
+          "enabled": true,
+          "mediaSize": 3
+        }
       ],
+      "maximizeWidgetIcons": true,
+      "maximizeWidgetText": false,
       "name": "Main Bar",
       "noBackground": false,
       "openOnOverview": false,
       "popupGapsAuto": true,
       "popupGapsManual": 4,
       "position": 0,
+      "removeWidgetPadding": false,
       "rightWidgets": [
         "systemTray",
+        "clipboard",
         {
           "enabled": true,
-          "id": "dankKDEConnect"
+          "id": "grimblast"
         },
-        {
-          "id": "grimblast",
-          "enabled": true
-        },
-        "clipboard",
-        "cpuUsage",
-        "memUsage",
         "notificationButton",
         "battery",
-        "controlCenterButton"
+        {
+          "id": "controlCenterButton",
+          "enabled": true,
+          "showNetworkIcon": false,
+          "showBluetoothIcon": false,
+          "showAudioPercent": false,
+          "showVpnIcon": false,
+          "showBrightnessIcon": false,
+          "showBrightnessPercent": false,
+          "showBatteryIcon": false,
+          "showAudioIcon": false
+        }
       ],
       "screenPreferences": [
         {
@@ -631,11 +658,14 @@
           "name": "DP-4"
         }
       ],
+      "shadowIntensity": 0,
       "showOnLastDisplay": true,
       "spacing": 4,
       "squareCorners": false,
       "transparency": 1,
+      "useOverlayLayer": false,
       "visible": true,
+      "widgetOutlineEnabled": false,
       "widgetTransparency": 1
     }
   ],
@@ -708,9 +738,55 @@
   "systemMonitorVariants": [],
   "desktopWidgetPositions": {},
   "desktopWidgetGridSettings": {},
-  "desktopWidgetInstances": [],
+  "desktopWidgetInstances": [
+    {
+      "config": {
+        "colorMode": "primary",
+        "customColor": "#ffffff",
+        "displayPreferences": [
+          "all"
+        ],
+        "gpuPciId": "",
+        "graphInterval": 60,
+        "layoutMode": "auto",
+        "showCpu": true,
+        "showCpuGraph": true,
+        "showCpuTemp": true,
+        "showDisk": true,
+        "showGpuTemp": false,
+        "showHeader": true,
+        "showMemory": true,
+        "showMemoryGraph": true,
+        "showNetwork": true,
+        "showNetworkGraph": true,
+        "showTopProcesses": false,
+        "topProcessCount": 3,
+        "topProcessSortBy": "cpu",
+        "transparency": 0.8
+      },
+      "enabled": false,
+      "id": "dw_1783245077972_n1ign4vjv",
+      "name": "System Monitor",
+      "positions": {
+        "eDP-1": {
+          "height": 480,
+          "width": 320,
+          "x": 919,
+          "y": 356.09765625
+        }
+      },
+      "widgetType": "systemMonitor"
+    }
+  ],
   "desktopWidgetGroups": [],
-  "builtInPluginSettings": {},
+  "builtInPluginSettings": {
+    "dms_clipboard_search": {
+      "trigger": "cb"
+    },
+    "dms_settings_search": {
+      "trigger": "?"
+    }
+  },
   "clipboardClickToPaste": false,
   "clipboardEnterToPaste": false,
   "clipboardRememberTypeFilter": false,
@@ -741,5 +817,5 @@
   "barInsetPaddingShared": -1,
   "barInsetPaddingSyncAll": false,
   "frameBarInsetPadding": -1,
-  "configVersion": 11
+  "configVersion": 12
 }
