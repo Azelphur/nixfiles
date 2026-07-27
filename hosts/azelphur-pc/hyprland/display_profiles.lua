@@ -44,6 +44,18 @@ local function enable_desk()
         transform = 3,
         disabled = false,
     })
+    hl.monitor({
+        output = monitors.simrig,
+        mode = "5120x1440@240",
+        position = "1620x2880",
+        scale = 1,
+        transform = 0,
+        bitdepth = 10,
+        cm = "hdr",
+        sdrbrightness = 1.3,
+        sdrsaturation = 1.2,
+        disabled = true,
+    })
 end
 
 local function disable_simrig()
