@@ -19,26 +19,6 @@ in
     terminal = 14;
     popups = 12;
   };
-  systemd.user.services.opendeck = {
-    Unit = {
-      Description = "OpenDeck";
-      After = [ "graphical-session.target" ];
-      Wants = [ "graphical-session.target" ];
-      PartOf = [ "graphical-session.target" ];
-    };
-
-    Service = {
-      Type = "simple";
-      ExecStart = "${inputs.opendeck-nix.packages.${pkgs.system}.default}/bin/opendeck --hide";
-
-      Restart = "on-failure";
-      RestartSec = 5;
-    };
-
-    Install = {
-      WantedBy = [ "graphical-session.target" ];
-    };
-  };
   programs.go-hass-agent = {
     commands = {
       button = [
