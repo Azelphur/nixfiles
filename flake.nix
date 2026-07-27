@@ -84,12 +84,7 @@
           (patcher.fetchpatch {
             name = "nixos/cmk-agent: init module, cmk-agent: init at 2.3.0";
             url = "https://github.com/NixOS/nixpkgs/pull/399463.diff";
-            hash = "sha256-jfTIzBu0KfDeCN5I9EOZ4zRhxdMOJQ1ALg/etLNocH4=";
-          })
-          (patcher.fetchpatch {
-            name = "orca-slicer: fix missing preview";
-            url = "https://github.com/NixOS/nixpkgs/pull/531346.diff";
-            hash = "sha256-A+BlbpNobzvj+SEbCN5pErfMnEncDLcGUW5XNFKDpuY=";
+            hash = "sha256-C+3VDCIrtTSYhwICnIX410vZNoJPvSUT2ZvXvyr5m8s=";
           })
         ];
 
