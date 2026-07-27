@@ -8,6 +8,8 @@ in {
   imports = [
       ../common/emulation.nix
   ];
+  programs.ydotool.enable = true;
+  users.users.${config.my.user.name}.extraGroups = ["ydotool"];
   home-manager.users.${config.my.user.name}.imports = [
     inputs.plasma-manager.homeModules.plasma-manager
     ../../home-manager/roles/desktop.nix

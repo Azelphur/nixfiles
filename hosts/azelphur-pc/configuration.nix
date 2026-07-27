@@ -25,8 +25,6 @@ in
     winetricks
     nodejs_26 # required for opendeck
   ];
-  programs.ydotool.enable = true;
-  users.users.${config.my.user.name}.extraGroups = ["ydotool"];
   home-manager.users.${config.my.user.name}.imports = [
     ./home.nix
   ];
