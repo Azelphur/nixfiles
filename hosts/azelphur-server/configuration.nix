@@ -28,7 +28,6 @@
     }
   ];
 
-  # Enable check-mk agent for monitoring
   boot.zfs = {
     extraPools = [ "tank" ];
     devNodes = "/dev/disk/by-id";
@@ -36,8 +35,10 @@
 
   # We use borgmatic, but having borg management commands is helpful
   environment.systemPackages = with pkgs; [
-    pkgs.borgbackup
-    pkgs.mergerfs
+    borgbackup
+    mergerfs
+    lsiutil
+    sg3_utils
   ];
 
   # Storage user is used for bulk storage items
